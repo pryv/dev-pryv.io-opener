@@ -1,0 +1,16 @@
+{
+  "name": "app-node-opener",
+  "version": "0.0.1",
+  "description": "Opener",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pryv S.A.",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "mkdirp": "^1.0.4",
+    "ncp": "^2.0.0",
+    "rsync": "^0.6.1"
+  }
+}
