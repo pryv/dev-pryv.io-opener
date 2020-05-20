@@ -10,9 +10,14 @@ const sed = require('./lib/sed')(destDir);
 
 const tasks = [{
     target: './components', 
-    excludes: ['hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks'],
-    patterns: ['-node_modules/']
+    excludes: ['hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks',
+      'business/src/series', 'business/src/series.js'],
+    patterns: ['-node_modules/','-influx*','-webhook*']
   }, 
+  { // remove series and hooks from business
+    target: './components/business/src/index.js',
+    sed: ['series', 'hook']
+  },
   {
     target: './scripts',
     patterns: ['-comp*', '-test*']
@@ -34,11 +39,7 @@ const tasks = [{
 
 
 (async () => {
-  // root files
-  await rsync(
-    { target: './src-dest/*' , noDelete: true}, 
-    path.resolve(__dirname, '..'),
-    destDir);
+
 
   // --- initial copy
   for (let i = 0; i < tasks.length; i++) {
@@ -47,7 +48,15 @@ const tasks = [{
       sed(tasks[i])
     }
   }
-  // --- sedding some files
+  // root files
+  await rsync(
+    { target: './src-dest/*', noDelete: true },
+    path.resolve(__dirname, '..'),
+    destDir);
+  await rsync(
+    { target: './src-dest/.??*', noDelete: true },
+    path.resolve(__dirname, '..'),
+    destDir);
 
   console.log('done');
 })();
