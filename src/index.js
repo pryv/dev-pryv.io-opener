@@ -11,8 +11,8 @@ const sed = require('./lib/sed')(destDir);
 const tasks = [{
     target: './components', 
     excludes: ['hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks',
-      'business/src/series', 'business/src/series.js'],
-    patterns: ['-node_modules/','-influx*','-webhook*']
+      'business/src/series', 'business/src/series.js', 'repository.test.js'],
+    patterns: ['-node_modules/','-*influx*', '-*series*','-webhook*']
   }, 
   { // remove series and hooks from business
     target: './components/business/src/index.js',
@@ -20,7 +20,8 @@ const tasks = [{
   },
   {
     target: './scripts',
-    patterns: ['-comp*', '-test*']
+    excludes: ['compile-proxy-config.js', 'components-checkdeps.js', 'components-version.js'],
+    patterns: ['-test*']
   },
   {
     target: './babel.config.json'
