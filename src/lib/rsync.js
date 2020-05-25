@@ -4,12 +4,15 @@ const mkdirp = require('mkdirp');
 
 module.exports = async function rsync(task, srcDir, destDir) {
   const src = path.resolve(srcDir, task.target);
-  const dest = path.resolve(destDir);
-  console.log(destDir, dest);
+  let dest = path.resolve(destDir);
+  if (! task.rsyncUseDestDir) {
+    dest = path.dirname(path.resolve(destDir, task.target));
+  }
+  console.log(src + ' >>>> ' + dest);
   mkdirp(dest);
   const r = new Rsync()
     .set('a')
-    .progress()
+    //.progress()
     .source(src)
     .destination(dest);
 

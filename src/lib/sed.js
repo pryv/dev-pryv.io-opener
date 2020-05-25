@@ -6,8 +6,9 @@ module.exports = function (destDir) {
     const dest = path.resolve(destDir, task.target);
     for (let i = 0; i < task.sed.length; i++) {
       const command = "sed -i.bak '/" + task.sed[i] + "/d' " + dest;
-      execSync(command);
-      execSync('rm -f ' + dest + '.bak');
+      execSync(command); 
     }
+    console.log('sed: ' + dest);
+    execSync('rm -f ' + dest + '.bak');
   }
 }

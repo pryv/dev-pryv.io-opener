@@ -2,8 +2,9 @@ var logger = require('winston');
 var database = require('./storage/database');
 logger['default'].transports.console.level = 'info';
 
-const headPath = '/reg';
+const headPath = require('../../api-server/src/routes/Paths').Reg;
 
+console.log('XXXXXXX', headPath);
 class fakeExpress {
   constructor(expressApp) {
     this.app = expressApp; 
@@ -29,19 +30,14 @@ module.exports = async (expressApp, application) => {
   console.log('XXXXX register loaded');
   // public API routes
   require('./routes/email')(app);
-  /** 
-  require('./routes/server')(app);
-
+  require('./routes/service')(app);
+  
+  
   // private API  routes
   require('./routes/users')(app);
-  require('./routes/admin')(app);
-
+  /** 
   //access
   require('./routes/access')(app);
-
-  //records
-  require('./routes/records')(app);
   */
-  //error management (evolution)
   require('./middleware/app-errors')(app);
 }

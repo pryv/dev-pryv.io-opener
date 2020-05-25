@@ -11,7 +11,9 @@ const sed = require('./lib/sed')(destDir);
 const tasks = [{
     target: './components', 
     excludes: ['hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks', 'metadata',
-      'business/src/series', 'business/src/series.js', 'repository.test.js'],
+      'business/src/series', 'business/src/series.js', 'repository.test.js', 
+      'register' // protects components/register from being deleted
+    ],
     patterns: ['-node_modules/','-*influx*', '-*series*','-webhook*']
   }, 
   {

@@ -53,9 +53,6 @@ function users() {
 function emailExists(email: string, callback: GenericCallback<boolean>) {
   email = email.toLowerCase();
   getUIDFromMail(email, function (error, username) {
-    if (error != null)
-      logger.error('Redis emailExists: ' + email + ' e: ' + error, error);
-
     callback(error, username !== null);
   });
 }
@@ -69,9 +66,6 @@ exports.emailExists = emailExists;
 exports.uidExists = function (uid: string, callback: Callback) {
   uid = uid.toLowerCase();
   redis.exists(uid + ':users', function (error, result) {
-    if (error) {
-      logger.error('Redis to uidExists: ' + uid + ' e: ' + error, error);
-    }
     callback(error, result === 1); // callback anyway
   });
 };
@@ -94,9 +88,6 @@ exports.getServer = function (uid: string, callback: GenericCallback<string>) {
 function getUIDFromMail (mail: string, callback: GenericCallback<string>) {
   mail = mail.toLowerCase();
   users().findOne({email: mail}, null, function (error, res) {
-    if (error) {
-      logger.error('Mongo getServerFromMail: ' + mail + ' e: ' + error, error);
-    }
     if (! res) { return callback(null, null); }
     return callback(null, res.username);
   });
@@ -119,9 +110,6 @@ exports.setAccessState = function (
   multi.set(dbkey, JSON.stringify(value));
   multi.expire(dbkey, config.get('persistence:access-ttl'));
   multi.exec(function (error, result) {
-    if (error) {
-      logger.error('Redis setAccess: ', key, value, error);
-    }
     callback(error, result); // callback anyway
   });
 };

@@ -12,10 +12,23 @@ const sed = require('./lib/sed')(destDir);
 
 const tasks = [{
     target: './source',
-    excludes: ['dataservers', 'service-info', 'dns', 'invitations', 'database',
-        'app.js', 'server.js', 'config.js',
-        'route/index.js', 'route/service.js'],
+    excludes: [
+        'app.js', 'server.js', 'config.js', 'dns', '.gitignore', '.npmignore', // root
+        'dataservers.js',  // business
+        'cross-domain.js', // middelware
+        'public/reserved-words.json', // public
+        'routes/index.js', 'routes/server.js', 'routes/records.js', 'routes/admin.js', 'routes/users.js', // routes (users.js will be added after)
+        'database.js', 'storage/invitations.js', 'storage/reserved-userid.js', 'storage/users.js', // storage
+        ],
     patterns: ['-*dns*']
+  },
+  {
+    target: './source/routes/users.js',
+    sed: [' START - CLEAN FOR OPENSOURCE/,/ END - CLEAN FOR OPENSOURCE']
+  },
+  {
+    target: './source/storage/users.js',
+    sed: [' START - CLEAN FOR OPENSOURCE/,/ END - CLEAN FOR OPENSOURCE']
   },
   {
     target: './package.json'

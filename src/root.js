@@ -6,11 +6,11 @@ const destDir = path.resolve(__dirname, '../dest/');
 module.exports = async () => { 
   // root files
   await rsync(
-    { target: './src-dest/*', noDelete: true },
+    { target: './src-dest/*', noDelete: true , rsyncUseDestDir: true},
     path.resolve(__dirname, '..'),
     destDir);
   await rsync(
-    { target: './src-dest/.??*', noDelete: true },
+    { target: './src-dest/.??*', noDelete: true , rsyncUseDestDir: true},
     path.resolve(__dirname, '..'),
     destDir);
 
