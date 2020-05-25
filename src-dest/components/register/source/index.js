@@ -4,7 +4,6 @@ logger['default'].transports.console.level = 'info';
 
 const headPath = require('../../api-server/src/routes/Paths').Reg;
 
-console.log('XXXXXXX', headPath);
 class fakeExpress {
   constructor(expressApp) {
     this.app = expressApp; 

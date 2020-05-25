@@ -65,8 +65,9 @@ exports.emailExists = emailExists;
  */
 exports.uidExists = function (uid: string, callback: Callback) {
   uid = uid.toLowerCase();
-  redis.exists(uid + ':users', function (error, result) {
-    callback(error, result === 1); // callback anyway
+  users().findOne({ username: uid }, null, function (error, res) {
+    if (!res) { return callback(null, null); }
+    return callback(error, res !== null);
   });
 };
 
@@ -127,43 +128,3 @@ exports.getAccessState = function (key: string, callback: GenericCallback<Access
   getJSON(key + ':access', mixedCallback);
 };
 
-//----------------- Reserved words --------------//
-
-var RESERVED_WORDS_VERSION = 'reservedwords:version';
-var RESERVED_WORDS_LIST = 'reservedwords:list';
-
-/**
- * Get the current version of the reserved words list in the database
- * @param callback: function(error,result), result being the version
- */
-exports.reservedWordsVersion = function (callback: Callback) {
-  redis.get(RESERVED_WORDS_VERSION, function (error, version) {
-    if (error) {
-      logger.error('ReservedWordManagement version ' + error, error);
-      return callback(error);
-    }
-    return callback(null, version);
-  });
-};
-
-/**
- * Load an up-to-date version of the reserved words list in the database
- * @param version: the new version
- * @param wordArray: the new words list
- * @param callback: function(error)
- */
-exports.reservedWordsLoad = function (
-  version: string, wordArray: Array<string>,
-  callback: Callback
-) {
-  callback();
-};
-
-/**
- * Check if the reserved words list contains provided word
- * @param word: the word to check for existence
- * @param callback: function(error,result), result being 'true' if existing, 'false' otherwise
- */
-exports.reservedWordExists = function (word: string, callback: GenericCallback<boolean>) {
-  callback(null, false);
-};

@@ -1,0 +1,15 @@
+{
+  "name": "register",
+  "description": "Pryv Register component",
+  "version": "0.1.9",
+  "private": true,
+  "author": "Pryv SA",
+  "main": "source/index.js",
+  "scripts": {
+   "test": "NODE_ENV=test ../../node_modules/.bin/mocha --timeout 10000 --reporter=dot 'test/**/*.test.js'"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
