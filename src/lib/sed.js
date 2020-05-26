@@ -8,6 +8,12 @@ module.exports = function (destDir) {
       const command = "sed -i.bak '/" + task.sed[i] + "/d' " + dest;
       execSync(command); 
     }
+    if (task.sedReplace)
+      for (let i = 0; i < task.sedReplace.length; i++) {
+        const replaceBy = task.sedReplace[i][1].split('/').join('\\/'); // to escape / slashes
+        const command = "sed -i.bak 's/.*" + task.sedReplace[i][0] + ".*/" + replaceBy + "'/ " + dest;
+        execSync(command);
+      }
     console.log('sed: ' + dest);
     execSync('rm -f ' + dest + '.bak');
   }

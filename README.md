@@ -17,6 +17,8 @@ The **"Open-sourced version"** will be located in `./dest`
 2. in another terminal cd to `dest/dist/components/register` or other component you need to test
   - `pushd {your path}/app-node-opener/ ; npm run build ; popd ; ../../node_modules/.bin/mocha  'test/**/*.test.js'`
 
-3. to start api-server cd to `dest` and use `cd ../ ; npm run build; cd dest; sleep 2 ; yarn api`
+3. to start api-server cd to `dest` and use `cd ../ ; npm run build; cd dest; sleep 2 ; yarn api`  
+  or: `cd ../ ; npm run build; cd dest; sleep 2 ; dist/components/api-server/bin/server --config ./config.json`
 
+  
 

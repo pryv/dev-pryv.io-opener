@@ -1,4 +1,6 @@
 
+const home = require('../config').get('service').home;
+
 function getHostings() {
   return {
     regions: {
@@ -9,7 +11,7 @@ function getHostings() {
             name: 'zone1',
             hostings: {
               hosting1: {
-                url: 'http://localhost:3000',
+                url: home, // here we set the sole dynamic var
                 name: 'Pryv.io',
                 description: 'Self hosted',
                 available: true

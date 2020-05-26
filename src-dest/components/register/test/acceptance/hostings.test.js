@@ -22,7 +22,8 @@ describe('service', function () {
       .get(regPath + '/service/info')
       .set('Accept', 'application/json');
     assert.equal(res.status, 200);
-    assert.equal(res.body.exists, true); // todo
+    assert.equal(res.body.name, 'Test'); // todo
+    assert.equal(res.body.api, 'http://localhost:3000/{username}/');
   });
 
   it('[REA2] GET /apps should receive empty array ', async function () {
@@ -46,7 +47,7 @@ describe('service', function () {
       .get(regPath + '/hostings')
       .set('Accept', 'application/json');
     assert.equal(res.status, 200);
-    expect(res.body).to.eql({ app: { id: 'toto' } }); // todo
+    expect(res.body).to.eql({ "regions": { "region1": { "name": "region1", "zones": { "zone1": { "name": "zone1", "hostings": { "hosting1": { "url": "https://pryv.com/openpryv/unconfigured.html", "name": "Pryv.io", "description": "Self hosted", "available": true } } } } } } }); 
   });
 
 });

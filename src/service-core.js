@@ -1,5 +1,5 @@
 const path = require('path');
-
+const fs = require('fs');
 const mkdirp = require('mkdirp');
 
 const srcDir = path.resolve(__dirname, '../../service-core/');
@@ -8,10 +8,15 @@ const destDir = path.resolve(__dirname, '../dest/');
 const rsync = require('./lib/rsync');
 const sed = require('./lib/sed')(destDir);
 
+let version = fs.readFileSync(path.resolve(__dirname, '../src-dest/.api-version'), 'utf8');
+version = version.split("\n")[0];
+
 const tasks = [{
     target: './components', 
-    excludes: ['hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks', 'metadata',
-      'business/src/series', 'business/src/series.js', 'repository.test.js', 
+    excludes: [
+      'hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks', 'metadata', // components
+      'business/src/series', 'business/src/series.js', 'series/repository.test.js', // series
+      'api-server/config/test.json', // replaced by src-dest
       'register' // protects components/register from being deleted
     ],
     patterns: ['-node_modules/','-*influx*', '-*series*','-webhook*']
@@ -26,7 +31,12 @@ const tasks = [{
   },
   {
     target: './package.json',
-    sed: ['hfs', 'metdata', 'webhooks', 'gnat', 'influx', 'jsdoc', 'test-root', 'cover', 'flow-coverage', 'tag-tests', 'test-results', 'tprpc', 'jaeger', 'pryvuser-cli', 'metadata']
+    sed: ['hfs', 'metdata', 'webhooks', 'gnat', 'influx', 'jsdoc', 'test-root', 'cover', 'flow-coverage', 'tag-tests', 'test-results', 'tprpc', 'jaeger', 'pryvuser-cli', 'metadata'],
+    sedReplace: [
+      ['"version"', '  "version": "' + version + '",'],
+      ['"url"', '    "url": "git://github.com/pryv/service-pryv.git"'],
+      ['"api": ', '    "api": "NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.json", '],
+    ]
   },
   {
     target: './.flowconfig',

@@ -1,8 +1,9 @@
 var logger = require('winston');
 var database = require('./storage/database');
+var config = require('./config');
 logger['default'].transports.console.level = 'info';
 
-const headPath = require('../../api-server/src/routes/Paths').Reg;
+const headPath = require('components/api-server/src/routes/Paths').Reg;
 
 class mockExpress {
   constructor(expressApp) {
@@ -23,8 +24,10 @@ class mockExpress {
 }
 
 module.exports = async (expressApp, application) => {
+  config.loadSettings(application.settings);
   database.setReference('storage', application.storageLayer);
-  database.setReference('systemAPI', application.systemAPI)
+  database.setReference('systemAPI', application.systemAPI);
+  
   const app = new mockExpress(expressApp);
   // public API routes
   require('./routes/email')(app);
