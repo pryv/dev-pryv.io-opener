@@ -4,7 +4,7 @@ logger['default'].transports.console.level = 'info';
 
 const headPath = require('../../api-server/src/routes/Paths').Reg;
 
-class fakeExpress {
+class mockExpress {
   constructor(expressApp) {
     this.app = expressApp; 
   }
@@ -24,19 +24,11 @@ class fakeExpress {
 
 module.exports = async (expressApp, application) => {
   database.setReference('storage', application.storageLayer);
-  const app = new fakeExpress(expressApp);
-
-  console.log('XXXXX register loaded');
+  const app = new mockExpress(expressApp);
   // public API routes
   require('./routes/email')(app);
   require('./routes/service')(app);
-  
-  
-  // private API  routes
   require('./routes/users')(app);
-  /** 
-  //access
   require('./routes/access')(app);
-  */
   require('./middleware/app-errors')(app);
 }

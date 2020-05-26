@@ -86,16 +86,17 @@ exports.getServer = function (uid: string, callback: GenericCallback<string>) {
  * @param mail: the email address
  * @param callback: function(error,result), result being the requested user id
  */
-function getUIDFromMail (mail: string, callback: GenericCallback<string>) {
+function getUIDFromMail(mail: string, callback: GenericCallback<string>) {
   mail = mail.toLowerCase();
-  users().findOne({email: mail}, null, function (error, res) {
-    if (! res) { return callback(null, null); }
+  users().findOne({ email: mail }, null, function (error, res) {
+    if (!res) { return callback(null, null); }
     return callback(null, res.username);
   });
 };
 exports.getUIDFromMail = getUIDFromMail;
 
 
+const dbAccessState = {};
 /**
  * Update the state of an access in the database
  * @param key: the database key for this access
@@ -106,13 +107,8 @@ exports.setAccessState = function (
   key: string, value: AccessState,
   callback: Callback,
 ) {
-  const multi = redis.multi();
-  const dbkey = key + ':access';
-  multi.set(dbkey, JSON.stringify(value));
-  multi.expire(dbkey, config.get('persistence:access-ttl'));
-  multi.exec(function (error, result) {
-    callback(error, result); // callback anyway
-  });
+  dbAccessState[key] = { value: value, time: Date.now() };
+  callback(null, value); // callback anyway
 };
 
 /** Get the current state of an access in the database.
@@ -122,9 +118,25 @@ exports.setAccessState = function (
  *    database entry
  */
 exports.getAccessState = function (key: string, callback: GenericCallback<AccessState>) {
-  // FLOW Since we access the right key, we assume that the data is correct.
-  const mixedCallback: Callback = callback;
-
-  getJSON(key + ':access', mixedCallback);
+  const res = dbAccessState[key];
+  callback(null, res ? res.value : null);
 };
 
+/**
+ * Timer to autoclean dbAccessState
+ */
+function cleanAccessState() {
+  const expired = Date.now() - (60 * 10 * 1000); // 10 minutes
+  try {
+    Object.keys(dbAccessState).forEach((key) => {
+      if (dbAccessState[key].time < expired) {
+        delete dbAccessState[key];
+      }
+    });
+  } catch (e) {
+    console.log(e);
+  }
+  setTimeout(cleanAccessState, 60 * 1000); // check every minutes
+}
+
+cleanAccessState(); // launch cleaner

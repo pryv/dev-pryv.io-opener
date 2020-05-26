@@ -4,14 +4,19 @@ const headPath = require('../../api-server/src/routes/Paths').Reg;
 const publichost = 'http://localhost:3000';
 
 const config = {
-  domain: 'fake.io',
+  'auth:authorizedKeys': {
+    'CHANGE-ME-SYSTEM-KEY': { roles: ['system'] },
+    'CHANGE-ME-ADMIN-KEY': { roles: ['admin'] },
+  },
   'dns:domain': 'fake.io',
-  'service': {
+  'service': { // change this
     'access': publichost + headPath + '/access/',
     'api': publichost + '/{username}/',
     'register': publichost + headPath 
   },
-  appList: []
+  'appList': [],
+  'access:trustedAuthUrls': ['https://l.rec.la'],
+  'access:defaultAuthUrl': publichost + '/ac'
 }
 
 module.exports = {
