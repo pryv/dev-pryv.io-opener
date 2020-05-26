@@ -28,13 +28,5 @@ function getCoreForHosting(
   callback(null, 'http://localhost:3000');
 }
 
-function postToAdmin(
-  host: ServerConfig, path: string, expectedStatus: number,
-  jsonData: any, callback: PostToAdminCallback,
-) {
-  console.log('XXXXX POST to Admin', host, path, expectedStatus, jsonData);
-}
-
-exports.postToAdmin = postToAdmin;
 exports.getHostings = getHostings;
 exports.getCoreForHosting = getCoreForHosting;

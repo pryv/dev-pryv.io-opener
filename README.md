@@ -10,3 +10,13 @@ Script that extracts sources for the Open-Core version of Pryv.io
 
 The **"Open-sourced version"** will be located in `./dest`
 
+
+# Helpers for developpment 
+
+1. in a terminal cd to `dest` run `yarn setup`, `yarn release`, `yarn watch`
+2. in another terminal cd to `dest/dist/components/register` or other component you need to test
+  - `pushd {your path}/app-node-opener/ ; npm run build ; popd ; ../../node_modules/.bin/mocha  'test/**/*.test.js'`
+
+3. to start api-server cd to `dest` and use `cd ../ ; npm run build; cd dest; sleep 2 ; yarn api`
+
+

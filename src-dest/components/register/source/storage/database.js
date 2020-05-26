@@ -44,6 +44,15 @@ exports.setReference = setReference;
 function users() {
   return references.storage.users;
 }
+function systemCall(...args) {
+  return references.systemAPI.call(...args);
+}
+
+
+function createUser(request, callback) {
+  systemCall('system.createUser', {}, request, callback);
+}
+exports.createUser = createUser;
 
 /**
  * Check if an email address exists in the database
@@ -129,9 +138,7 @@ function cleanAccessState() {
   const expired = Date.now() - (60 * 10 * 1000); // 10 minutes
   try {
     Object.keys(dbAccessState).forEach((key) => {
-      if (dbAccessState[key].time < expired) {
-        delete dbAccessState[key];
-      }
+      if (dbAccessState[key].time < expired) delete dbAccessState[key];
     });
   } catch (e) {
     console.log(e);

@@ -24,6 +24,7 @@ class mockExpress {
 
 module.exports = async (expressApp, application) => {
   database.setReference('storage', application.storageLayer);
+  database.setReference('systemAPI', application.systemAPI)
   const app = new mockExpress(expressApp);
   // public API routes
   require('./routes/email')(app);

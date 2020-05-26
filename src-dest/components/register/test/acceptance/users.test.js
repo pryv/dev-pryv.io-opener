@@ -41,8 +41,21 @@ describe('register /users', function () {
   });
 
   describe('POST /user', function () {
-    it.skip('REU1 Post user', async function () {
-
+    it('REU1 Post user', async function () {
+      const userData = {
+        appid: 'pryv-test',
+        hosting: 'dummy',
+        username: cuid().substr(5),
+        password: cuid(),
+        email: cuid().substr(5) + '@pryv.io',
+        referer: 'tests',
+        language: 'fr'
+      }
+      const res = await server.request()
+        .post(regPath + '/user')
+        .send(userData);
+      assert.equal(res.status, 200);
+      assert.equal(res.body.username, userData.username);
     });
   });
 
@@ -50,10 +63,9 @@ describe('register /users', function () {
     it('[REU7] POST /username/check', async function () {
       const res = await server.request()
         .post(regPath + '/username/check')
-        .send({ username: username });
-      console.log(res.text);
+        .send({ username: username })
+        .set('Accept', 'application/json');;
       assert.equal(res.status, 200);
-      assert.equal(res.text, 'false');
     });
 
     it('[REU8] POST /username/check', async function () {
