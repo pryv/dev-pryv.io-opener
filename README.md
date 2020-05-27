@@ -6,7 +6,8 @@ Folow dev on: [Trello Card](https://trello.com/c/6OyTu3Qi/861-pryv-opener)
 
 # Usage
 
-1. checkout `service-core`, `service-register` and `app-node-opener` in the same directory
+1. checkout `app-node-opener` in the same directory
+2. run `npm run setup` to checkout git dependencies such as `service-core` and `service-register` 
 2. eventually update `src-dest/.api-version` and set the version of the future open-source release
 3. run `npm run build`
 
@@ -106,6 +107,6 @@ Build tool that creates a testable, ready to be shipped distribution of Pryv.io 
 
 ##### Build flow
 
-1. rsync subset of `service-core` and `service-register` that should be checked-out in sibling directories of `app-node-opener`. 
+1. rsync subset of `service-core` and `service-register` that are checkedout as git submdoules in `app-node-opener`. 
 2. using sed, some lines are `removed` or `replaced`in cherry-picked files
 3. the content of `src-dest` is synched to `dest`. These files represents the code base unique to the open version of pryv.

@@ -1,0 +1,6 @@
+[submodule "service-core"]
+	path = service-core
+	url = git@github.com:pryv/service-core.git
+[submodule "service-register"]
+	path = service-register
+	url = git@github.com:pryv/service-register.git

@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 
-const srcDir = path.resolve(__dirname, '../../service-core/');
+const srcDir = path.resolve(__dirname, '../service-core/');
 const destDir = path.resolve(__dirname, '../dest/');
 
 const rsync = require('./lib/rsync');

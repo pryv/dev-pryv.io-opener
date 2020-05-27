@@ -2,7 +2,7 @@ const path = require('path');
 
 const mkdirp = require('mkdirp');
 
-const srcDir = path.resolve(__dirname, '../../service-register/');
+const srcDir = path.resolve(__dirname, '../service-register/');
 const destDir = path.resolve(__dirname, '../dest/components/register');
 
 mkdirp.sync(destDir);

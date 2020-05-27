@@ -4,7 +4,8 @@
   "description": "Opener",
   "main": "index.js",
   "scripts": {
-    "build": "node src/index.js"
+    "build": "node src/index.js",
+    "setup": "git submodule init && git submodule update"
   },
   "author": "Pryv S.A.",
   "license": "UNLICENSED",
