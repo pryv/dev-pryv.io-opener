@@ -27,7 +27,7 @@ const tasks = [{
     sed: [' START - CLEAN FOR OPENSOURCE/,/ END - CLEAN FOR OPENSOURCE']
   },
   {
-    target: './source/storage/users.js',
+    target: './source/routes/admin.js',
     sed: [' START - CLEAN FOR OPENSOURCE/,/ END - CLEAN FOR OPENSOURCE']
   },
 ];
