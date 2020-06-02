@@ -6,7 +6,8 @@
   "author": "Pryv SA",
   "main": "source/index.js",
   "scripts": {
-   "test": "NODE_ENV=test PRYV_CONFIG=../api-server/config/test.json  ../../node_modules/.bin/mocha --timeout 10000 --reporter=dot 'test/**/*.test.js'"
+   "test": "yarn run _test --logs:console:active=false",
+   "_test": "NODE_ENV=test PRYV_CONFIG=../api-server/config/test.json  ../../node_modules/.bin/mocha --reporter=dot 'test/**/*.test.js' --exit"
   },
   "dependencies": {
   },
