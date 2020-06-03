@@ -19,7 +19,7 @@ const tasks = [{
       'api-server/config/test.json', // replaced by src-dest
       'register' // protects components/register from being deleted
     ],
-    patterns: ['-node_modules/','-*influx*', '-*series*','-webhook*']
+    patterns: ['-node_modules/','-*influx*', '-*series*','-webhook*', '-*nats*']
   }, 
   {
     target: './scripts',
@@ -31,7 +31,7 @@ const tasks = [{
   },
   {
     target: './package.json',
-    sed: ['hfs', 'metdata', 'webhooks', 'gnat', 'influx', 'jsdoc', 'test-root', 'cover', 'flow-coverage', 'tag-tests', 'test-results', 'tprpc', 'jaeger', 'pryvuser-cli', 'metadata'],
+    sed: ['hfs', 'metdata', 'webhooks', 'gnat', 'influx', 'jsdoc', 'test-root', 'cover', 'flow-coverage', 'tag-tests', 'test-results', 'tprpc', 'jaeger', 'pryvuser-cli', 'metadata', 'nats'],
     sedReplace: [
       ['"version"', '  "version": "' + version + '",'],
       ['"url"', '    "url": "git://github.com/pryv/service-pryv.git"'],

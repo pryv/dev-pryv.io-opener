@@ -35,12 +35,25 @@ Maintained and developped by Pryv's developper team.
 
 ### Prerequisites:
 
-- Node v12+
-- Yarn v1+
+- Node v12+ [Node.js home page](https://nodejs.org/)
+
+- Yarn v1+  - once Node.js is installed do: 
+  
+  ```bash
+  $ npm install -g yarn
+  ```
+  
+- MongoDB 3.6 use the following to install MongoDB
+
+  ```bash
+  $ ./script/setup-dev-env.sh
+  ```
+
+
 
 *Install and setup, run:*
 
-- `./script/setup-dev-env.sh` install MongoDB 3.6 (works on OSX and Linux x86 64bit)
+-  install MongoDB 3.6 (works on OSX and Linux x86 64bit)
 - `yarn setup` fetch necessary node-modules
 - `yarn release` create distribution for release
 
