@@ -35,6 +35,8 @@ Maintained and developped by Pryv's developper team.
 
 ### Prerequisites:
 
+- Git
+
 - Node v12+ [Node.js home page](https://nodejs.org/)
 
 - Yarn v1+  - once Node.js is installed do: 
@@ -42,18 +44,14 @@ Maintained and developped by Pryv's developper team.
   ```bash
   $ npm install -g yarn
   ```
-  
-- MongoDB 3.6 use the following to install MongoDB
-
-  ```bash
-  $ ./script/setup-dev-env.sh
-  ```
 
 
 
 *Install and setup, run:*
 
--  install MongoDB 3.6 (works on OSX and Linux x86 64bit)
+-  Install dependencies with `$ ./script/setup-dev-env.sh`
+   -  MongoDB 3.6 (works on OSX and Linux x86 64bit)
+   -  Service-mail 
 - `yarn setup` fetch necessary node-modules
 - `yarn release` create distribution for release
 
@@ -82,6 +80,19 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
     "assets": {
       "definitions": "https://http://localhost:3000/wwww/assets/index.json"
     }
+  },
+  "services": {
+    "email": {
+        "enabled": {
+          "welcome": true,
+          "resetPassword": true
+        },
+        "method": "microservice",
+        "url": "http://localhost:9000",
+        "key": "CHANGEME",
+        "welcomeTemplate": "welcome-email",
+        "resetPasswordTemplate": "reset-password"
+    }
   }
 }
 ```
@@ -95,15 +106,43 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
      API for trusted apps: [API reference-full](https://api.pryv.com/reference-full/)
     see: [SETUP Guide - customize authorization](https://api.pryv.com/customer-resources/pryv.io-setup/#customize-authorization-registration-and-reset-password-apps)
 - `service` [API documention on Service Information](https://api.pryv.com/reference/#service-info)
+- `email` see [Options & Customization](#custom) bellow
+  - `key` set a random string which must be identical to: `http:auth`  property in `./service-mail/config.hson` 
 
 ### run 
 
 - `yarn database &` start mongodb
 - `yarn api` start the API server on port 3000 (default)
+- `yarn mail` start the mail service
+
+### Options & Customization<a name="custom"></a>
+
+#### E-Mails
+
+Pryv.io sends welcome e-mail at registration and during "password lost" process.  
+
+The emails can be send either:
+
+1. By local `service-mail` (default). This service, it's documentation and mail templates can be found in the `./service-mail/` folder. 
+
+By Mandrill. 
+If you choose to use mandril, you do not need to start **service-mail** with `yarn service-mail`
+
+Change the folowing patameters in `./config.json services:mail:`
+
+```json
+"method": "mandrill",
+"url": "https://mandrillapp.com/api/1.0/messages/send-template.json",
+"key": ${apiKey},
+```
+
+`${apiKey}` : your Mandrill's API key
+
+the template names should be adapted as per your Mandrill's templates names.
 
 ## Contributing
 
-Pryv.io core is developped and maintained by Pryv's team. You may contact us to submit a change or adaptation but do not be offended if we decline it or decide to re-write it.
+Open Pryv.io is developped and maintained by Pryv's team. You may contact us to submit a change or adaptation but do not be offended if we decline it or decide to re-write it.
 
 ## License
 

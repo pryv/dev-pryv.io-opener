@@ -35,7 +35,7 @@ const tasks = [{
     sedReplace: [
       ['"version"', '  "version": "' + version + '",'],
       ['"url"', '    "url": "git://github.com/pryv/service-pryv.git"'],
-      ['"api": ', '    "api": "NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.json", '],
+      ['"api": ', '    "api": "NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.json", ']
     ]
   },
   {
