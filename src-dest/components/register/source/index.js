@@ -3,7 +3,7 @@ var database = require('./storage/database');
 var config = require('./config');
 logger['default'].transports.console.level = 'info';
 
-const headPath = require('components/api-server/src/routes/Paths').Reg;
+const headPath = require('components/api-server/src/routes/Paths').Register;
 
 class mockExpress {
   constructor(expressApp) {

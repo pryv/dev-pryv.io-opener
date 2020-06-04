@@ -1,5 +1,5 @@
 
-const headPath = require('../../api-server/src/routes/Paths').Reg;
+const headPath = require('../../api-server/src/routes/Paths').Register;
 
 const config = {
   'auth:authorizedKeys': {
