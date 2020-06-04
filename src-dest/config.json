@@ -16,5 +16,13 @@
     "assets": {
       "definitions": "https://http://localhost:3000/wwww/assets/index.json"
     }
+  },
+  "services": {
+    "email": {
+      "enabled": {
+        "welcome": true,
+        "resetPassword": true
+      }
+    }
   }
 }

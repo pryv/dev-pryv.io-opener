@@ -83,15 +83,10 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
   },
   "services": {
     "email": {
-        "enabled": {
-          "welcome": true,
-          "resetPassword": true
-        },
-        "method": "microservice",
-        "url": "http://localhost:9000",
-        "key": "CHANGEME",
-        "welcomeTemplate": "welcome-email",
-        "resetPasswordTemplate": "reset-password"
+      "enabled": {
+        "welcome": true,
+        "resetPassword": true
+      }
     }
   }
 }
@@ -106,8 +101,7 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
      API for trusted apps: [API reference-full](https://api.pryv.com/reference-full/)
     see: [SETUP Guide - customize authorization](https://api.pryv.com/customer-resources/pryv.io-setup/#customize-authorization-registration-and-reset-password-apps)
 - `service` [API documention on Service Information](https://api.pryv.com/reference/#service-info)
-- `email` see [Options & Customization](#custom) bellow
-  - `key` set a random string which must be identical to: `http:auth`  property in `./service-mail/config.hson` 
+- `email` see [Options & Customization](#custom-email) bellow
 
 ### run 
 
@@ -115,30 +109,16 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
 - `yarn api` start the API server on port 3000 (default)
 - `yarn mail` start the mail service
 
-### Options & Customization<a name="custom"></a>
+### Options & Customization
 
-#### E-Mails
+#### E-Mails<a name="custom-email"></a>
 
 Pryv.io sends welcome e-mail at registration and during "password lost" process.  
 
-The emails can be send either:
+The emails can be send either by local sendmail (default) or SMTP. 
+Note: It's pre-configured to find sendmail in `/usr/sbin/sendmail` change the configuration accordingly to your system.
 
-1. By local `service-mail` (default). This service, it's documentation and mail templates can be found in the `./service-mail/` folder. 
-
-By Mandrill. 
-If you choose to use mandril, you do not need to start **service-mail** with `yarn service-mail`
-
-Change the folowing patameters in `./config.json services:mail:`
-
-```json
-"method": "mandrill",
-"url": "https://mandrillapp.com/api/1.0/messages/send-template.json",
-"key": ${apiKey},
-```
-
-`${apiKey}` : your Mandrill's API key
-
-the template names should be adapted as per your Mandrill's templates names.
+This service, its documentation and mail templates can be found in the `./service-mail/` folder. 
 
 ## Contributing
 

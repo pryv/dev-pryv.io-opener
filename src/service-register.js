@@ -20,7 +20,7 @@ const tasks = [{
         'routes/index.js', 'routes/server.js', 'routes/records.js', 'routes/admin.js', 'routes/users.js', // routes (users.js will be added after)
         'database.js', 'storage/invitations.js', 'storage/reserved-userid.js', 'storage/users.js', // storage
         ],
-    patterns: ['-*dns*']
+    patterns: ['-*dns*','-node_modules/']
   },
   {
     target: './source/routes/users.js',
