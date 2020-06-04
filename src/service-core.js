@@ -7,6 +7,7 @@ const destDir = path.resolve(__dirname, '../dest/');
 
 const rsync = require('./lib/rsync');
 const sed = require('./lib/sed')(destDir);
+const json = require('./lib/json')(destDir);
 
 let version = fs.readFileSync(path.resolve(__dirname, '../src-dest/.api-version'), 'utf8');
 version = version.split("\n")[0];
@@ -31,12 +32,21 @@ const tasks = [{
   },
   {
     target: './package.json',
-    sed: ['hfs', 'metdata', 'webhooks', 'gnat', 'influx', 'jsdoc', 'test-root', 'cover', 'flow-coverage', 'tag-tests', 'test-results', 'tprpc', 'jaeger', 'pryvuser-cli', 'metadata', 'nats'],
-    sedReplace: [
-      ['"version"', '  "version": "' + version + '",'],
-      ['"url"', '    "url": "git://github.com/pryv/service-pryv.git"'],
-      ['"api": ', '    "api": "NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.json", ']
-    ]
+    json: {
+      merge: { 
+        "name": "open-pryv.io",
+        "version": version,
+        "private": false,
+        "repository": {
+          "url": "git://github.com/pryv/service-open-pryv.git"
+        },
+        "scripts": {
+          "api": "NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.json",
+          "mail": "yarn --cwd ./service-mail start"
+        }
+      }
+    },
+    sed: ['hfs', 'metdata', 'webhooks', 'gnat', 'influx', 'jsdoc', 'test-root', 'cover', 'flow-coverage', 'tag-tests', 'test-results', 'tprpc', 'jaeger', 'pryvuser-cli', 'metadata', 'nats']
   },
   {
     target: './.flowconfig',
@@ -53,6 +63,9 @@ module.exports = async () => {
   // --- initial copy
   for (let i = 0; i < tasks.length; i++) {
     await rsync(tasks[i], srcDir, destDir);
+    if (tasks[i].json) {
+      json(tasks[i]);
+    }
     if (tasks[i].sed) {
       sed(tasks[i])
     }
