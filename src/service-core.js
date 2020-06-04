@@ -42,7 +42,12 @@ const tasks = [{
         },
         "scripts": {
           "api": "NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.json",
-          "mail": "yarn --cwd ./service-mail start"
+          "mail": "yarn --cwd ./service-mail start",
+          "proxy": "./node_modules/rec-la/bin/proxy.js localhost:3000"
+        },
+        "dependencies": {
+          "pryv": "^2.0.2",
+          "rec-la": "^0.1.12"
         }
       }
     },

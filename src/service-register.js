@@ -13,11 +13,11 @@ const sed = require('./lib/sed')(destDir);
 const tasks = [{
     target: './source',
     excludes: [
-        'app.js', 'server.js', 'config.js', 'dns', '.gitignore', '.npmignore', 'package.json', // root
+        'app.js', 'config.js', 'dns', '.gitignore', '.npmignore', 'package.json', // root
         'dataservers.js',  // business
         'cross-domain.js', // middelware
         'public/reserved-words.json', // public
-        'routes/index.js', 'routes/server.js', 'routes/records.js', 'routes/admin.js', 'routes/users.js', // routes (users.js will be added after)
+        'routes/index.js', 'routes/records.js', 'routes/admin.js', 'routes/users.js', // routes (users.js will be added after)
         'database.js', 'storage/invitations.js', 'storage/reserved-userid.js', 'storage/users.js', // storage
         ],
     patterns: ['-*dns*','-node_modules/']
