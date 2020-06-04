@@ -69,7 +69,7 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
     "ip": "127.0.0.1"
   },
   "auth": {
-    "trustedApps": "*@http://pryv.github.io, *@https://*.rec.la"
+    "trustedApps": "*@http://pryv.github.io, *@https://*.rec.la*"
   },
   "service": {
     "name": "Test",
@@ -105,9 +105,21 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
 
 ### run 
 
+All services in a single command line
+
+- `yarn pryv`  - mail and database logs will be kept in `./var-pryv/local-*.log`
+
+Each service independently - logs will be displayed on the console
+
 - `yarn database &` start mongodb
 - `yarn api` start the API server on port 3000 (default)
 - `yarn mail` start the mail service
+
+For development en debugging purposes 
+
+- `yarn proxy` based on [rec-la](https://github.com/pryv/rec-la) will expose the server running on http://localhost:3000 with an SSL certificate on https://l.rec.la:4443 in this case you migh want to use `./configs/rec-la.json` 
+- `yarn local` is the equivalent of running `yarn pryv` + `yarn proxy` and `./configs/rec-la.json`
+  This setup is usefull to test pryv fully local. Once started you can test the authortiztaion process on [App-Web-Access](http://pryv.github.io/app-web-access/?pryvServiceInfoUrl=https://l.rec.la:4443/reg/service/info) the pryvServiceInfoUrl being: `https://l.rec.la:4443/reg/service/info`
 
 ### Options & Customization
 

@@ -8,7 +8,7 @@
     "trustedApps": "*@https://pryv.github.io, *@https://*.rec.la*"
   },
   "service": {
-    "name": "Test",
+    "name": "Open-Pryv.io",
     "support": "https://pryv.com/open-pryv-non-configured-page/",
     "terms": "https://pryv.com/open-pryv-non-configured-page/",
     "home": "https://pryv.com/open-pryv-non-configured-page/",
