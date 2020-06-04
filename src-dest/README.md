@@ -111,6 +111,18 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
 
 ### Options & Customization
 
+#### Authentication & Registration web app.
+
+Open Pryv.io comes packaged with [app-web-auth3](https://github.com/pryv/app-web-auth3), the web pages for app authorization, user registration and password reset.
+
+During the set-up process it has been built and published in `./public_html/access` to customize it, refer to the README.md document in `./app-web-auth3` folder.
+
+To publish a new build, simply copy or move the content of the generated in `./app-web-auth3/dist` in place of `./public_html/access`
+
+#### Visual assets and icons
+
+Your platforms visuals can be customized from `./public_html/assets/` folder, please refer to the README.md inside. These assets are a checkout from [assets-pryv.me](https://github.com/pryv/assets-pryv.me) repository.
+
 #### E-Mails<a name="custom-email"></a>
 
 Pryv.io sends welcome e-mail at registration and during "password lost" process.  
