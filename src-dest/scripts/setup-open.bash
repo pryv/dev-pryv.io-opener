@@ -1,16 +1,8 @@
 #!/bin/bash
 
 SCRIPT_FOLDER=$(cd $(dirname "$0"); pwd)
-cd $SCRIPT_FOLDER/.. # root
+cd $SCRIPT_FOLDER
 
-# Sets up service-mail
-
-SERVICE_MAIL_FOLDER="service-mail"
-
-pushd $SERVICE_MAIL_FOLDER
-yarn install
-popd 
-
-echo ""
-echo "Service-Mail Installed!"
-echo ""
+bash ./setup-assets.bash
+bash ./setup-service-mail.bash
+bash ./setup-app-web-auth3.bash
