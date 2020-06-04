@@ -1,20 +1,20 @@
 {
-  "singleCoreUrl": "http://localhost:3000",
+  "singleCoreUrl": "https://l.rec.la:4443",
   "http": {
     "port": 3000,
     "ip": "127.0.0.1"
   },
   "auth": {
-    "trustedApps": "*@http://pryv.github.io, *@https://*.rec.la"
+    "trustedApps": "*@https://pryv.github.io, *@https://*.rec.la*"
   },
   "service": {
     "name": "Test",
-    "support": "https://pryv.com/openpryv/unconfigured.html",
-    "terms": "https://pryv.com/openpryv/unconfigured.html",
-    "home": "https://pryv.com/openpryv/unconfigured.html",
+    "support": "https://pryv.com/open-pryv-non-configured-page/",
+    "terms": "https://pryv.com/open-pryv-non-configured-page/",
+    "home": "https://pryv.com/open-pryv-non-configured-page/",
     "eventTypes": "https://api.pryv.com/event-types/flat.json",
     "assets": {
-      "definitions": "http://localhost:3000/www/assets/index.json"
+      "definitions": "https://l.rec.la:4443/www/assets/index.json"
     }
   },
   "services": {

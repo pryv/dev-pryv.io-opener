@@ -47,7 +47,7 @@ const tasks = [{
         },
         "dependencies": {
           "pryv": "^2.0.2",
-          "rec-la": "^0.1.12"
+          "rec-la": "^0.1.13"
         }
       }
     },

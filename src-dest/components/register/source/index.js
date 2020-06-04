@@ -34,5 +34,6 @@ module.exports = async (expressApp, application) => {
   require('./routes/service')(app);
   require('./routes/users')(app);
   require('./routes/access')(app);
+  require('./routes/server')(app); // only used for backwards compatiblity with DNS set-up
   require('./middleware/app-errors')(app);
 }
