@@ -1,5 +1,6 @@
 
 const headPath = require('../../api-server/src/routes/Paths').Register;
+const wwwPath = require('../../api-server/src/routes/Paths').WWW;
 
 const config = {
   'auth:authorizedKeys': {
@@ -16,9 +17,10 @@ module.exports = {
   },
   loadSettings: function(settings) {
     config.service = settings.get('service').obj();
-    config.publicUrl = settings.get('dnsLess.publicUrl').str();
-
-    config['access:trustedAuthUrls'] = [config.publicUrl];
-    config['access:defaultAuthUrl'] = [config.publicUrl + '/www/access/access.html'];
+    let publicUrl = settings.get('dnsLess.publicUrl').str();
+    if (publicUrl.slice(-1) === '/') publicUrl = publicUrl.slice(0, -1);
+    config.publicUrl = publicUrl;
+    config['access:trustedAuthUrls'] = [publicUrl];
+    config['access:defaultAuthUrl'] = [publicUrl + wwwPath +'/access/access.html'];
   }
 }
