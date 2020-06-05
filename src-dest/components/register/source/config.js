@@ -6,7 +6,7 @@ const config = {
     'CHANGE-ME-SYSTEM-KEY': { roles: ['system'] },
     'CHANGE-ME-ADMIN-KEY': { roles: ['admin'] },
   },
-  'dns:domain': 'fake.io',
+  'dns:domain': 'open-pryv.io',
   'appList': []
 }
 
@@ -16,8 +16,9 @@ module.exports = {
   },
   loadSettings: function(settings) {
     config.service = settings.get('service').obj();
-    config.singleCoreUrl = settings.get('singleCoreUrl').str();
-    config['access:trustedAuthUrls'] = [config.singleCoreUrl];
-    config['access:defaultAuthUrl'] = [config.singleCoreUrl + '/www/access/access.html'];
+    config.publicUrl = settings.get('dnsLess.publicUrl').str();
+
+    config['access:trustedAuthUrls'] = [config.publicUrl];
+    config['access:defaultAuthUrl'] = [config.publicUrl + '/www/access/access.html'];
   }
 }

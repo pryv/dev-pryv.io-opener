@@ -63,7 +63,9 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
 
 ```json
 {
-  "singleCoreUrl": "http://localhost:3000",
+  "dnsLess": {
+    "publicUrl":  "http://localhost:3000"
+  },
   "http": {
     "port": 3000,
     "ip": "127.0.0.1"
@@ -92,7 +94,7 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
 }
 ```
 
-- `singleCoreUrl` Is the "Public" URL to reach the service, usually exposed in **https** by a third party SSL service such as NGNIX.
+- `publicUrl` Is the "Public" URL to reach the service, usually exposed in **https** by a third party SSL service such as NGNIX.
 - `http`
   - `port` The local port to listen-
   - `ip` The IP adress to use. Keep it 0.0.0.0 unless you explicitely want to expose the service in `http` to another network.

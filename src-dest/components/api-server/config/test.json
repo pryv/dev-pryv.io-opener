@@ -1,5 +1,11 @@
 {
-  "singleCoreUrl": "http://localhost:3000",
+  "openSource": {
+    "isActive": true
+  },
+  "dnsLess": {
+    "isActive": true,
+    "publicUrl": "http://localhost:3000"
+  },
   "auth": {
     "trustedApps": "pryv-test@http://test.pryv.local, pryv-test-no-cors@*, *@https://*.rec.la*"
   },
