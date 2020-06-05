@@ -8,8 +8,8 @@ Folow dev on: [Trello Card](https://trello.com/c/6OyTu3Qi/861-pryv-opener)
 
 1. checkout `app-node-opener` in the same directory
 2. run `npm run setup` to checkout git dependencies such as `service-core` and `service-register` 
-2. eventually update `src-dest/.api-version` and set the version of the future open-source release
 3. run `npm run build`
+4. check `src-dest/.api-version` 
 
 The **"Open-sourced version"** will be located in `./dest`
 
@@ -30,40 +30,6 @@ The **"Open-sourced version"** will be located in `./dest`
 ### service-core
 
 Changes made on **service-core** legacy code base to make it openable
-
-#### .env
-
-Added a ".env" file in the reporsitory to pass global settings to the following items
-
-	- setup scripts
-	- api-server
-	- tests
-
-Setup scripts loads it with `. ../.env` Node.js code with the npm package `dotenv`
-
-This method could (should) be changed to use the standard config (convict) method
-
-used variables
-
-```bash
-# in legacy service-core
-PRYV_WEBHOOKS=TRUE
-PRYV_HF=TRUE
-PRYV_GITVERSION=TRUE
-PRYV_VAR=./var-pryv/
-PRYV_FILES=./var-pryv/service-core-files
-PRYV_LOGS=./var-pryv/logs
-PRYV_MONGODB=./var-pryv/mongodb/
-PRYV_MONGODATA=./var-pryv/mongo-data/
-
-# in open service-core
-PRYV_DNSLESS=TRUE
-PRYV_VAR=./var-pryv/
-PRYV_FILES=./var-pryv/service-core-files
-PRYV_LOGS=./var-pryv/logs
-PRYV_MONGODB=./var-pryv/mongodb/
-PRYV_MONGODATA=./var-pryv/mongo-data/
-```
 
 ####  integration of register as a component (used if DNSLESS = true)
 

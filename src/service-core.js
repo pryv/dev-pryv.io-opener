@@ -9,8 +9,23 @@ const rsync = require('./lib/rsync');
 const sed = require('./lib/sed')(destDir);
 const json = require('./lib/json')(destDir);
 
-let version = fs.readFileSync(path.resolve(__dirname, '../src-dest/.api-version'), 'utf8');
-version = version.split("\n")[0];
+const OPEN_TAG='-open';
+
+function execShellCommand(cmd) {
+  const exec = require('child_process').exec;
+  return new Promise((resolve, reject) => {
+    exec(cmd, (error, stdout, stderr) => {
+      if (error) {
+        console.warn(error);
+      }
+      resolve(stdout ? stdout : stderr);
+    });
+  });
+}
+
+let version = null;
+
+
 
 const tasks = [{
     target: './components', 
@@ -66,6 +81,11 @@ const tasks = [{
 
 module.exports = async () => {
 
+  version = await execShellCommand('git --git-dir=' + srcDir + '/.git describe');
+  version = version.substr(0,version.lastIndexOf('-'));
+  version = version.split("\n")[0] + OPEN_TAG;
+  console.log('VERSION ', version)
+  fs.writeFileSync(path.resolve(__dirname, '../src-dest/.api-version'), version);
 
   // --- initial copy
   for (let i = 0; i < tasks.length; i++) {
