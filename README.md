@@ -4,10 +4,17 @@ Script that extracts sources for the Open-Core version of Pryv.io
 
 Folow dev on: [Trello Card](https://trello.com/c/6OyTu3Qi/861-pryv-opener)
 
-# Usage
+# Install
 
 1. checkout `app-node-opener` in the same directory
 2. run `npm run setup` to checkout git dependencies such as `service-core` and `service-register` 
+
+## License
+
+
+
+# Usage
+
 3. run `npm run build`
 4. check `src-dest/.api-version` 
 
