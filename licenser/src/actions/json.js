@@ -23,14 +23,14 @@ async function action(fullPath, spec) {
 
 /**
  * Eventually prepare fileSpecs (can be called multiple times)
- * @param {Object} fileSpecs 
+ * @param {Object} actionItem 
  * @param {String} license - content of the license
  * @return {Function} the action to apply;
  */
-async function prepare(spec, license) {
-  return function (fullPath) {
+async function prepare(actionItem, license) {
+  actionItem.actionMethod = async function (fullPath) {
     console.log('JSON Handler >> ' + fullPath);
-    action(fullPath, spec);
+    await action(fullPath, actionItem);
   };
 }
 

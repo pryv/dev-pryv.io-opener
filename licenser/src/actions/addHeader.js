@@ -32,16 +32,21 @@ async function action(fullPath, spec) {
 
 /**
  * Eventually prepare fileSpecs (can be called multiple times)
+ * Add actionMethod function to be called on each matched file
+ * 
  * @param {Object} fileSpecs 
  * @param {String} license - content of the license
- * @return {Function} the action to apply;
  */
 async function prepare(spec, license) {
   spec.startBlockBuffer = Buffer.from(spec.startBlock, 'utf-8'); // save startBlock as Buffer for fast check
   spec.startBlockLength = spec.startBlockBuffer.length;
-  spec.license = spec.startBlock + license.split('\n').join('\n' + spec.lineBlock) + spec.endBlock; // prepare license block
-  return function (fullPath) {
-    action(fullPath, spec);
+  let myLicense = '' + license;
+  if (spec.lineBlock !== '') {
+    myLicense = myLicense.split('\n').join('\n' + spec.lineBlock)
+  }
+  spec.license = spec.startBlock + myLicense + spec.endBlock; // prepare license block
+  spec.actionMethod = async function (fullPath) {
+    await action(fullPath, spec);
   };
 }
 

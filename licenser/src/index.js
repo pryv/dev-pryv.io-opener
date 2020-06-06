@@ -3,13 +3,24 @@ const fs = require('fs');
 const path = require('path');
 const ignores = ['node_modules', '.git', 'dest/dist/'];
 
+// --- extract default version from dest/package.json
+const version = require('../../dest/package.json').version;
+
 const fileSpecs = {
   '.js' : [
    {
       action: 'addHeader',
-      startBlock: '/**\n * @copyright',
+      startBlock: '/**\n * @license',
       lineBlock: ' * ',
       endBlock: '\n */\n'
+    }
+  ],
+  'README.md': [
+    {
+      action: 'addTrailer',
+      startBlock: '# License',
+      lineBlock: '',
+      endBlock: '' // (go up to the end of the file)
     }
   ],
   'package.json': [
@@ -22,7 +33,8 @@ const fileSpecs = {
       },
       defaults: {
         homepage: "http://pryv.com",
-        description: "This package is part of Open Pryv.io"
+        description: "This package is part of Open Pryv.io",
+        version: version
       },
       sortPackage: true
     },
@@ -31,6 +43,18 @@ const fileSpecs = {
     }
   ]
 }
+
+async function start() {
+  await loadAction(require('./actions/addHeader'));
+  await loadAction(require('./actions/json'));
+  await loadAction(require('./actions/addSibling'));
+  await loadAction(require('./actions/addTrailer'));
+  checkInit();
+  await loop('../dest');
+}
+
+
+// ----------------- helpers
 
 // load license file (add an extra starting)
 const license = '\n' + fs.readFileSync(path.resolve(__dirname, 'LICENSE'), 'utf-8');
@@ -43,7 +67,7 @@ async function loadAction(action) {
     for (const actionItem of fileSpecs[specKey]) {
       if (actionItem.action === action.key) {
         console.log('Loading: ' + action.key + ' for ' + specKey);
-        fileSpecs[specKey].actionMethod = await action.prepare(actionItem, license);
+        await action.prepare(actionItem, license);
       }
     }
   };
@@ -53,7 +77,7 @@ async function loadAction(action) {
 function checkInit() {
   for (const specKey of specKeys) {
     for (const actionItem of fileSpecs[specKey]) {
-      if (!fileSpecs[specKey].actionMethod) {
+      if (!actionItem.actionMethod) {
         console.error('Handler "' + actionItem.action + '" for "' + specKey + '" has not been initialized');
         process.exit(0);
       }
@@ -92,7 +116,9 @@ function ignore(fullPath) {
  * @param {Object} spec the Specifications from fileSpecs matching this file
  */
 async function handleMatchingFile(fullPath, spec) {
-  spec.actionMethod(fullPath);
+  for (const actionItem of spec) {
+    actionItem.actionMethod(fullPath);
+  }
   count++;
 }
 
@@ -128,10 +154,7 @@ async function loop(dir) {
 
 let count = 0;
 (async () => {
-  const start = Date.now();
-  await loadAction(require('./actions/addHeader'));
-  await loadAction(require('./actions/json'));
-  checkInit();
-  await loop('../dest');
-  console.log('Added license to ' + count + ' files in ' + Math.round((Date.now() - start) / 10) / 100 + ' s');
+  const startTime = Date.now();
+  await start();
+  console.log('Added license to ' + count + ' files in ' + Math.round((Date.now() - startTime) / 10) / 100 + ' s');
 })();

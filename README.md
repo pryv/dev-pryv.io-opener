@@ -11,16 +11,14 @@ Folow dev on: [Trello Card](https://trello.com/c/6OyTu3Qi/861-pryv-opener)
 
 # Usage
 
-3. run `npm run build`
-4. check `src-dest/.api-version` 
-
-The **"Open-sourced version"** will be located in `./dest`
+1. run `npm run build`
+2. check `src-dest/.api-version` 
+3. check the **"Open-sourced version"** located in `./dest`
+4. apply license text `npm run license`
 
 ## License
 
-`src/LICENSE` content will  append to all `*.js` files 
-
- 
+License settings and exec can be found  in `./lincenser`
 
 
 # Helpers for developpment 
