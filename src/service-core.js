@@ -9,7 +9,7 @@ const rsync = require('./lib/rsync');
 const sed = require('./lib/sed')(destDir);
 const json = require('./lib/json')(destDir);
 
-const OPEN_TAG='-open';
+const OPEN_TAG = '-open';
 
 function execShellCommand(cmd) {
   const exec = require('child_process').exec;
@@ -26,17 +26,17 @@ function execShellCommand(cmd) {
 let version = null;
 
 
-
-const tasks = [{
-    target: './components', 
+function loadTasks() {
+  return [{
+    target: './components',
     excludes: [
       'hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks', 'metadata', // components
       'business/src/series', 'business/src/series.js', 'series/repository.test.js', // series
       'api-server/config/test.json', // replaced by src-dest
       'register' // protects components/register from being deleted
     ],
-    patterns: ['-node_modules/','-*influx*', '-*series*','-webhook*', '-*nats*']
-  }, 
+    patterns: ['-node_modules/', '-*influx*', '-*series*', '-webhook*', '-*nats*']
+  },
   {
     target: './scripts',
     excludes: ['compile-proxy-config.js', 'components-checkdeps.js', 'components-version.js'],
@@ -48,7 +48,7 @@ const tasks = [{
   {
     target: './package.json',
     json: {
-      merge: { 
+      merge: {
         "name": "open-pryv.io",
         "version": version,
         "private": false,
@@ -74,7 +74,8 @@ const tasks = [{
     target: './.flowconfig',
     sed: ['jaeger', 'tprpc', 'metadata', 'hfs-server', 'flow-coverage']
   }
-];
+  ];
+};
 
 
 
@@ -82,10 +83,13 @@ const tasks = [{
 module.exports = async () => {
 
   version = await execShellCommand('git --git-dir=' + srcDir + '/.git describe');
-  version = version.substr(0,version.lastIndexOf('-'));
+  version = version.substr(0, version.lastIndexOf('-'));
   version = version.split("\n")[0] + OPEN_TAG;
   console.log('VERSION ', version)
   fs.writeFileSync(path.resolve(__dirname, '../src-dest/.api-version'), version);
+
+
+  tasks = loadTasks();
 
   // --- initial copy
   for (let i = 0; i < tasks.length; i++) {
