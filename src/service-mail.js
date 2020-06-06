@@ -14,6 +14,7 @@ const tasks = [{
     target: './',
     excludes: [
       'app.js', 'build', 'config', 'test', '.gitignore', 'Jenkinsfile', 'CHANGELOG.md', // root
+      'templates/welcome-email', // set by src-dest
       'package.json', './README.md' // sed will manage them
         ],
     patterns: ['-node_modules/']
