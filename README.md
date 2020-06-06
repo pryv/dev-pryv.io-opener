@@ -9,16 +9,18 @@ Folow dev on: [Trello Card](https://trello.com/c/6OyTu3Qi/861-pryv-opener)
 1. checkout `app-node-opener` in the same directory
 2. run `npm run setup` to checkout git dependencies such as `service-core` and `service-register` 
 
-## License
-
-
-
 # Usage
 
 3. run `npm run build`
 4. check `src-dest/.api-version` 
 
 The **"Open-sourced version"** will be located in `./dest`
+
+## License
+
+`src/LICENSE` content will  append to all `*.js` files 
+
+ 
 
 
 # Helpers for developpment 
