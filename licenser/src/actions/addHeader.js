@@ -17,7 +17,7 @@ async function checkFileHeaderAndClean(fullPath, spec) {
   // startBlock found read all file and rewrite without startBlock
   const fileContent = fs.readFileSync(fullPath, 'utf8');
   const endBlockPos = fileContent.indexOf(spec.endBlock);
-  console.log('Updated >> ' + fullPath);
+  //onsole.log('Updated >> ' + fullPath);
   fs.writeFileSync(fullPath, fileContent.substr(fileContent.indexOf(spec.endBlock) + spec.endBlock.length));
   return true;
 }

@@ -1,7 +1,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const ignores = ['node_modules', '.git'];
+const ignores = ['node_modules', '.git', 'dest/dist/'];
 
 const fileSpecs = {
   '.js' : [
@@ -16,17 +16,15 @@ const fileSpecs = {
     {
       action: 'json',
       force: {
-        author: {
-          name: "Pryv S.A.",
-          email: "support@pryv.com",
-          url: "http://pryv.com"
-        },
+        author: "Pryv S.A. <support@pryv.com> (http://pryv.com)",
         license: "BSD-3-Clause",
         private: false,
       },
       defaults: {
-        homepage: "http://pryv.com"
-      }
+        homepage: "http://pryv.com",
+        description: "This package is part of Open Pryv.io"
+      },
+      sortPackage: true
     },
     {
       action: 'addSibling'
