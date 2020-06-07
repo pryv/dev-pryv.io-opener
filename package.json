@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node src/index.js",
-    "setup": "git submodule init && git submodule update; npm install; cd licenser; npm install",
+    "setup": "git submodule init && git submodule update; yarn; cd licenser; yarn",
     "license": "cd licenser ; yarn apply"
   },
   "author": "Pryv S.A.",
