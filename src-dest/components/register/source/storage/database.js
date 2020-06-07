@@ -104,6 +104,14 @@ function getUIDFromMail(mail: string, callback: GenericCallback<string>) {
 };
 exports.getUIDFromMail = getUIDFromMail;
 
+/**
+ * Get all users
+ */
+function getAllUsers(callback: GenericCallback<string>) {
+  const options = { projection: { 'id': 0, 'registeredTimestamp': '$created', 'username': 1, 'language': 1, 'email': 1, 'storageUsed': 1 } };
+  users().findAll(options, callback);
+};
+exports.getAllUsers = getAllUsers;
 
 const dbAccessState = {};
 /**

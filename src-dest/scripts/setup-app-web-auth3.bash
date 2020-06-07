@@ -14,7 +14,7 @@ if [[ ! -d $APP_WEB_AUTH_FOLDER ]]; then
   echo "module.exports = {DNSLess: true};" > "./src/defaults.js"
   yarn setup
   yarn build
-  mv "./dist/*" "../public_html/"
+  mv ./dist/* ../public_html/
   echo "App-web-auth3 fetched out in ${APP_WEB_AUTH_FOLDER}"
 else
   echo "App-web-auth3 already fetched skipping"
