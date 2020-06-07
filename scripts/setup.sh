@@ -22,9 +22,8 @@ cd $rootFolder
 if [ -d release ] && [ ! -d release/.git ]
 then
   echo "
-  Conflict with previous unpublished build, cleaning 'dist' folder."
-  # when we are sure of what we do, we can uncomment the line below
-  #rm -rf release/
+  Conflict with previous unpublished build, cleaning 'release' folder."
+  rm -rf release/
 fi
 
 if [ ! -d release ]
