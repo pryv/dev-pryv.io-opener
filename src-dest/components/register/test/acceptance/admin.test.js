@@ -3,6 +3,9 @@ const { databaseFixture } = require('components/test-helpers');
 const { produceMongoConnection, context } = require('components/api-server/test/test-helpers');
 const regPath = require('components/api-server/src/routes/Paths').Register;
 
+const config = require('components/api-server/config/test.json');
+const adminKey = config.auth.adminAccessKey;
+
 const cuid = require('cuid');
 
 const chai = require('chai');
@@ -44,7 +47,7 @@ describe('register /admin', function () {
   it('/admin/users ', async function () {
     const res = await server.request()
       .get(regPath + '/admin/users')
-      .set('Authorization', 'CHANGE-ME-ADMIN-KEY')
+      .set('Authorization', adminKey)
       .set('Accept', 'application/json');
     assert.equal(res.status, 200);
     assert.exists(res.body.users);

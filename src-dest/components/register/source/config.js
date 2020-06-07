@@ -3,10 +3,7 @@ const headPath = require('../../api-server/src/routes/Paths').Register;
 const wwwPath = require('../../api-server/src/routes/Paths').WWW;
 
 const config = {
-  'auth:authorizedKeys': {
-    'CHANGE-ME-SYSTEM-KEY': { roles: ['system'] },
-    'CHANGE-ME-ADMIN-KEY': { roles: ['admin'] },
-  },
+  'auth:authorizedKeys': {},
   'dns:domain': 'open-pryv.io',
   'appList': []
 }
@@ -22,5 +19,11 @@ module.exports = {
     config.publicUrl = publicUrl;
     config['access:trustedAuthUrls'] = [publicUrl];
     config['access:defaultAuthUrl'] = [publicUrl + wwwPath +'/access/access.html'];
+
+    // load admin keys
+    config.adminKey = settings.get('auth.adminAccessKey').str();
+    if (config.adminKey) {
+      config['auth:authorizedKeys'][config.adminKey] = { roles: ['admin'] }
+    }
   }
 }

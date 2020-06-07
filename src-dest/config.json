@@ -11,6 +11,7 @@
     "ip": "127.0.0.1"
   },
   "auth": {
+    "adminAccessKey": "OVERRIDE ME",
     "trustedApps": "*@https://pryv.github.io, *@https://*.rec.la*"
   },
   "service": {
