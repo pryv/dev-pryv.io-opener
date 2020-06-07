@@ -18,35 +18,33 @@ Maintained and developed by Pryv.
 - Support pages: [support.pryv.com](https://support.pryv.com)
 - More information about Pryv : [Pryv Home](https://pryv.com)
 
-## Install & Build
+## Usage
 
-### Prerequisites:
+### Prerequisites
 
 - Git
-
-- Node v12+ [Node.js home page](https://nodejs.org/)
-
-- Yarn v1+  - once Node.js is installed do: 
+- Node v12.13.1 [Node.js home page](https://nodejs.org/)
+- Yarn v1
   
   ```bash
   $ npm install -g yarn
   ```
 
-*Install and setup, run:*
+### Install
 
 Install script as been tested on Linux Ubuntu 16.04 LTS and MacOSX.
 
-- `yarn setup` will: (see `./script` folder for details)
-  - fetch necessary node-modules 
-  - install mongodb 
-  - install service mail
-  - install assets & app-web-auth3
-  - generate random adminKey
+- `yarn setup`: (see `./script` folder for details)
+  - Fetch dependencies
+  - Install mongodb
+  - Install service mail
+  - Install assets & app-web-auth3
+  - Generate strong cryptography adminKey
 - `yarn release` create distribution for release
 
-### Configure your installatiom 
+### Configure your installatiom
 
-Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix` 
+Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix`.
 
 #### edit ./config.json
 
@@ -96,11 +94,11 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
 - `service` [API documention on Service Information](https://api.pryv.com/reference/#service-info)
 - `email` see [Options & Customization](#custom-email) bellow
 
-### run 
+### Run
 
 All services in a single command line
 
-- `yarn pryv`  - mail and database logs will be kept in `./var-pryv/local-*.log`
+- `yarn pryv`  - mail and database logs will be kept in `./var-pryv/logs/local-*.log`
 
 Each service independently - logs will be displayed on the console
 
