@@ -51,7 +51,8 @@ function loadTasks() {
       merge: {
         "name": "open-pryv.io",
         "version": version,
-        "private": false,
+        "private": true,
+        "license": "BSD-3-clause",
         "repository": {
           "url": "git://github.com/pryv/service-open-pryv.git"
         },
