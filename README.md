@@ -6,12 +6,12 @@ Folow dev on: [Trello Card](https://trello.com/c/6OyTu3Qi/861-pryv-opener)
 
 ## Usage
 
-1. Fetch git dependencies: `npm run setup`
-2. Fetch node dependencies: `npm i`
+1. Fetch git dependencies: `yarn setup`
+2. Fetch node dependencies: `yarn`
 3. Eventually update `src-dest/.api-version` and set the version of the future open-source release
-4. Generate open-source release: `npm run build`
+4. Generate open-source release: `yarn build`
 5. Verify the release in `./dest`
-6. Apply license notices with  `npm run license`
+6. Apply license notices with  `yarn license`
 
 ## License
 
@@ -21,9 +21,9 @@ License settings and script are located in [`licenser/`](licenser/).
 
 1. In `dest/` run `yarn setup`, `yarn release`, `yarn watch`
 2. `dest/dist/components/register` or other component you need to test
-  - `pushd {your path}/app-node-opener/ ; npm run build ; popd ; ../../node_modules/.bin/mocha  'test/**/*.test.js'`
-3. to start api-server cd to `dest` and use `cd ../ ; npm run build; cd dest; sleep 2 ; yarn api`  
-  or: `cd ../ ; npm run build; cd dest; sleep 2 ; dist/components/api-server/bin/server --config ./config.json`
+  - `pushd {your path}/app-node-opener/ ; yarn build ; popd ; ../../node_modules/.bin/mocha  'test/**/*.test.js'`
+3. to start api-server cd to `dest` and use `cd ../ ; yarn build; cd dest; sleep 2 ; yarn api`  
+  or: `cd ../ ; yarn build; cd dest; sleep 2 ; dist/components/api-server/bin/server --config ./config.json`
 
 ## Opener
 
