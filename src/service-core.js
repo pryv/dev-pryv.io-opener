@@ -33,7 +33,7 @@ function loadTasks() {
       'hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks', 'metadata', // components
       'business/src/series', 'business/src/series.js', 'series/repository.test.js', // series
       'api-server/config/test.json', // replaced by src-dest
-      'register' // protects components/register from being deleted
+      'register' // protects components/register from being deleted because we rsync --delete
     ],
     patterns: ['-node_modules/', '-*influx*', '-*series*', '-webhook*', '-*nats*']
   },
@@ -60,8 +60,8 @@ function loadTasks() {
           "mail": "yarn --cwd ./service-mail start",
           "setup": "yarn install --ignore-optionals ; bash ./scripts/setup-dev-env.bash",
           "proxy": "./node_modules/rec-la/bin/proxy.js localhost:3000",
-          "pryv": "yarn database >> ./var-pryv/local-db.log & yarn mail  >> ./var-pryv/local-mail.log & yarn api",
-          "local": "yarn database >> ./var-pryv/local-db.log & yarn mail  >> ./var-pryv/local-mail.log & yarn proxy & NODE_ENV=production ./dist/components/api-server/bin/server --config ./configs/rec-la.json",
+          "pryv": "yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn api",
+          "local": "yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn proxy & NODE_ENV=production ./dist/components/api-server/bin/server --config ./configs/rec-la.json",
         },
         "dependencies": {
           "pryv": "^2.0.2",
