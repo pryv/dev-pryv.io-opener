@@ -19,20 +19,20 @@ yarn
 
 cd $rootFolder
 
-if [ -d dest ] && [ ! -d dest/.git ]
+if [ -d release ] && [ ! -d release/.git ]
 then
   echo "
   Conflict with previous unpublished build, cleaning 'dist' folder."
   # when we are sure of what we do, we can uncomment the line below
-  #rm -rf dest/
+  #rm -rf release/
 fi
 
-if [ ! -d dest ]
+if [ ! -d release ]
 then
   echo "
-Setting up 'dest' folder for publishing to release repository
+Setting up 'release' folder for publishing to release repository
 "
-  git clone git@github.com:pryv/pryv.io-open-source.git dest
+  git clone git@github.com:pryv/pryv.io-open-source.git release
 fi
 
 echo "
