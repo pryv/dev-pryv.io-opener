@@ -15,9 +15,9 @@ Folow dev on: [Trello Card](https://trello.com/c/6OyTu3Qi/861-pryv-opener)
 
 ## License
 
-License settings and script are located in [`lincenser/`](licenser/).
+License settings and script are located in [`licenser/`](licenser/).
 
-## Helpers for developpment
+## Helpers for developpment
 
 1. In `dest/` run `yarn setup`, `yarn release`, `yarn watch`
 2. `dest/dist/components/register` or other component you need to test
