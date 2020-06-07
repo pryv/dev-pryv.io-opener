@@ -56,6 +56,8 @@ describe('register /users', function () {
         .send(userData);
       assert.equal(res.status, 200);
       assert.equal(res.body.username, userData.username);
+      assert.equal(res.body.server, res.body.username + '.open-pryv.io');
+      assert.equal(res.body.apiEndpoint, 'http://localhost:3000/' + res.body.username + '/');
     });
   });
 

@@ -11,6 +11,9 @@ const logger = require('winston');
 const messages = require('../utils/messages');
 const domain = '.' + require('../config').get('dns:domain');
 
+const info = require('../business/service-info');
+const Pryv = require('pryv');
+
 type GenericCallback<T> = (err?: ?Error, res: ?T) => mixed;
 type Callback = GenericCallback<mixed>;
 
@@ -33,6 +36,7 @@ export type UserInformation = {
 type CreateResult = {
   username: string,
   server: string,
+  apiEndpoint: string
 };
 
 /**
@@ -67,7 +71,8 @@ exports.create = function create(host, inUser: UserInformation, callback: Generi
     if (! result || !result.id) return callback(new Error('Invalid answer from core'), null);
     callback(error, {
       username: user.username,
-      server: user.username + domain
+      server: user.username + domain,
+      apiEndpoint: Pryv.Service.buildAPIEndpoint(info, user.username, null),
     });
   });
 };
