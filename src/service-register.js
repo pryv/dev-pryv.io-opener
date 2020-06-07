@@ -17,7 +17,7 @@ const tasks = [{
         'dataservers.js',  // business
         'cross-domain.js', // middelware
         'public/reserved-words.json', // public
-        'routes/index.js', 'routes/records.js', 'routes/admin.js', 'routes/users.js', // routes (users.js will be added after)
+        'routes/index.js', 'routes/records.js', 'routes/users.js', // routes (users.js will be added after)
         'database.js', 'storage/invitations.js', 'storage/reserved-userid.js', 'storage/users.js', // storage
         ],
     patterns: ['-*dns*','-node_modules/']

@@ -87,44 +87,14 @@ type ServerUsageStats = {
  * @param callback: function(error, result), result being an array of users
  */
 exports.getUsersOnServer = function (serverName: string, callback: Callback) {
-  var result = [];
-  db.doOnKeysValuesMatching('*:server', serverName,
-    function (key) {
-      result.push(key.split(':')[0]);
-    },
-    function (error) {
-      callback(error, result);
-    });
+  getAllUsersInfos(callback);
 };
 
 /**
  * Get a list of all user's information (see getUserInfos)
  * @param callback: function(error, result), result being a list of information for all users
  */
-exports.getAllUsersInfos = function (callback: GenericCallback<Array<UserInformation>>) {
-  const userlist = [];
-  let waiter = 1;
-
-  function done() {
-    waiter--;
-    if (waiter === 0) {
-      callback(null, userlist);
-    }
-  }
-
-  db.doOnKeysMatching('*:users',
-    function (userkey) { // action
-      const user = userkey.substring(0, userkey.length - 6);
-      waiter++;
-
-      this.getUserInfos(user, function (errors, userInfos) {
-        if (errors != null && errors.length > 0) {
-          userInfos.errors = errors;
-        }
-        userlist.push(userInfos);
-        done();
-      });
-    }.bind(this), function (/*error, count*/) {  // done
-      done();
-    });
+function getAllUsersInfos (callback: GenericCallback<Array<UserInformation>>) {
+  db.getAllUsers(callback);
 };
+exports.getAllUsersInfos = getAllUsersInfos;
