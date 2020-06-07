@@ -17,6 +17,7 @@ yarn
 cd $rootFolder/licenser
 yarn
 
+cd $rootFolder
 
 if [ -d dest ] && [ ! -d dest/.git ]
 then
