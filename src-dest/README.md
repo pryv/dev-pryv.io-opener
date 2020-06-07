@@ -4,15 +4,15 @@
 
 **Personal Data & Privacy Management Software**
 
-A ready-to-use middleware for personal data and consent management
+A ready-to-use service for personal data and consent management.
 
 Pryv.io is a solid foundation on which you build your own digital health solution, so you can collect, store, share and rightfully use personal data.
 
-Maintained and developped by Pryv's developper team.
+Maintained and developed by Pryv.
 
-![Solution](https://pryv.com/wp-content/themes/pryv2019/assets/img/Illustration-solution@2x.jpg)
+![Solution](assets/pryv.io-ecosystem.jpg)
 
-## Features 
+## Features
 
 - Provides latest Pryv.io core system ready for production.
 - User registration and authentication.
