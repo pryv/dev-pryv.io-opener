@@ -58,6 +58,7 @@ function loadTasks() {
         "scripts": {
           "api": "NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.json",
           "mail": "yarn --cwd ./service-mail start",
+          "setup": "yarn install --ignore-optionals ; bash ./scripts/setup-dev-env.bash",
           "proxy": "./node_modules/rec-la/bin/proxy.js localhost:3000",
           "pryv": "yarn database >> ./var-pryv/local-db.log & yarn mail  >> ./var-pryv/local-mail.log & yarn api",
           "local": "yarn database >> ./var-pryv/local-db.log & yarn mail  >> ./var-pryv/local-mail.log & yarn proxy & NODE_ENV=production ./dist/components/api-server/bin/server --config ./configs/rec-la.json",

@@ -10,8 +10,6 @@ Pryv.io is a solid foundation on which you build your own digital health solutio
 
 Maintained and developped by Pryv's developper team.
 
-
-
 ![Solution](https://pryv.com/wp-content/themes/pryv2019/assets/img/Illustration-solution@2x.jpg)
 
 ## Features 
@@ -45,14 +43,16 @@ Maintained and developped by Pryv's developper team.
   $ npm install -g yarn
   ```
 
-
-
 *Install and setup, run:*
 
--  Install dependencies with `$ ./script/setup-dev-env.sh`
-   -  MongoDB 3.6 (works on OSX and Linux x86 64bit)
-   -  Service-mail 
-- `yarn setup` fetch necessary node-modules
+Install script as been tested on Linux Ubuntu 16.04 LTS and MacOSX.
+
+- `yarn setup` will: (see `./script` folder for details)
+  - fetch necessary node-modules 
+  - install mongodb 
+  - install service mail
+  - install assets & app-web-auth3
+  - generate random adminKey
 - `yarn release` create distribution for release
 
 ### Configure your installatiom 
@@ -71,6 +71,7 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
     "ip": "127.0.0.1"
   },
   "auth": {
+    "adminAccessKey": "randomstring",
     "trustedApps": "*@http://pryv.github.io, *@https://*.rec.la*"
   },
   "service": {
@@ -99,6 +100,7 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
   - `port` The local port to listen-
   - `ip` The IP adress to use. Keep it 0.0.0.0 unless you explicitely want to expose the service in `http` to another network.
 - `auth`
+  - `adminAccesskey` key to use for system calls such as `/reg/admin/users`. A random key should be generated on setup.
   - `trustedApps` list of web apps that can be trusted-app functionalities
      API for trusted apps: [API reference-full](https://api.pryv.com/reference-full/)
     see: [SETUP Guide - customize authorization](https://api.pryv.com/customer-resources/pryv.io-setup/#customize-authorization-registration-and-reset-password-apps)
