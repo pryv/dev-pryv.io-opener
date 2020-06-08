@@ -12,6 +12,17 @@ Maintained and developed by Pryv.
 
 ![Solution](assets/pryv.io-ecosystem.jpg)
 
+## Features
+
+- Provides latest Pryv.io core system ready for production
+- User registration and authentication
+- Granular consent-based access control rights
+- Data model made for privacy, aggregation and sharing [Data in Pryv](https://pryv.com/data_in_pryv/)
+- Full data life-cycle: collect - store - change - delete
+- REST & Socket.io API
+- Ease of software integration and configuration
+- Seamless connectivity and interoperability
+
 ## Documentation
 
 - API Documentation & Guides: [api.pryv.com](https://api.pryv.com)
