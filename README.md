@@ -12,6 +12,14 @@ Folow dev on: [Trello Card](https://trello.com/c/6OyTu3Qi/861-pryv-opener)
 4. Verify the release in `./dest`
 5. Apply license notices with: `yarn license`
 
+### Update git dependencies
+
+1. `cd service-core`
+2. `git checkout master`
+3. `git pull`
+4. `cd ..`
+5. git add, commit and push
+
 ## License
 
 License settings and script are located in [`licenser/`](licenser/).
