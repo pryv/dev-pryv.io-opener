@@ -54,11 +54,7 @@ Pryv.io is designed to be exposed by a third party SSL temination such as NGINX.
 
 #### NGINX configuration
 
-Here is an example of NGINX README that you can use in production
-
-```nginx
-
-```
+You can find a NGINX configuration that you can include in your `sites-enabled/` in [configs/site.conf](configs/site.conf).
 
 #### Open Pryv.io configuration
 
