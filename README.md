@@ -11,7 +11,6 @@ Folow dev on: [Trello Card](https://trello.com/c/6OyTu3Qi/861-pryv-opener)
 3. Generate open-source release: `yarn build`
 4. Verify the release in `./dest`
 5. Apply license notices with: `yarn license`
-6. Generate release (strip tests): `yarn release`
 
 ## License
 

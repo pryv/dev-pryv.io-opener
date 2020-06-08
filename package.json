@@ -6,7 +6,6 @@
   "scripts": {
     "build": "node src/index.js",
     "setup": "./scripts/setup.sh",
-    "release": "./scripts/release.sh",
     "license": "cd licenser ; yarn apply"
   },
   "author": "Pryv S.A.",
