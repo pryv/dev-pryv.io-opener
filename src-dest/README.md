@@ -1,4 +1,4 @@
-# Pryv.io Open-Core
+# Open Pryv.io
 
 ![Pryv-Logo](https://i0.wp.com/pryv.com/wp-content/uploads/2018/06/logo-data-privacy-management-pryv.png?fit=256%2C100&ssl=1)
 
