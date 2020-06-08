@@ -10,7 +10,7 @@ Pryv.io is a solid foundation on which you build your own digital health solutio
 
 Maintained and developed by Pryv.
 
-![Solution](assets/pryv.io-ecosystem.jpg)
+![Solution](readme/pryv.io-ecosystem.jpg)
 
 ## Features
 
