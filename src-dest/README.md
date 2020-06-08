@@ -52,10 +52,6 @@ Install script as been tested on Linux Ubuntu 16.04 LTS and MacOSX.
 
 Pryv.io is designed to be exposed by a third party SSL temination such as NGINX.
 
-#### NGINX configuration
-
-You can find a NGINX configuration that you can include in your `sites-enabled/` in [configs/site.conf](configs/site.conf).
-
 #### Open Pryv.io configuration
 
 Edit the `config.json` file:
@@ -105,6 +101,12 @@ Edit the `config.json` file:
     see: [SETUP Guide - customize authorization](https://api.pryv.com/customer-resources/pryv.io-setup/#customize-authorization-registration-and-reset-password-apps)
 - **service** [API documention on Service Information](https://api.pryv.com/reference/#service-info)
 - **services:email** see [Options & Customization](#custom-email) bellow
+
+#### NGINX configuration
+
+You can find a NGINX configuration that you can include in your `sites-enabled/` in [configs/site.conf](configs/site.conf).
+
+You must change `${PUBLIC_URL}` to match the `dnsLess:publicUrl` setting in the Pryv.io configuration.
 
 ### Run
 
