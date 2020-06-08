@@ -33,13 +33,8 @@ Maintained and developed by Pryv.
 
 ### Prerequisites
 
-- Git
 - Node v12.13.1 [Node.js home page](https://nodejs.org/)
-- Yarn v1
-  
-  ```bash
-  $ npm install -g yarn
-  ```
+- Yarn v1 `npm install -g yarn`
 
 ### Install
 
@@ -50,7 +45,7 @@ Install script as been tested on Linux Ubuntu 16.04 LTS and MacOSX.
   - Install mongodb
   - Install service mail
   - Install assets & app-web-auth3
-  - Generate strong cryptography adminKey
+  - Generate random alpha-numeric adminKey
 - `yarn release` create distribution for release
 
 ### Configure your installatiom
@@ -113,7 +108,7 @@ All services in a single command line
 
 Each service independently - logs will be displayed on the console
 
-- `yarn database &` start mongodb
+- `yarn database` start mongodb
 - `yarn api` start the API server on port 3000 (default)
 - `yarn mail` start the mail service
 
