@@ -12,7 +12,7 @@ module.exports = async () => {
   await rsync(
     { target: './src-dest/.??*', noDelete: true , rsyncUseDestDir: true},
     path.resolve(__dirname, '..'),
-    destDir);
+    destDir); 
 
   console.log('done');
 }
