@@ -26,7 +26,7 @@ Maintained and developed by Pryv.
 ## Documentation
 
 - API Documentation & Guides: [api.pryv.com](https://api.pryv.com)
-- Support pages: [support.pryv.com](https://support.pryv.com)
+- Support: [support.pryv.com](https://support.pryv.com)
 - More information about Pryv : [Pryv Home](https://pryv.com)
 
 ## Usage
@@ -40,7 +40,7 @@ Maintained and developed by Pryv.
 
 Install script as been tested on Linux Ubuntu 16.04 LTS and MacOSX.
 
-- `yarn setup`: (see `./script` folder for details)
+- `yarn setup`: (see `scripts/` for details)
   - Fetch dependencies
   - Install mongodb
   - Install service mail
@@ -50,9 +50,19 @@ Install script as been tested on Linux Ubuntu 16.04 LTS and MacOSX.
 
 ### Configure your installatiom
 
-Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix`.
+Pryv.io is designed to be exposed by a third party SSL temination such as NGINX.
 
-#### edit ./config.json
+#### NGINX configuration
+
+The following 
+
+```nginx
+
+```
+
+#### Open Pryv.io configuration
+
+Edit the `config.json` file:
 
 ```json
 {
@@ -88,23 +98,23 @@ Pryv.io is designed to be exposed by a third party SSL temination such as `ngnix
 }
 ```
 
-- `publicUrl` Is the "Public" URL to reach the service, usually exposed in **https** by a third party SSL service such as NGNIX.
-- `http`
-  - `port` The local port to listen-
-  - `ip` The IP adress to use. Keep it 0.0.0.0 unless you explicitely want to expose the service in `http` to another network.
-- `auth`
-  - `adminAccesskey` key to use for system calls such as `/reg/admin/users`. A random key should be generated on setup.
-  - `trustedApps` list of web apps that can be trusted-app functionalities
+- **publicUrl** Is the "Public" URL to reach the service, usually exposed in **https** by a third party SSL service such as NGNIX.
+- **http**
+  - **port** The local port to listen
+  - **ip** The IP adress to use. Keep it 0.0.0.0 unless you explicitely want to expose the service in `http` to another network.
+- **auth**
+  - **adminAccesskey** key to use for system calls such as `/reg/admin/users`. A random key should be generated on setup.
+  - **trustedApps** list of web apps that can be trusted-app functionalities
      API for trusted apps: [API reference-full](https://api.pryv.com/reference-full/)
     see: [SETUP Guide - customize authorization](https://api.pryv.com/customer-resources/pryv.io-setup/#customize-authorization-registration-and-reset-password-apps)
-- `service` [API documention on Service Information](https://api.pryv.com/reference/#service-info)
-- `email` see [Options & Customization](#custom-email) bellow
+- **service** [API documention on Service Information](https://api.pryv.com/reference/#service-info)
+- **services:email** see [Options & Customization](#custom-email) bellow
 
 ### Run
 
 All services in a single command line
 
-- `yarn pryv`  - mail and database logs will be kept in `./var-pryv/logs/local-*.log`
+- `yarn pryv`  - mail and database logs will be kept in `var-pryv/logs/local-*.log`
 
 Each service independently - logs will be displayed on the console
 
@@ -112,10 +122,10 @@ Each service independently - logs will be displayed on the console
 - `yarn api` start the API server on port 3000 (default)
 - `yarn mail` start the mail service
 
-For development en debugging purposes 
+#### For development and debugging purposes 
 
-- `yarn proxy` based on [rec-la](https://github.com/pryv/rec-la) will expose the server running on http://localhost:3000 with an SSL certificate on https://l.rec.la:4443 in this case you migh want to use `./configs/rec-la.json` 
-- `yarn local` is the equivalent of running `yarn pryv` + `yarn proxy` and `./configs/rec-la.json`
+- `yarn proxy` based on [rec-la](https://github.com/pryv/rec-la) will expose the server running on http://localhost:3000 with an SSL certificate on https://l.rec.la:4443 in this case you migh want to use `configs/rec-la.json` 
+- `yarn local` is the equivalent of running `yarn pryv` + `yarn proxy` using `configs/rec-la.json`
   This setup is usefull to test pryv fully local. Once started you can test the authortiztaion process on [App-Web-Access](http://pryv.github.io/app-web-access/?pryvServiceInfoUrl=https://l.rec.la:4443/reg/service/info) the pryvServiceInfoUrl being: `https://l.rec.la:4443/reg/service/info`
 
 ### Options & Customization
@@ -124,22 +134,21 @@ For development en debugging purposes
 
 Open Pryv.io comes packaged with [app-web-auth3](https://github.com/pryv/app-web-auth3), the web pages for app authorization, user registration and password reset.
 
-During the set-up process it has been built and published in `./public_html/access` to customize it, refer to the README.md document in `./app-web-auth3` folder.
+During the set-up process it has been built and published in `public_html/access/`. To customize it, refer to its `README` in `app-web-auth3/`.
 
-To publish a new build, simply copy or move the content of the generated in `./app-web-auth3/dist` in place of `./public_html/access`
+To use a new build, simply copy the contents of the generated files from `app-web-auth3/dist/` to `public_html/access/`
 
 #### Visual assets and icons
 
-Your platforms visuals can be customized from `./public_html/assets/` folder, please refer to the README.md inside. These assets are a checkout from [assets-pryv.me](https://github.com/pryv/assets-pryv.me) repository.
+Your platforms visuals can be customized in `public_html/assets/`, please refer to the README inside. These assets are a clone of the [assets-pryv.me](https://github.com/pryv/assets-pryv.me) repository.
 
 #### E-Mails<a name="custom-email"></a>
 
-Pryv.io sends welcome e-mail at registration and during "password lost" process.  
+Pryv.io can send e-mails at registration and password reset request.
 
 The emails can be send either by local sendmail (default) or SMTP. 
-Note: It's pre-configured to find sendmail in `/usr/sbin/sendmail` change the configuration accordingly to your system.
 
-This service, its documentation and mail templates can be found in the `./service-mail/` folder. 
+This service, its documentation and mail templates can be found in `service-mail/`.
 
 ## Contributing
 
