@@ -108,6 +108,16 @@ You can find a NGINX configuration that you can include in your `sites-enabled/`
 
 You must change `${PUBLIC_URL}` to match the `dnsLess:publicUrl` setting in the Pryv.io configuration.
 
+##### SSL certificate
+
+Using [certbot](https://certbot.eff.org/), you can generate a SSL certificate for your platform using `sudo certbot --nginx -d ${PUBLIC_URL}`.
+
+To set an automatic renewal, run `crontab -e` and append the following line:
+
+```cron
+0 12 * * * /usr/bin/certbot renew --quiet
+```
+
 ### Run
 
 All services in a single command line
