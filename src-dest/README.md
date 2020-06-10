@@ -161,7 +161,7 @@ Pryv.io can send e-mails at registration and password reset request.
 
 The emails can be sent either by local sendmail (default) or SMTP. 
 
-This service, its documentation and mail templates can be found in `service-mail/`.
+This service, its documentation and mail templates can be found in [`service-mail/`](service-mail/).
 
 ## Contributing
 
