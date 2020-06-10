@@ -101,7 +101,7 @@ Edit the `config.json` file:
   - **adminAccesskey** key to use for system calls such as `/reg/admin/users`. A random key should be generated on setup.
   - **trustedApps** list of web apps that can be trusted-app functionalities
      API for trusted apps: [API reference](https://api.pryv.com/reference/)
-    see: [SETUP Guide - customize authorization](https://api.pryv.com/customer-resources/pryv.io-setup/#customize-authorization-registration-and-reset-password-apps)
+    see: [SETUP Guide - customize authentication](https://api.pryv.com/customer-resources/pryv.io-setup/#customize-authentication-registration-and-reset-password-apps)
 - **eventFiles**
   - **attachmentsDirPath** Directory where event attachment files will be stored on the file system.
 - **service** [API documention on Service Information](https://api.pryv.com/reference/#service-info)
@@ -139,7 +139,7 @@ Each service independently - logs will be displayed on the console
 
 - `yarn proxy` based on [rec-la](https://github.com/pryv/rec-la) will expose the server running on http://localhost:3000 with an SSL certificate on https://l.rec.la:4443 in this case you might want to use `configs/rec-la.json` 
 - `yarn local` is the equivalent of running `yarn pryv` + `yarn proxy` using `configs/rec-la.json`
-  This setup is useful to test Open Pryv.io locally. Once started you can test the authorization process on [App-Web-Access](http://api.pryv.com/app-web-access/?pryvServiceInfoUrl=https://l.rec.la:4443/reg/service/info) the `pryvServiceInfoUrl` being: [https://l.rec.la:4443/reg/service/info](https://l.rec.la:4443/reg/service/info)
+  This setup is useful to test Open Pryv.io locally. Once started you can test the authentication process on [App-Web-Access](http://api.pryv.com/app-web-access/?pryvServiceInfoUrl=https://my-computer.rec.la:4443/reg/service/info) the `pryvServiceInfoUrl` being: [https://my-computer.rec.la:4443/reg/service/info](https://my-computer.rec.la:4443/reg/service/info)
 
 ### Options & Customization
 
