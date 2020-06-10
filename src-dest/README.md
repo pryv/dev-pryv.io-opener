@@ -153,7 +153,7 @@ To use a new build, simply copy the contents of the generated files from `app-we
 
 #### Visual assets and icons
 
-Your platforms visuals can be customized in `public_html/assets/`, please refer to the README inside. These assets are a clone of the [assets-pryv.me](https://github.com/pryv/assets-pryv.me) repository.
+Your platforms visuals can be customized in `public_html/assets/`, please refer to the README inside. These assets are a clone of the [assets-open-pryv.io](https://github.com/pryv/assets-open-pryv.io).
 
 #### E-Mails<a name="custom-email"></a>
 
