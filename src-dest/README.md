@@ -145,7 +145,7 @@ Each service independently - logs will be displayed on the console
 
 #### Authentication & Registration web app.
 
-Open Pryv.io comes packaged with [app-web-auth3](https://github.com/pryv/app-web-auth3), the web pages for app authorization, user registration and password reset.
+Open Pryv.io comes packaged with [app-web-auth3](https://github.com/pryv/app-web-auth3), the default web pages for app authentication, user registration and password reset.
 
 During the set-up process it has been built and published in `public_html/access/`. To customize it, refer to its `README` in `app-web-auth3/`.
 
