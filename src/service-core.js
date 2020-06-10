@@ -85,8 +85,12 @@ function loadTasks() {
 module.exports = async () => {
 
   version = await execShellCommand('git --git-dir=' + srcDir + '/.git describe');
-  version = version.substr(0, version.lastIndexOf('-'));
-  version = version.split("\n")[0] + OPEN_TAG;
+  // remove the intermediate commit index
+  if (version.indexOf('-') >= 0) {
+    version = version.substr(0, version.lastIndexOf('-'));
+  }
+  version = version.split("\n")[0];
+  version = version + OPEN_TAG;
   console.log('VERSION ', version)
   fs.writeFileSync(path.resolve(__dirname, '../src-dest/.api-version'), version);
 
