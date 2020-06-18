@@ -8,9 +8,8 @@ Folow dev on: [Trello Card](https://trello.com/c/6OyTu3Qi/861-pryv-opener)
 
 1. Fetch git dependencies: `yarn setup`
 2. Fetch node dependencies: `yarn`
-3. Generate open-source release: `yarn build`
+3. Generate open-source release: `yarn build` this step also licenses code with: `yarn license`
 4. Verify the release in `./dest`
-5. Apply license notices with: `yarn license`
 
 ### Update git dependencies
 
