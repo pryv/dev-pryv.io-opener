@@ -1,0 +1,62 @@
+name: Pryv-registration-server deployment CD
+
+on: 
+  push:
+    branches:
+      - feature/automate-build
+
+jobs:
+  build:
+
+    runs-on: ubuntu-16.04
+    strategy:
+      matrix:
+        node-version: [12.13]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deployment pipeline using Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+        
+    - name: Download pryv service-core
+      uses: actions/checkout@v2
+      with:
+        repository: pryv/service-core
+        token: ${{ secrets.SECRET_FOR_READING_SUBMODULES }}
+        path: service-core
+        
+    - name: Download pryv service-register
+      uses: actions/checkout@v2
+      with:
+        repository: pryv/service-register
+        token: ${{ secrets.SECRET_FOR_READING_SUBMODULES }}
+        path: service-register
+        
+    - name: Download pryv service-mail
+      uses: actions/checkout@v2
+      with:
+        repository: pryv/service-mail
+        token: ${{ secrets.SECRET_FOR_READING_SUBMODULES }}
+        path: service-mail
+        
+    - name: Download pryv.io-open-source
+      uses: actions/checkout@v2
+      with:
+        repository: pryv/pryv.io-open-source
+        token: ${{ secrets.SECRET_FOR_READING_SUBMODULES }}
+        path: dest
+      
+    - name: yarn install
+      run: yarn install
+      
+    - name: yarn build and prepend licences
+      run: yarn build
+      
+    - name: Run tests on build
+      run: echo 'I pretend that I run the tests'
+      
+    - name: Commit and push to open Pryv
+      run: cd dest && git status
+      
