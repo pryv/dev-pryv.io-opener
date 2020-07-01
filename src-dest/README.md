@@ -153,26 +153,33 @@ You can either build the images locally or download them from DockerHub before r
 
 This will create all the components required to run Pryv.io with a NGINX proxy for SSL termination.
 
-You should change the following values to run it on a VM:
-
-- `HOSTNAME` in `docker-compose.yml`
-
 After images are built, you can simply run `docker-compose up -f docker-compose.yml` or `docker-compose up -f docker-compose.download.yml` instead of `sh build-local.sh` to start the containers.
 
 ## Start
 
 At this moment you should have your application running on the public URL you defined. For a **production environment**, please refer to [this part](#nginx-configuration) on how to setup a SSL certificate for your domain.
 
+### Native
+
 - Create an account and launch the [authentication process](https://api.pryv.com/reference/#authenticate-your-app) on **App-Web-Access**: [https://api.pryv.com/app-web-access/?pryvServiceInfoUrl=https://my-computer.rec.la:4443/reg/service/info](https://api.pryv.com/app-web-access/?pryvServiceInfoUrl=https://my-computer.rec.la:4443/reg/service/info).
 - The service info URL to your platform is: [https://my-computer.rec.la:4443/reg/service/info](https://my-computer.rec.la:4443/reg/service/info)
 
 If you are using another public URL, replace `https://my-computer.rec.la:4443` by it in the link above.
 
+### Dockerized
+
+- Create an account and launch the [authentication process](https://api.pryv.com/reference/#authenticate-your-app) on **App-Web-Access**: [https://api.pryv.com/app-web-access/?pryvServiceInfoUrl=https://my-computer.rec.la/reg/service/info](https://api.pryv.com/app-web-access/?pryvServiceInfoUrl=https://my-computer.rec.la/reg/service/info).
+- The service info URL to your platform is: [https://my-computer.rec.la/reg/service/info](https://my-computer.rec.la/reg/service/info)
+
+If you are using another public URL, replace `https://my-computer.rec.la` by it in the link above.
+
+### Try the API
+
 After this process, you should have an account on your Open Pryv.io platform with a valid authorization token, you can try various **API requests** using **Postman** following this guide [https://api.pryv.com/open-api/](https://api.pryv.com/open-api/).
 
 ## Options & Customization
 
-#### Authentication & Registration web app.
+### Authentication & Registration web app.
 
 Open Pryv.io comes packaged with [app-web-auth3](https://github.com/pryv/app-web-auth3), the default web pages for app authentication, user registration and password reset.
 
@@ -180,11 +187,11 @@ During the set-up process it has been built and published in `public_html/access
 
 To use a new build, simply copy the contents of the generated files from `app-web-auth3/dist/` to `public_html/access/`
 
-#### Visual assets and icons
+### Visual assets and icons
 
 Your platforms visuals can be customized in `public_html/assets/`, please refer to the README inside. These assets are a clone of the [assets-open-pryv.io](https://github.com/pryv/assets-open-pryv.io).
 
-#### E-Mails<a name="custom-email"></a>
+### E-Mails<a name="custom-email"></a>
 
 Pryv.io can send e-mails at registration and password reset request.
 
@@ -196,8 +203,8 @@ This service, its documentation and mail templates can be found in [`service-mai
 
 Open Pryv.io is developed and maintained by Pryv's team. You may contact us to submit a change or adaptation but do not be offended if we decline it or decide to re-write it.
 
-#
-# License
+## License
+
 Copyright (c) 2020 Pryv S.A. https://pryv.com
 
 This file is part of Open-Pryv.io and released under BSD-Clause-3 License
