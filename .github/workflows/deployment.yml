@@ -44,5 +44,5 @@ jobs:
       run: echo 'I pretend that I run the tests'
       
     - name: Commit and push to open Pryv 
-      run: cd dest && git status && git diff && echo '${{ env.RELEASE_VERSION }} version'
+      run: cd dest && yarn remove test-helpers && git status && git diff && echo '${{ env.RELEASE_VERSION }} version'
       
