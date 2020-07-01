@@ -3,3 +3,5 @@ release/
 node_modules
 service-core-files
 dest-bkp
+# Netbeans IDE
+nbproject/

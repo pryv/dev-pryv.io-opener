@@ -1,0 +1,48 @@
+name: Pryv-registration-server deployment
+
+on: 
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-16.04
+    strategy:
+      matrix:
+        node-version: [12.13]
+
+    steps:
+    - name: Checkout repository with submodules
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+        token: ${{ secrets.SECRET_FOR_READING_SUBMODULES }}
+        fetch-depth: 3
+        clean: false
+        
+    - name: Install Node.js with version ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+        
+    - name: Download pryv.io-open-source
+      uses: actions/checkout@v2
+      with:
+        repository: pryv/pryv.io-open-source
+        token: ${{ secrets.SECRET_FOR_READING_SUBMODULES }}
+        path: dest
+      
+    - name: yarn install
+      run: yarn install
+      
+    - name: yarn build and prepend licenses
+      run: cd licenser && yarn install && cd .. && yarn build
+      
+    - name: Run tests on build
+      run: echo 'I pretend that I run the tests'
+      
+    - name: Commit and push to open Pryv 
+      run: cd dest && git status && git diff && echo '${{ env.RELEASE_VERSION }} version'
+      
