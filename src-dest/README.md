@@ -163,7 +163,7 @@ After images are built, you can simply run `docker-compose up -f docker-compose.
 
 At this moment you should have your application running on the public URL you defined. For a **production environment**, please refer to [this part](#nginx-configuration) on how to setup a SSL certificate for your domain.
 
-- Create an account and launch the [authentication process](https://api.pryv.com/reference/#authenticate-your-app) on [App-Web-Access](http://api.pryv.com/app-web-access/?pryvServiceInfoUrl=https://my-computer.rec.la:4443/reg/service/info).
+- Create an account and launch the [authentication process](https://api.pryv.com/reference/#authenticate-your-app) on **App-Web-Access**: [https://api.pryv.com/app-web-access/?pryvServiceInfoUrl=https://my-computer.rec.la:4443/reg/service/info](https://api.pryv.com/app-web-access/?pryvServiceInfoUrl=https://my-computer.rec.la:4443/reg/service/info).
 - The service info URL to your platform is: [https://my-computer.rec.la:4443/reg/service/info](https://my-computer.rec.la:4443/reg/service/info)
 
 If you are using another public URL, replace `https://my-computer.rec.la:4443` by it in the link above.
