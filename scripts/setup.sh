@@ -31,7 +31,7 @@ then
   echo "
 Setting up 'dest' folder for publishing to release repository
 "
-  git clone git@github.com:pryv/pryv.io-open-source.git dest
+  git clone git@github.com:pryv/open-pryv.io.git dest
 fi
 
 echo "
