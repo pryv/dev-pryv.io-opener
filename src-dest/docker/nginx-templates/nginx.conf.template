@@ -25,11 +25,12 @@ http {
 
     # HSTS (ngx_http_headers_module is required) (63072000 seconds)
     add_header Strict-Transport-Security "max-age=63072000" always;
-    
-    ssl_certificate /etc/nginx/certs/self-signed/rec.la-bundle.crt;
-    ssl_certificate_key /etc/nginx/certs/self-signed/rec.la-key.pem;
 
-    ssl_dhparam /etc/nginx/certs/dhparam.pem;
+    ssl_certificate /etc/letsencrypt/live/${HOSTNAME}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/${HOSTNAME}/privkey.pem;
+
+    #include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
     include       /etc/nginx/mime.types;
 
@@ -57,5 +58,4 @@ http {
     include /etc/nginx/site*.conf;
 
     server_tokens off;
-
 }

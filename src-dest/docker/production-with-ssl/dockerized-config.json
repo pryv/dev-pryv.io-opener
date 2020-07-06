@@ -1,4 +1,6 @@
 {
+  "ssl_email": "OVERRIDE.ME@pryv.com",
+  "ssl_staging": "1",
   "openSource": {
     "isActive": true
   },
@@ -12,7 +14,7 @@
   },
   "auth": {
     "adminAccessKey": "{ADMIN_ACCESS_KEY}",
-    "trustedApps": "*@https://pryv.github.io, *@https://*.rec.la*"
+    "trustedApps": "*@https://pryv.github.io, *@https://my-computer.rec.la*"
   },
   "eventFiles": {
     "attachmentsDirPath": "var-pryv/attachment-files"
@@ -33,10 +35,10 @@
         "welcome": true,
         "resetPassword": true
       },
-      "url": "http://open_pryv_mail:9000/sendmail/"
+      "url": "http://open-pryv-mail:9000/sendmail/"
     }
   },
   "database": {
-    "host": "pryv_mongo"
+    "host": "open-pryv-mongo"
   }
 }

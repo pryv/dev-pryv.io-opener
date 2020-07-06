@@ -1,7 +1,21 @@
 node_modules
+# netbeans IDE
 nbproject
 app-web-auth3/node_modules
 .git
 dump.rdb
 dist
+# volume data
 var-pryv/
+# skip build related files except for dockerized-config
+docker/production-no-ssl
+docker/production-with-ssl
+docker/dev/rec.la-certificates
+docker/dev/dhparam.pem
+docker/dev/docker-compose.no-ssl.yml
+docker/dev/docker-compose.with-ssl.yml
+docker/dev/Dockerfile
+build-local.sh
+
+# non functional files
+README.md
