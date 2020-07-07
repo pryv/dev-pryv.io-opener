@@ -42,7 +42,8 @@ services:
         container_name: "open-pryv-nginx"
         volumes:
           # You can load custom nginx config and use env variables in it
-          - ./nginx-templates:/etc/nginx/templates
+          - ./nginx.conf.template:/etc/nginx/templates/nginx.conf.template
+          - ./site.conf.template:/etc/nginx/templates/site.conf.template
           - ./var-pryv/certbot/www:/var/www/certbot
           - ./var-pryv/certbot/conf:/etc/letsencrypt
         ports:

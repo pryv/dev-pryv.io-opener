@@ -210,7 +210,7 @@ _Be ready with your Pryv.io set-up in a few minutes._
 - [Docker-compose v1.26](https://docs.docker.com/compose/install/)
 - Server (Ubuntu 18.04 is recommended) with a hostname and exposed 80 and 443 ports
 
-1. 1. Change the config `configs/production-with-ssl-docker/dockerized-config.json` and `configs/production-with-ssl-docker/dockerized-service-mail-config.hjson` config files with your setup:
+1. Change the config `configs/production-with-ssl-docker/dockerized-config.json` and `configs/production-with-ssl-docker/dockerized-service-mail-config.hjson` config files with your setup:
     * Change `https://my-computer.rec.la` to your domain. Please keep the same format.
     * (_Optional_)If you have already SMTP - change `dockerized-service-mail-config.hjson` file with SMTP details. If you don't have SMTP, API will work without this step, just will not send emails.
     * [Explanation of other config fields](#Config)
@@ -219,7 +219,7 @@ _Be ready with your Pryv.io set-up in a few minutes._
 4. In the server: Run `./build_production.sh` 
     * This step will try to create SLL certificates for your domain and run docker-compose to start the API.
     * Note that you can change docker images that are used in docker-compose.yml file with your images.
-
+    * Note that by changing ssl_staging from 0 to 1 in dockerized-config.json you can test the certificate generation with letsencrypt staging environment.
 You can test you api now just instead of using my-computer.rec.la domain replace it with yours. [Continue tutorial](#dockerized)
 
 ### Server setup with external SSL
@@ -231,7 +231,8 @@ _This set-up is for systems that have their own SSL termination_
 - [Docker-compose v1.26](https://docs.docker.com/compose/install/)
 - Server (Ubuntu 18.04 is recommended)
 
-1. Change the config
+1. Change the config `configs/production-with-ssl-docker/dockerized-config.json` and `configs/production-with-ssl-docker/dockerized-service-mail-config.hjson` config files with your setup:
+    * Change `https://my-computer.rec.la` to your domain or ip. Please keep the same format.
     * (_Optional_) If you have already SMTP - change `configs/production-without-ssl-docker/dockerized-service-mail-config.hjson` file with SMTP details. If you don't have SMTP, API will work without this step, just will not send emails.
     * [Explanation of other config fields](#Config)
 2. Upload all files from `configs/production-without-ssl-docker/` directory to the server

@@ -4,7 +4,7 @@
   },
   "dnsLess": {
     "isActive": true,
-    "publicUrl": "https://*.rec.la"
+    "publicUrl": "https://my-computer.rec.la"
   },
   "http": {
     "port": 3000,
@@ -12,7 +12,7 @@
   },
   "auth": {
     "adminAccessKey": "{ADMIN_ACCESS_KEY}",
-    "trustedApps": "*@https://pryv.github.io, *@https://*.rec.la*"
+    "trustedApps": "*@https://pryv.github.io, *@https://my-computer.rec.la*"
   },
   "eventFiles": {
     "attachmentsDirPath": "var-pryv/attachment-files"
