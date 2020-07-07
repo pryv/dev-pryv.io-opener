@@ -37,7 +37,7 @@ Choose your Set-up
 
 * Discover Open Pryv.io in local
     * [local native setup](!#local-native-setup) 
-    * [local docker setup without ssl](!#local-docker-setup-without-ssl) 
+    * [local docker setup without ssl (quick way to start)](!#local-docker-setup-without-ssl) 
     * [local docker setup with ssl](!#local-docker-setup-with-ssl) 
     
 * Launch Pryv.io on a server exposed to the internet with the build-in SSL 
@@ -165,18 +165,20 @@ To set an automatic renewal, run `crontab -e` and append the following line:
 - [Docker v19.03](https://docs.docker.com/engine/install/)
 - [Docker-compose v1.26](https://docs.docker.com/compose/install/)
 
-1. Run `./build-local.sh configs/local-docker/docker-compose.no-ssl.yml "up --build"`
+1. Run `chmod +x build-local.sh`
+2. Run `./build-local.sh configs/local-docker/docker-compose.no-ssl.yml "up --build"`
 
 This command will:
 
 * download app-web-auth3 to app-web-auth3 directory
 * download assets to public_html directory
 * will take config file `configs/local-docker/dockerized-config.json` 
-* start `configs/local-docker/docker-compose.no-ssl.yml` docker-compose.
+* build images and start `configs/local-docker/docker-compose.no-ssl.yml` docker-compose.
+* launch API on `http://localhost:3000`
 
-2.After images are built, you can run the command above just without "--build" part. 
+3.After images are built, you can run the command above just without "--build" part. 
 
-You can test you api now. [Continue tutorial](!#dockerized)
+You can test you api now. [Continue tutorial](#dockerized)
 
 ### Local docker setup with ssl
 *Prerequisites*:
@@ -184,7 +186,8 @@ You can test you api now. [Continue tutorial](!#dockerized)
 - [Docker v19.03](https://docs.docker.com/engine/install/)
 - [Docker-compose v1.26](https://docs.docker.com/compose/install/)
 
-1. Run `./build-local.sh configs/local-docker/docker-compose.with-ssl.yml "up --build"`
+1. Run `chmod +x build-local.sh`
+2. Run `./build-local.sh configs/local-docker/docker-compose.with-ssl.yml "up --build"`
 
 This command will:
 
@@ -193,10 +196,11 @@ This command will:
 * download *.rec.la domain certificates for local development to ./configs/local-docker/rec.la-certificates
 * will take config file `configs/local-docker/dockerized-config.json` 
 * start `configs/local-docker/docker-compose.with-ssl.yml` docker-compose.
+* launch API on `https://my-computer.rec.la`
 
-2.After images are built, you can run the command above just without "--build" part. 
+3.After images are built, you can run the command above just without "--build" part. 
 
-You can test you api now. [Continue tutorial](!#dockerized)
+You can test you api now. [Continue tutorial](#dockerized)
 
 ### Server setup with the build-in SSL
 _Be ready with your Pryv.io set-up in a few minutes._
@@ -209,14 +213,14 @@ _Be ready with your Pryv.io set-up in a few minutes._
 1. 1. Change the config `configs/production-with-ssl-docker/dockerized-config.json` and `configs/production-with-ssl-docker/dockerized-service-mail-config.hjson` config files with your setup:
     * Change `https://my-computer.rec.la` to your domain. Please keep the same format.
     * (_Optional_)If you have already SMTP - change `dockerized-service-mail-config.hjson` file with SMTP details. If you don't have SMTP, API will work without this step, just will not send emails.
-    * [Explanation of other config fields](!#Config)
+    * [Explanation of other config fields](#Config)
 2. Upload all files from `configs/production-with-ssl-docker/` directory to the server
 3. In the server: Run `chmod +x build_production.sh` 
 4. In the server: Run `./build_production.sh` 
     * This step will try to create SLL certificates for your domain and run docker-compose to start the API.
     * Note that you can change docker images that are used in docker-compose.yml file with your images.
 
-You can test you api now just instead of using my-computer.rec.la domain replace it with yours. [Continue tutorial](!#dockerized)
+You can test you api now just instead of using my-computer.rec.la domain replace it with yours. [Continue tutorial](#dockerized)
 
 ### Server setup with external SSL
 
@@ -229,13 +233,13 @@ _This set-up is for systems that have their own SSL termination_
 
 1. Change the config
     * (_Optional_) If you have already SMTP - change `configs/production-without-ssl-docker/dockerized-service-mail-config.hjson` file with SMTP details. If you don't have SMTP, API will work without this step, just will not send emails.
-    * [Explanation of other config fields](!#Config)
+    * [Explanation of other config fields](#Config)
 2. Upload all files from `configs/production-without-ssl-docker/` directory to the server
 3. In the server: Run `docker-compose up` 
     * This step will download Open Pryv docker images and start the API on 80 port
     * Note that you can change docker images that are used in docker-compose.yml file with your images.
 
-You can test you api now just instead of using my-computer.rec.la domain replace it with yours. [Continue tutorial](!#dockerized)
+You can test you api now just instead of using my-computer.rec.la domain replace it with yours. [Continue tutorial](#dockerized)
 
 ## Start
 

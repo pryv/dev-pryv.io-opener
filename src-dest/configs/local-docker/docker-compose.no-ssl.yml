@@ -11,7 +11,7 @@ services:
         ports:
           - 3000:3000
         volumes:
-          - ./dockerized-config.json:/app/config.json
+          - ./dockerized-config-no-ssl.json:/app/config.json
           - ../../public_html/:/app/public_html/
         depends_on:
             - open-pryv-mongo

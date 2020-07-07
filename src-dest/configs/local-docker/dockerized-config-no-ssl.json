@@ -1,12 +1,10 @@
 {
-  "ssl_email": "OVERRIDE.ME@pryv.com",
-  "ssl_staging": "1",
   "openSource": {
     "isActive": true
   },
   "dnsLess": {
     "isActive": true,
-    "publicUrl": "https://my-computer.rec.la"
+    "publicUrl": "http://localhost:3000"
   },
   "http": {
     "port": 3000,
@@ -14,7 +12,7 @@
   },
   "auth": {
     "adminAccessKey": "{ADMIN_ACCESS_KEY}",
-    "trustedApps": "*@https://pryv.github.io, *@https://my-computer.rec.la*"
+    "trustedApps": "*@https://pryv.github.io, *@https://*localhost*"
   },
   "eventFiles": {
     "attachmentsDirPath": "var-pryv/attachment-files"
