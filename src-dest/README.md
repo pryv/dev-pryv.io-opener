@@ -172,13 +172,13 @@ This command will:
 
 * download app-web-auth3 to app-web-auth3 directory
 * download assets to public_html directory
-* will take config file `configs/local-docker/dockerized-config.json` 
+* it will use config file `configs/local-docker/dockerized-config.json` 
 * build images and start `configs/local-docker/docker-compose.no-ssl.yml` docker-compose.
 * launch API on `http://localhost:3000`
 
 3.After images are built, you can run the command above just without "--build" part. 
 
-You can test you api now. [Continue tutorial](#dockerized)
+You can test your api now. [Continue tutorial](#dockerized)
 
 ### Local docker setup with ssl
 *Prerequisites*:
@@ -194,13 +194,13 @@ This command will:
 * download app-web-auth3 to app-web-auth3 directory
 * download assets to public_html directory
 * download *.rec.la domain certificates for local development to ./configs/local-docker/rec.la-certificates
-* will take config file `configs/local-docker/dockerized-config.json` 
+* it will use config file `configs/local-docker/dockerized-config.json` 
 * start `configs/local-docker/docker-compose.with-ssl.yml` docker-compose.
 * launch API on `https://my-computer.rec.la`
 
 3.After images are built, you can run the command above just without "--build" part. 
 
-You can test you api now. [Continue tutorial](#dockerized)
+You can test your api now. [Continue tutorial](#dockerized)
 
 ### Server setup with the build-in SSL
 _Be ready with your Pryv.io set-up in a few minutes._
@@ -219,7 +219,7 @@ _Be ready with your Pryv.io set-up in a few minutes._
 4. In the server: Run `./build_production.sh` 
     * This step will try to create SLL certificates for your domain and run docker-compose to start the API.
     * Note that you can change docker images that are used in docker-compose.yml file with your images.
-    * Note that by changing ssl_staging from 0 to 1 in dockerized-config.json you can test the certificate generation with letsencrypt staging environment.
+
 You can test you api now just instead of using my-computer.rec.la domain replace it with yours. [Continue tutorial](#dockerized)
 
 ### Server setup with external SSL

@@ -1,4 +1,4 @@
-name: Pryv-registration-server deployment
+name: App-node-opener deployment
 
 on: 
   push:

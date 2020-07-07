@@ -37,35 +37,31 @@ services:
         networks:
           - app-network
 
-    open-pryv-nginx:
-        image:  nginx:latest
+    letsencrypt:
+        # nginx + ssl certificate by https://github.com/linuxserver/docker-letsencrypt
+        image: linuxserver/letsencrypt
         container_name: "open-pryv-nginx"
-        volumes:
-          # You can load custom nginx config and use env variables in it
-          - ./nginx.conf.template:/etc/nginx/templates/nginx.conf.template
-          - ./site.conf.template:/etc/nginx/templates/site.conf.template
-          - ./var-pryv/certbot/www:/var/www/certbot
-          - ./var-pryv/certbot/conf:/etc/letsencrypt
-        ports:
-          - 80:80
-          - 443:443
-        depends_on:
-          - open-pryv-core
+        cap_add:
+          - NET_ADMIN
         networks:
           - app-network
         environment:
-         - HOSTNAME=${HOSTNAME}
-         - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
-
-    open-pryv-certbot:
-        image: certbot/certbot
-        container_name: "open-pryv-certbot"
-        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-        depends_on:
-          - open-pryv-nginx
+          - PUID=1000
+          - PGID=1000
+          - TZ=Europe/London
+          - URL=${HOSTNAME}
+          - VALIDATION=http
+          - EMAIL=${EMAIL}
+          - ONLY_SUBDOMAINS=false #optional
+          - STAGING=false #optional - change this to not be banned
         volumes:
-          - ./var-pryv/certbot/conf:/etc/letsencrypt
-          - ./var-pryv/certbot/www:/var/www/certbot
+          - ./config:/config
+          - ./nginx.conf:/config/nginx/site-confs/default
+        ports:
+          - 443:443
+          - 80:80 #optional
+        restart: unless-stopped
+        
 networks:
   app-network:
     driver: bridge    

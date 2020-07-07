@@ -1,6 +1,5 @@
 {
-  "ssl_email": "OVERRIDE.ME@pryv.com",
-  "ssl_staging": "0",
+  "ssl_email": "",
   "openSource": {
     "isActive": true
   },
