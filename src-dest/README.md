@@ -162,7 +162,7 @@ Edit the `config.json` file:
 
 #### NGINX configuration
 
-You can find a NGINX configuration that you can include in your `sites-enabled/` in [configs/site.conf](configs/site.conf).
+You can find a NGINX configuration that you can include in your `sites-enabled/` in [configs/local-native/site.conf](configs/local-native/site.conf).
 
 You must change `${HOSTNAME}` to match the `dnsLess:publicUrl` setting in the Pryv.io configuration.
 
@@ -190,8 +190,8 @@ Each service independently - logs will be displayed on the console
 
 #### Development
 
-- `yarn proxy` based on [rec-la](https://github.com/pryv/rec-la) will expose the server running on http://localhost:3000 with an SSL certificate on https://my-computer.rec.la:4443 in this case you might want to use `configs/rec-la.json` 
-- `yarn local` is the equivalent of running `yarn pryv` + `yarn proxy` using `configs/rec-la.json`
+- `yarn proxy` based on [rec-la](https://github.com/pryv/rec-la) will expose the server running on http://localhost:3000 with an SSL certificate on https://my-computer.rec.la:4443 in this case you might want to use `configs/local-native/rec-la.json` 
+- `yarn local` is the equivalent of running `yarn pryv` + `yarn proxy` using `configs/local-native/rec-la.json`
   This setup is useful to test Open Pryv.io locally. Once started you can test the authentication process on [App-Web-Access](http://api.pryv.com/app-web-access/?pryvServiceInfoUrl=https://my-computer.rec.la:4443/reg/service/info) the `pryvServiceInfoUrl` being: [https://my-computer.rec.la:4443/reg/service/info](https://my-computer.rec.la:4443/reg/service/info)
 
 ### Options & Customization

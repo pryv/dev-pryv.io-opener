@@ -1,5 +1,5 @@
 # download rec.la certificates
-CERTIFICATED_FOLDER="docker/dev/rec.la-certificates"
+CERTIFICATED_FOLDER="./configs/local-docker/rec.la-certificates"
 if [ ! -d $CERTIFICATED_FOLDER ]; then
 	echo "Downloading default certificates to $CERTIFICATED_FOLDER"
 	mkdir $CERTIFICATED_FOLDER

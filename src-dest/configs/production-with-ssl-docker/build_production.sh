@@ -57,7 +57,6 @@ function create_new_ssl() {
 	echo "### Creating dummy certificate for $domains ..."
 	path="/etc/letsencrypt/live/$domains"
 	mkdir -p "$data_path/conf/live/$domains"
-	echo HOSTNAME=$HOSTNAME docker-compose -f docker-compose.yml run --rm --entrypoint " openssl req -x509 -nodes -newkey rsa:2048 -days 1 -keyout '$path/privkey.pem' -out '$path/fullchain.pem' -subj '/CN=localhost'" open-pryv-certbot
 	ls $data_path/conf/live/$domains
 	echo
 	HOSTNAME=$HOSTNAME docker-compose -f docker-compose.yml run --rm --entrypoint "\

@@ -40,7 +40,6 @@ services:
     open-pryv-nginx:
         image:  nginx:latest
         container_name: "open-pryv-nginx"
-        command: "/bin/sh -c 'while :; do sleep 6h & wait $${!};  nginx -s reload; done & nginx -g \"daemon off;\"'"
         volumes:
           # You can load custom nginx config and use env variables in it
           - ./nginx-templates:/etc/nginx/templates
@@ -60,7 +59,7 @@ services:
     open-pryv-certbot:
         image: certbot/certbot
         container_name: "open-pryv-certbot"
-        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew --dry-run; sleep 12h & wait $${!}; done;'"
+        entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
         depends_on:
           - open-pryv-nginx
         volumes:

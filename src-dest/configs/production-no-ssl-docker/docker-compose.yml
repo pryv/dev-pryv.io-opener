@@ -1,7 +1,7 @@
 version: "3"
 services:
     open-pryv-core:
-        image:  pryvio/open-pryv-core:1.5.18
+        image:  pryvio/open-pryv-core:latest
         command: "yarn api"
         container_name: "open-pryv-core"
         restart: "always"
@@ -15,7 +15,7 @@ services:
           - app-network
 
     open-pryv-mail:
-        image: pryvio/open-pryv-core:1.5.18
+        image: pryvio/open-pryv-core:latest
         command: "yarn mail"
         container_name: "open-pryv-mail"
         restart: "always"

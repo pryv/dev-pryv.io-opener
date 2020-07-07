@@ -8,13 +8,13 @@ dist
 # volume data
 var-pryv/
 # skip build related files except for dockerized-config
-docker/production-no-ssl
-docker/production-with-ssl
-docker/dev/rec.la-certificates
-docker/dev/dhparam.pem
-docker/dev/docker-compose.no-ssl.yml
-docker/dev/docker-compose.with-ssl.yml
-docker/dev/Dockerfile
+configs/production-with-ssl-docker
+configs/production-no-ssl-docker
+configs/local-docker/rec.la-certificates
+configs/local-docker/dhparam.pem
+configs/local-docker/docker-compose.no-ssl.yml
+configs/local-docker/docker-compose.with-ssl.yml
+configs/local-docker/Dockerfile
 build-local.sh
 
 # non functional files

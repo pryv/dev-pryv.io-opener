@@ -12,7 +12,7 @@ upstream websocket_server {
 # API (Core)
 server {
   # redirect from http to https
-  listen 80 default_server;
+  listen ${PORT} default_server;
   server_name ${HOSTNAME};
 
   location /.well-known/acme-challenge/ {

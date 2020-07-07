@@ -38,7 +38,7 @@ jsonval () {
 	temp=${temp##*|}
   echo "$temp"
 }
-CONFIGS_FILE="docker/dev/dockerized-config.json"
+CONFIGS_FILE="configs/local-docker/dockerized-config.json"
 JSON_CONF=$(cat $CONFIGS_FILE)
 PUBLIC_URL_ROW=$(jsonval "$JSON_CONF" "publicUrl")
 HOSTNAME=$(echo $PUBLIC_URL_ROW | cut -d"/" -f3)
@@ -57,10 +57,18 @@ bash ./scripts/download-recla-certificates.sh
 # =====================================================================
 
 DOCKER_COMPOSE_FILE=$1
+DOCKER_COMMAND=$2
 if [ -z "$DOCKER_COMPOSE_FILE" ]
 then
-    echo "No docker compose file was given so starting default with docker/dev/docker-compose.no-ssl.yml"
-    HOSTNAME=$HOSTNAME TAG=latest docker-compose -f docker/dev/docker-compose.no-ssl.yml up --build
+    echo "No docker compose file was given so starting default with ./configs/local-docker/docker-compose.no-ssl.yml"
+    HOSTNAME=$HOSTNAME TAG=latest PORT=80 docker-compose -f configs/local-docker/docker-compose.no-ssl.yml up --build
 else
-    HOSTNAME=$HOSTNAME TAG=latest docker-compose -f $DOCKER_COMPOSE_FILE up --build
+    if [ -z "$DOCKER_COMMAND" ]
+    then
+        echo "Running: HOSTNAME=$HOSTNAME TAG=latest PORT=80 docker-compose -f $DOCKER_COMPOSE_FILE up --build"
+        HOSTNAME=$HOSTNAME TAG=latest PORT=80 docker-compose -f $DOCKER_COMPOSE_FILE up --build
+    else
+        echo "Running: HOSTNAME=$HOSTNAME TAG=latest PORT=80 docker-compose -f $DOCKER_COMPOSE_FILE $DOCKER_COMMAND"
+        HOSTNAME=$HOSTNAME TAG=latest PORT=80 docker-compose -f $DOCKER_COMPOSE_FILE $DOCKER_COMMAND
+    fi
 fi
