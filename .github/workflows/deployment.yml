@@ -55,7 +55,7 @@ jobs:
         password: ${{ secrets.REGISTRY_PRYV_PASSWORD_DOCKERHUB }}
 
     - name: Build core image
-      run: cd dest && TAG=latest docker-compose -f docker/dev/docker-compose.no-ssl.yml build open-pryv-core
+      run: cd dest && TAG=latest docker-compose -f configs/local-docker/docker-compose.no-ssl.yml build open-pryv-core
 
     - name: Upload new image to docker hub
       run: docker images && docker push pryvio/open-pryv-core:latest
