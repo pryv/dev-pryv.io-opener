@@ -165,8 +165,7 @@ To set an automatic renewal, run `crontab -e` and append the following line:
 - [Docker v19.03](https://docs.docker.com/engine/install/)
 - [Docker-compose v1.26](https://docs.docker.com/compose/install/)
 
-1. Run `chmod +x build-local.sh`
-2. Run `./build-local.sh configs/local-docker/docker-compose.no-ssl.yml "up --build"`
+Run `./build-local.sh configs/local-docker/docker-compose.no-ssl.yml "up --build"`
 
 This command will:
 
