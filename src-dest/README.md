@@ -44,14 +44,14 @@ Pryv.io is designed to be exposed by a third party SSL termination such as NGINX
 
 Choose your Set-up
 
-- Discover Open Pryv.io on your local environment, this will allow for only localhost apps to connect to your platform.
-  - [Download docker images without SSL](#local-docker-setup-without-ssl) (quick way to start)
+- Discover Open Pryv.io on your local environment, this will only allow localhost apps to connect to your platform.
+  - [Download docker images without SSL](#local-docker-setup-without-ssl) (quick start)
   - [Download docker images with SSL](#local-docker-setup-with-ssl)
   - [Native installation](#local-native-setup)
 - Launch Pryv.io on a server exposed to the Internet with built-in SSL, this requires to have a hostname pointing to the public IP of your server.
-  - [Download docker images](#server-setup-with-the-built-in-SSL) *Be ready with your Pryv.io set-up in a few minutes*
+  - [Download docker images](#server-setup-with-the-built-in-SSL) (quick start)
   - [Native installation](#native-server-setup-with-the-built-in-ssl)
-- Launch Pryv.io on a server with an external SSL termination. You know your stuff, ....
+- Launch Pryv.io on a server with an external SSL termination. You know what you are doing.
   - [Download docker images](#server-setup-with-external-ssl)
   - [Native installation](#native-setup-with-external-ssl)
 
