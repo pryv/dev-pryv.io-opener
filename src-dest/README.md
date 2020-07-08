@@ -35,20 +35,21 @@ Pryv.io is designed to be exposed by a third party SSL termination such as NGINX
 
 Choose your Set-up
 
-* Discover Open Pryv.io in local
-    * [local native setup](#local-native-setup) 
-    * [local docker setup without ssl (quick way to start)](#local-docker-setup-without-ssl) 
-    * [local docker setup with ssl](#local-docker-setup-with-ssl) 
-    
-* Launch Pryv.io on a server exposed to the internet with the build-in SSL 
-    * [native setup](#native-server-setup-with-the-build-in-ssl)
-    * [dockerized setup](#server-setup-with-the-build-in-SSL) 
-    
-* Launch Pryv.io on a server with an external SSL termination 
-    * [native setup](#all-services-in-a-single-command-line) 
-    * [dockerized setup](#server-setup-with-external-ssl) 
+- Discover Open Pryv.io in local
+  - [local native setup](#local-native-setup)
+  - [local docker setup without ssl (quick way to start)](#local-docker-setup-without-ssl)
+  - [local docker setup with ssl](#local-docker-setup-with-ssl)
 
-#### Config
+- Launch Pryv.io on a server exposed to the internet with the built-in SSL
+  - [native setup](#native-server-setup-with-the-built-in-ssl)
+  - [dockerized setup](#server-setup-with-the-built-in-SSL) *Be ready with your Pryv.io set-up in a few minutes*
+
+- Launch Pryv.io on a server with an external SSL termination
+  - [native setup](#native-setup-with-external-ssl)
+  - [dockerized setup](#server-setup-with-external-ssl)
+
+### Config
+
 For the native installation, edit `config.json`, otherwise `configs/local-docker/dockerized-config.json`:
 
 ```json
@@ -105,7 +106,6 @@ For the native installation, edit `config.json`, otherwise `configs/local-docker
 ## Setup
 
 ### Native
-_The API will be only exposed to Apps and WebApps on your own computer_
 
 *Prerequisites*:
 
@@ -122,7 +122,7 @@ The installation script has been tested on Linux Ubuntu 18.04 LTS and MacOSX.
   - Generate random alpha-numeric adminKey
 - `yarn release` create distribution for release
 
-#### All services in a single command line
+#### Native setup with external SSL
 
 - `yarn pryv` - mail and database logs will be kept in `var-pryv/logs/local-*.log`
 
@@ -138,9 +138,9 @@ Each service independently - logs will be displayed on the console
 
 - `yarn proxy` based on [rec-la](https://github.com/pryv/rec-la), it will expose the server running on http://localhost:3000 with an SSL certificate on https://my-computer.rec.la:4443 in this case you need to edit `configs/local-native/rec-la.json`.
 
+#### Native Server setup with the built-in SSL
 
-##### NATIVE Server setup with the build-in SSL
-1. Run `yarn database` + `yarn api` to start the API
+1. Run `yarn pryv` to start the API
 2. Configure NGINX and certificate
 
 You can find a NGINX configuration that you can include in your `sites-enabled/` in [configs/local-native/site.conf](configs/local-native/site.conf).
@@ -157,78 +157,67 @@ To set an automatic renewal, run `crontab -e` and append the following line:
 0 12 * * * /usr/bin/certbot renew --quiet
 ```
 
-
-### Local docker setup without ssl
+### Docker
 
 *Prerequisites*:
 
 - [Docker v19.03](https://docs.docker.com/engine/install/)
 - [Docker-compose v1.26](https://docs.docker.com/compose/install/)
+
+#### Local docker setup without ssl
 
 Run `./build-local.sh configs/local-docker/docker-compose.no-ssl.yml "up --build"`
 
 This command will:
 
-* download app-web-auth3 to app-web-auth3 directory
-* download assets to public_html directory
-* it will use config file `configs/local-docker/dockerized-config.json` 
-* build images and start `configs/local-docker/docker-compose.no-ssl.yml` docker-compose.
-* launch API on `http://localhost:3000`
+- download app-web-auth3 to app-web-auth3 directory
+- download assets to public_html directory
+- it will use the configuration file `configs/local-docker/dockerized-config.json`
+- build images and start `configs/local-docker/docker-compose.no-ssl.yml` docker-compose.
+- launch API on `http://localhost:3000`
 
-3.After images are built, you can run the command above just without "--build" part. 
+After images are built, you can run the command above just without "--build" part.
 
-You can test your api now. [Continue tutorial](#dockerized)
+You can test your API now. [Continue tutorial](#dockerized)
 
-### Local docker setup with ssl
-*Prerequisites*:
+#### Local docker setup with ssl
 
-- [Docker v19.03](https://docs.docker.com/engine/install/)
-- [Docker-compose v1.26](https://docs.docker.com/compose/install/)
-
-1. Run `chmod +x build-local.sh`
-2. Run `./build-local.sh configs/local-docker/docker-compose.with-ssl.yml "up --build"`
+Run `./build-local.sh configs/local-docker/docker-compose.with-ssl.yml "up --build"`
 
 This command will:
 
-* download app-web-auth3 to app-web-auth3 directory
-* download assets to public_html directory
-* download *.rec.la domain certificates for local development to ./configs/local-docker/rec.la-certificates
-* it will use config file `configs/local-docker/dockerized-config.json` 
-* start `configs/local-docker/docker-compose.with-ssl.yml` docker-compose.
-* launch API on `https://my-computer.rec.la`
+- download app-web-auth3 to app-web-auth3 directory
+- download assets to public_html directory
+- download *.rec.la domain certificates for local development to ./configs/local-docker/rec.la-certificates
+- it will use config file `configs/local-docker/dockerized-config.json` 
+- start `configs/local-docker/docker-compose.with-ssl.yml` docker-compose.
+- launch API on `https://my-computer.rec.la`
 
 3.After images are built, you can run the command above just without "--build" part. 
 
 You can test your api now. [Continue tutorial](#dockerized)
 
-### Server setup with the build-in SSL
-_Be ready with your Pryv.io set-up in a few minutes._
-*Prerequisites*:
+#### Server setup with the built-in SSL
 
-- [Docker v19.03](https://docs.docker.com/engine/install/)
-- [Docker-compose v1.26](https://docs.docker.com/compose/install/)
-- Server (Ubuntu 18.04 is recommended) with a hostname and exposed 80 and 443 ports
+*Prerequisites:*
+- Server with a hostname pointing to its IP address
+- open port TCP/443 (TCP/80 is optional for HTTP->HTTPS redirection)
 
 1. Change the config `configs/production-with-ssl-docker/dockerized-config.json` and `configs/production-with-ssl-docker/dockerized-service-mail-config.hjson` config files with your setup:
-    * Change `https://my-computer.rec.la` to your domain. Please keep the same format.
-    * (_Optional_)If you have already SMTP - change `dockerized-service-mail-config.hjson` file with SMTP details. If you don't have SMTP, API will work without this step, just will not send emails.
-    * [Explanation of other config fields](#Config)
+  - Change `https://my-computer.rec.la` to your domain. Please keep the same format.
+  - (_Optional_)If you have already SMTP - change `dockerized-service-mail-config.hjson` file with SMTP details. If you don't have SMTP, API will work without this step, just will not send emails.
+  - [Explanation of other config fields](#Config)
 2. Upload all files from `configs/production-with-ssl-docker/` directory to the server
 3. In the server: Run `chmod +x build_production.sh` 
 4. In the server: Run `./build_production.sh` 
-    * This step will try to create SLL certificates for your domain and run docker-compose to start the API.
-    * Note that you can change docker images that are used in docker-compose.yml file with your images.
+  - This step will try to create SLL certificates for your domain and run docker-compose to start the API.
+  - Note that you can change docker images that are used in docker-compose.yml file with your images.
 
 You can test you api now just instead of using my-computer.rec.la domain replace it with yours. [Continue tutorial](#dockerized)
 
 ### Server setup with external SSL
 
 _This set-up is for systems that have their own SSL termination_ 
-*Prerequisites*:
-
-- [Docker v19.03](https://docs.docker.com/engine/install/)
-- [Docker-compose v1.26](https://docs.docker.com/compose/install/)
-- Server (Ubuntu 18.04 is recommended)
 
 1. Change the config `configs/production-with-ssl-docker/dockerized-config.json` and `configs/production-with-ssl-docker/dockerized-service-mail-config.hjson` config files with your setup:
     * Change `https://my-computer.rec.la` to your domain or ip. Please keep the same format.
