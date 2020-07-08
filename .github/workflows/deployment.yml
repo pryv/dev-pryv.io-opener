@@ -85,3 +85,6 @@ jobs:
 
     - name: Upload image with version tag to docker hub
       run: docker tag pryvio/open-pryv-core:latest pryvio/open-pryv-core:${{ env.RELEASE_VERSION }} && docker images && docker push pryvio/open-pryv-core:${{ env.RELEASE_VERSION }}
+      
+    - name: Release docker tarball
+      run: cd dest; tar czfv dockerized-open-pryv.io.tgz 
