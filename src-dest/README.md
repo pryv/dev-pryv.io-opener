@@ -44,16 +44,14 @@ Pryv.io is designed to be exposed by a third party SSL termination such as NGINX
 
 Choose your Set-up
 
-- Discover Open Pryv.io in local
+- Discover Open Pryv.io on your local environment, this will allow for only localhost apps to connect to your platform.
   - [Download docker images without SSL](#local-docker-setup-without-ssl) (quick way to start)
   - [Download docker images with SSL](#local-docker-setup-with-ssl)
   - [Native installation](#local-native-setup)
-  - Build docker images without SSL
-  - Build docker images with SSL
-- Launch Pryv.io on a server exposed to the Internet with built-in SSL
+- Launch Pryv.io on a server exposed to the Internet with built-in SSL, this requires to have a hostname pointing to the public IP of your server.
   - [Download docker images](#server-setup-with-the-built-in-SSL) *Be ready with your Pryv.io set-up in a few minutes*
   - [Native installation](#native-server-setup-with-the-built-in-ssl)
-- Launch Pryv.io on a server with an external SSL termination
+- Launch Pryv.io on a server with an external SSL termination. You know your stuff, ....
   - [Download docker images](#server-setup-with-external-ssl)
   - [Native installation](#native-setup-with-external-ssl)
 
@@ -141,14 +139,9 @@ You can test your API now. [Continue tutorial](#dockerized)
 
 Run `./build-local.sh configs/local-docker/docker-compose.with-ssl.yml "up --build"`
 
-This command will:
-
-- download app-web-auth3 to app-web-auth3 directory
-- download assets to public_html directory
-- download *.rec.la domain certificates for local development to ./configs/local-docker/rec.la-certificates
-- it will use config file `configs/local-docker/dockerized-config.json` 
-- start `configs/local-docker/docker-compose.with-ssl.yml` docker-compose.
-- launch API on `https://my-computer.rec.la`
+- Edit the config file `configs/local-docker/dockerized-config.json` 
+- Start `configs/local-docker/docker-compose.with-ssl.yml` docker-compose.
+- Launch API on `https://my-computer.rec.la`
 
 3.After images are built, you can run the command above just without "--build" part. 
 
@@ -156,14 +149,15 @@ You can test your api now. [Continue tutorial](#dockerized)
 
 #### Fetch docker images with built-in local SSL
 
-TODO
+This is meant to use the [rec-la SSL certificate](https://github.com/pryv/rec-la#rec-la) that is only valid for apps running on your own machine
+
+Download the files in this link and follow the README inside on how to run it: [Download link](TODO).
+
+Once it is running, you can continue with the [tutorials](#dockerized).
 
 #### Fetch the docker images with built-in SSL
 
-To use this on a remote server (remove this?)
-
-- Server with a hostname pointing to its IP address
-- open port TCP/443 (TCP/80 is optional for HTTP->HTTPS redirection)
+Download the files in this link and follow the README inside on how to run it: [Download link](TODO).
 
 1. Download the installation files: [Link]()
 2. Edit the config `dockerized-config.json` and `dockerized-service-mail-config.hjson` config files with your setup (you can also find them in `configs/production-with-ssl-docker/`). See [config section](#config).
