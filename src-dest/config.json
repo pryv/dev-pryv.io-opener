@@ -12,7 +12,7 @@
   },
   "auth": {
     "adminAccessKey": "{ADMIN_ACCESS_KEY}",
-    "trustedApps": "*@https://pryv.github.io, *@https://*.rec.la*"
+    "trustedApps": "*@https://pryv.github.io*, *@https://*.rec.la*"
   },
   "eventFiles": {
     "attachmentsDirPath": "var-pryv/attachment-files"
