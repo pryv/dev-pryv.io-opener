@@ -48,7 +48,7 @@ Choose your Set-up
   - [Download docker images without SSL](#local-docker-setup-without-ssl) (quick way to start)
   - [Download docker images with SSL](#local-docker-setup-with-ssl)
   - [Native installation](#local-native-setup)
-- Build docker images without SSL
+  - Build docker images without SSL
   - Build docker images with SSL
 - Launch Pryv.io on a server exposed to the Internet with built-in SSL
   - [Download docker images](#server-setup-with-the-built-in-SSL) *Be ready with your Pryv.io set-up in a few minutes*
