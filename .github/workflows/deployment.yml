@@ -41,11 +41,27 @@ jobs:
       
     - name: Run tests on build
       run: echo 'I pretend that I run the tests'
-      
+
+    - name: Download public_html assets and rec.la certificates
+      run: cd dest; bash ./scripts/download-recla-certificates.sh; bash ./scripts/setup-assets.bash
+
+    - name: Create docker tarball without ssl
+      run: cd dest; tar czfv dockerized-open-pryv.io.tgz \
+          ./configs/local-docker/dockerized-config.json \
+          ./configs/local-docker/dockerized-config-no-ssl.json \
+          ./configs/local-docker/dockerized-service-mail-config.hjson \
+          ./configs/local-docker/nginx-templates/ \
+          ./configs/local-docker/dhparam.pem \
+          ./configs/local-docker/docker-compose.no-ssl-download.yml \
+          ./configs/local-docker/docker-compose.with-ssl-download.yml \
+          ./configs/local-docker/rec.la-certificates/src/rec.la-bundle.crt \
+          ./configs/local-docker/rec.la-certificates/src/rec.la-key.pem \
+          ./public_html/assets/ build-local-tarball.sh
+
     - name: Check the prepared commit to Open Pryv
       run: cd dest && yarn remove test-helpers && git status && git diff && echo '${{ env.RELEASE_VERSION }} version'
 
-    #- name: Commit and push to open Pryv
+    #- name: Commit and push to open Pryv and release docker tarball
     #  uses: EndBug/add-and-commit@v4
     #  with:
         # The name of the user that will be displayed as the author of the commit
@@ -85,6 +101,3 @@ jobs:
 
     - name: Upload image with version tag to docker hub
       run: docker tag pryvio/open-pryv-core:latest pryvio/open-pryv-core:${{ env.RELEASE_VERSION }} && docker images && docker push pryvio/open-pryv-core:${{ env.RELEASE_VERSION }}
-      
-    - name: Release docker tarball
-      run: cd dest; tar czfv dockerized-open-pryv.io.tgz 

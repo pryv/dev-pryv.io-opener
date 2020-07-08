@@ -1,0 +1,79 @@
+version: "3.8"
+services:
+    open-pryv-core:
+        image: pryvio/open-pryv-core:${TAG}
+        command: "yarn api"
+        container_name: "open-pryv-core"
+        restart: "always"
+        volumes:
+          - ./dockerized-config.json:/app/config.json
+          - ../../public_html/:/app/public_html/
+        depends_on:
+            - open-pryv-mongo
+        networks:
+          - app-network
+
+    open-pryv-mail:
+        image: pryvio/open-pryv-core:${TAG}
+        command: "yarn mail"
+        container_name: "open-pryv-mail"
+        restart: "always"
+        depends_on:
+            - open-pryv-core
+        volumes:
+          - ../../var-pryv/logs/:/app/var-pryv/logs/
+          - ./dockerized-service-mail-config.hjson:/app/service-mail/config.hjson
+        networks:
+          - app-network
+
+    open-pryv-mongo:
+        image: mongo:3.6.18
+        container_name: "open-pryv-mongo"
+        restart: "always"
+        volumes:
+            - ../../var-pryv/mongodb/conf/:/app/conf/:ro
+            - ../../var-pryv/mongodb/data/:/app/data/
+            - ../../var-pryv/mongodb/log/:/app/log/
+            - ../../var-pryv/mongodb/backup/:/app/backup/
+        networks:
+          - app-network
+
+    # visualize data in mongodb - only for local development
+    open-pryv-mongo-express:
+        image: mongo-express
+        restart: "always"
+        ports:
+          - 8081:8081
+        depends_on:
+          - open-pryv-mongo
+        environment:
+            ME_CONFIG_MONGODB_SERVER: open-pryv-mongo
+        networks:
+          - app-network
+
+    open-pryv-nginx:
+        container_name: "open-pryv-nginx"
+        image: nginx:latest
+        volumes:
+          # You can load custom nginx config and use env variables in it
+          - ./nginx-templates:/etc/nginx/templates
+          # Load default *.rec.la (or your) certificates
+          - ./rec.la-certificates/src/rec.la-bundle.crt:/etc/letsencrypt/live/${HOSTNAME}/fullchain.pem
+          - ./rec.la-certificates/src/rec.la-key.pem:/etc/letsencrypt/live/${HOSTNAME}/privkey.pem
+          - ./dhparam.pem:/etc/letsencrypt/ssl-dhparams.pem
+        ports:
+          - ${PORT}:${PORT}
+          - 443:443
+        depends_on:
+          - open-pryv-core
+          - open-pryv-mail
+        networks:
+          - app-network
+        environment:
+          - PORT=${PORT}
+          - HOSTNAME=${HOSTNAME}
+          - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
+
+networks:
+  app-network:
+    driver: bridge
