@@ -43,7 +43,7 @@ DOCKER_COMMAND=$2
 if [ -z "$DOCKER_COMPOSE_FILE" ]
 then
     echo "No docker compose file was given so starting default with ./configs/local-docker/docker-compose.with-ssl-download.yml"
-    HOSTNAME=$HOSTNAME TAG=latest PORT=80 docker-compose -f configs/local-docker/docker-compose.with-ssl-download.yml up --build
+    HOSTNAME=$HOSTNAME TAG=latest PORT=4443 docker-compose -f configs/local-docker/docker-compose.with-ssl-download.yml up --build
 else
     if [ -z "$DOCKER_COMMAND" ]
     then
