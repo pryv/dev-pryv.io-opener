@@ -9,33 +9,34 @@ This archive contains the necessary files to download and run Open Pryv.io.
 
 ## Local dev with SSL
 
-Run:
+Run: 
 
 ```bash
 docker-compose -f local/docker-compose.with-ssl-download.yml up
 ```
 
-It will run the API on https://my-computer.rec.la:4443
-
 Config file: `local/dockerized-config.json`
+
+It will run Open Pryv.io on https://my-computer.rec.la:4443, using [rec-la](https://github.com/pryv/rec-la).
 
 ## Server with built-in SSL
 
-1. Edit the following values in the config file `production-with-ssl/dockerized-config.json` and docker-compose file: `production-with-ssl/docker-compose.yml`:
+1. Edit the following values in the [Config](https://github.com/pryv/open-pryv.io#config) file `production-with-ssl/dockerized-config.json` and docker-compose file: `production-with-ssl/docker-compose.yml`:
 
-   - ${HOSTNAME}
-   - ${EMAIL}: 
-
+   - ${HOSTNAME}: the hostname part of the public URL
+   
 2. Run:
 
 ```bash
 docker-compose -f production-with-ssl/docker-compose.yml up
 ```
 
+It will run Open Pryv.io on https://${HOSTNAME}.
+
 ## Server with external SSL
 
-1. Edit the following value in the config file `production-with-ssl/dockerized-config.json`:
-   - ${HOSTNAME}
+1. Edit the following value in the [Config](https://github.com/pryv/open-pryv.io#config) file `production-with-ssl/dockerized-config.json`:
+   - ${HOSTNAME}: the hostname part of the public URL
 
 2. Run:
 
@@ -43,3 +44,4 @@ docker-compose -f production-with-ssl/docker-compose.yml up
 docker-compose -f production-no-ssl/docker-compose.yml up
 ```
 
+It will run Open Pryv.io on http://0.0.0.0:80.
