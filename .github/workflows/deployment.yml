@@ -56,7 +56,9 @@ jobs:
           ./configs/local-docker/docker-compose.with-ssl-download.yml \
           ./configs/local-docker/rec.la-certificates/src/rec.la-bundle.crt \
           ./configs/local-docker/rec.la-certificates/src/rec.la-key.pem \
-          ./public_html/ build-local-tarball.sh
+          ./public_html/ build-local-tarball.sh \
+          ./configs/production-no-ssl-docker \
+          ./configs/production-with-ssl-docker \
 
     - name: Check the prepared commit to Open Pryv
       run: cd dest && yarn remove test-helpers && git status && git diff && echo '${{ env.RELEASE_VERSION }} version'
