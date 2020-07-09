@@ -9,6 +9,7 @@ services:
           - 80:3000
         volumes:
           - ./dockerized-config.json:/app/config.json
+          - ../../public_html/:/app/public_html/
         depends_on:
             - open-pryv-mongo
         networks:
