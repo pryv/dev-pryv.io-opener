@@ -52,7 +52,6 @@ services:
           - TZ=Europe/London
           - URL=${HOSTNAME}
           - VALIDATION=http
-          - EMAIL=${EMAIL}
           - ONLY_SUBDOMAINS=false #optional
           - STAGING=false #optional - change this to not be banned
         volumes:
