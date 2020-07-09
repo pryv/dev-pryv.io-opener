@@ -58,17 +58,19 @@ bash ./scripts/download-recla-certificates.sh
 
 DOCKER_COMPOSE_FILE=$1
 DOCKER_COMMAND=$2
+PORT=80
+PORT_SSL=4443
 if [ -z "$DOCKER_COMPOSE_FILE" ]
 then
     echo "No docker compose file was given so starting default with ./configs/local-docker/docker-compose.no-ssl.yml"
-    HOSTNAME=$HOSTNAME TAG=latest PORT=80 docker-compose -f configs/local-docker/docker-compose.no-ssl.yml up --build
+    HOSTNAME=$HOSTNAME TAG=latest PORT=$PORT PORT_SSL=$PORT_SSL docker-compose -f configs/local-docker/docker-compose.no-ssl.yml up --build
 else
     if [ -z "$DOCKER_COMMAND" ]
     then
-        echo "Running: HOSTNAME=$HOSTNAME TAG=latest PORT=80 docker-compose -f $DOCKER_COMPOSE_FILE up --build"
-        HOSTNAME=$HOSTNAME TAG=latest PORT=80 docker-compose -f $DOCKER_COMPOSE_FILE up --build
+        echo "Running: HOSTNAME=$HOSTNAME TAG=latest PORT=$PORT PORT_SSL=$PORT_SSL docker-compose -f $DOCKER_COMPOSE_FILE up --build"
+        HOSTNAME=$HOSTNAME TAG=latest PORT=$PORT PORT_SSL=$PORT_SSL docker-compose -f $DOCKER_COMPOSE_FILE up --build
     else
-        echo "Running: HOSTNAME=$HOSTNAME TAG=latest PORT=80 docker-compose -f $DOCKER_COMPOSE_FILE $DOCKER_COMMAND"
-        HOSTNAME=$HOSTNAME TAG=latest PORT=80 docker-compose -f $DOCKER_COMPOSE_FILE $DOCKER_COMMAND
+        echo "Running: HOSTNAME=$HOSTNAME TAG=latest PORT=$PORT PORT_SSL=$PORT_SSL docker-compose -f $DOCKER_COMPOSE_FILE $DOCKER_COMMAND"
+        HOSTNAME=$HOSTNAME TAG=latest PORT=$PORT PORT_SSL=$PORT_SSL docker-compose -f $DOCKER_COMPOSE_FILE $DOCKER_COMMAND
     fi
 fi

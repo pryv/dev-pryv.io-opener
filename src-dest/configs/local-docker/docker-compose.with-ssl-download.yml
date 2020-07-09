@@ -50,7 +50,7 @@ services:
           - ./dhparam.pem:/etc/letsencrypt/ssl-dhparams.pem
         ports:
           - ${PORT}:${PORT}
-          - 443:443
+          - ${PORT_SSL}:${PORT_SSL}
         depends_on:
           - open-pryv-core
           - open-pryv-mail
@@ -58,6 +58,7 @@ services:
           - app-network
         environment:
           - PORT=${PORT}
+          - PORT_SSL=${PORT_SSL}
           - HOSTNAME=${HOSTNAME}
           - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
 
