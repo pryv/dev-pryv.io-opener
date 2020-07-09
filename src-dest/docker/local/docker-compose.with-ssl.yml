@@ -1,10 +1,7 @@
 version: "3.8"
 services:
     open-pryv-core:
-        build: 
-          context: ../..
-          dockerfile: ./local/Dockerfile
-        image: pryvio/open-pryv-core:${TAG}
+        image: pryvio/open-pryv-core:latest
         command: "yarn api"
         container_name: "open-pryv-core"
         restart: "always"
@@ -17,7 +14,7 @@ services:
           - app-network
 
     open-pryv-mail:
-        image: pryvio/open-pryv-core:${TAG}
+        image: pryvio/open-pryv-core:latest
         command: "yarn mail"
         container_name: "open-pryv-mail"
         restart: "always"
@@ -62,7 +59,7 @@ services:
         environment:
           - PORT=80
           - PORT_SSL=4443
-          - HOSTNAME=${HOSTNAME}
+          - HOSTNAME=https://my-computer.rec.la
           - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
 
 networks:

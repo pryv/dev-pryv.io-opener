@@ -1,6 +1,6 @@
 #### Build your own docker images without SSL
 
-Run `./build-local.sh local/docker-compose.no-ssl.yml "up --build"`
+Run `./build-local.sh local/docker-compose.no-ssl-build.yml "up --build"`
 
 - configuration file: `local/dockerized-config.json`
 
@@ -14,7 +14,7 @@ After images are built, you can run the command above just without "--build" par
 
 #### Build your own docker images with SSL
 
-Run `./build-local.sh local/docker-compose.with-ssl.yml "up --build"`
+Run `./build-local.sh local/docker-compose.with-ssl-build.yml "up --build"`
 
 - Edit the config file `local/dockerized-config.json`
 - Start `local/docker-compose.with-ssl.yml` docker-compose.

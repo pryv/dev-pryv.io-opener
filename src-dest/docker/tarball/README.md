@@ -12,7 +12,7 @@ This archive contains the necessary files to download and run Open Pryv.io.
 Run: 
 
 ```bash
-docker-compose -f local/docker-compose.with-ssl-download.yml up
+docker-compose -f local/docker-compose.with-ssl.yml up
 ```
 
 Config file: `local/dockerized-config.json`
