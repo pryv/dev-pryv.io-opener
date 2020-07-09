@@ -41,19 +41,6 @@ services:
         networks:
           - app-network
 
-    # visualize data in mongodb - only for local development
-    open-pryv-mongo-express:
-        image: mongo-express
-        restart: "always"
-        ports:
-          - 8081:8081
-        depends_on:
-          - open-pryv-mongo
-        environment:
-            ME_CONFIG_MONGODB_SERVER: open-pryv-mongo
-        networks:
-          - app-network
-
     open-pryv-nginx:
         container_name: "open-pryv-nginx"
         image: nginx:latest
