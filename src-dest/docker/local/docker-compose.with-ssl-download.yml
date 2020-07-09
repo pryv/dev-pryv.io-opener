@@ -1,10 +1,7 @@
 version: "3.8"
 services:
     open-pryv-core:
-        build: 
-          context: ../..
-          dockerfile: ./configs/local-docker/Dockerfile
-        image: pryvio/open-pryv-core:${TAG}
+        image: pryvio/open-pryv-core:latest
         command: "yarn api"
         container_name: "open-pryv-core"
         restart: "always"
@@ -17,7 +14,7 @@ services:
           - app-network
 
     open-pryv-mail:
-        image: pryvio/open-pryv-core:${TAG}
+        image: pryvio/open-pryv-core:latest
         command: "yarn mail"
         container_name: "open-pryv-mail"
         restart: "always"
@@ -52,17 +49,17 @@ services:
           - ./rec.la-certificates/src/rec.la-key.pem:/etc/letsencrypt/live/${HOSTNAME}/privkey.pem
           - ./dhparam.pem:/etc/letsencrypt/ssl-dhparams.pem
         ports:
-          - ${PORT}:${PORT}
-          - ${PORT_SSL}:${PORT_SSL}
+          - 80:80
+          - 4443:4443
         depends_on:
           - open-pryv-core
           - open-pryv-mail
         networks:
           - app-network
         environment:
-          - PORT=${PORT}
-          - PORT_SSL=${PORT_SSL}
-          - HOSTNAME=${HOSTNAME}
+          - PORT=80
+          - PORT_SSL=4443
+          - HOSTNAME=https://my-computer.rec.la
           - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
 
 networks:

@@ -1,12 +1,17 @@
 version: "3.8"
 services:
     open-pryv-core:
+        build: 
+          context: ../..
+          dockerfile: ./local/Dockerfile
         image: pryvio/open-pryv-core:${TAG}
         command: "yarn api"
         container_name: "open-pryv-core"
         restart: "always"
+        ports:
+          - 3000:3000
         volumes:
-          - ./dockerized-config.json:/app/config.json
+          - ./dockerized-config-no-ssl.json:/app/config.json
           - ../../public_html/:/app/public_html/
         depends_on:
             - open-pryv-mongo
@@ -37,30 +42,6 @@ services:
             - ../../var-pryv/mongodb/backup/:/app/backup/
         networks:
           - app-network
-
-    open-pryv-nginx:
-        container_name: "open-pryv-nginx"
-        image: nginx:latest
-        volumes:
-          # You can load custom nginx config and use env variables in it
-          - ./nginx-templates:/etc/nginx/templates
-          # Load default *.rec.la (or your) certificates
-          - ./rec.la-certificates/src/rec.la-bundle.crt:/etc/letsencrypt/live/${HOSTNAME}/fullchain.pem
-          - ./rec.la-certificates/src/rec.la-key.pem:/etc/letsencrypt/live/${HOSTNAME}/privkey.pem
-          - ./dhparam.pem:/etc/letsencrypt/ssl-dhparams.pem
-        ports:
-          - ${PORT}:${PORT}
-          - ${PORT_SSL}:${PORT_SSL}
-        depends_on:
-          - open-pryv-core
-          - open-pryv-mail
-        networks:
-          - app-network
-        environment:
-          - PORT=${PORT}
-          - PORT_SSL=${PORT_SSL}
-          - HOSTNAME=${HOSTNAME}
-          - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
 
 networks:
   app-network:

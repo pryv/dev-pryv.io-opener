@@ -1,17 +1,23 @@
-# Dockerized Open Pryv.io
+#### Build your own docker images without SSL
 
-## Local dev with rec-la
+Run `./build-local.sh local/docker-compose.no-ssl.yml "up --build"`
 
-1. run `sh run-rec-la`
+- configuration file: `local/dockerized-config.json`
 
-## server with built-in SSL
+- download app-web-auth3 to app-web-auth3 directory
+- download assets to public_html directory
+- it will use the configuration file 
+- build images and start `local/docker-compose.no-ssl.yml` docker-compose.
+- launch API on `http://localhost:3000`
 
-1. Set your hostname in `dockerized-config.json`
-2. run `sh run-with-ssl` or run `HOSTNAME=$HOSTNAME EMAIL=$EMAIL docker-compose -f docker-compose.yml up` setting the hostname for your Open Pryv.io platform and email for 
+After images are built, you can run the command above just without "--build" part.
 
-1. Edit the config dockerized-config.json and dockerized-service-mail-config.hjson config files with your setup (you can also find them in configs/production-with-ssl-docker/). See config section.
-2. Run ./build_production.sh. This step will generate an SLL certificate for your hostname and run docker-compose to start the services.
+#### Build your own docker images with SSL
 
-## server with external SSL
+Run `./build-local.sh local/docker-compose.with-ssl.yml "up --build"`
 
-2. run `sh run-with-ssl`
+- Edit the config file `local/dockerized-config.json`
+- Start `local/docker-compose.with-ssl.yml` docker-compose.
+- Launch API on `https://my-computer.rec.la`
+
+After images are built, you can run the command above just without "--build" part. 
