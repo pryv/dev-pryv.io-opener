@@ -17,12 +17,6 @@ docker-compose -f local/docker-compose.with-ssl-download.yml up
 
 It will run the API on https://my-computer.rec.la:4443
 
-If you want to serve the API on http://localhost:3000, use:
-
-```bash
-docker-compose -f local/docker-compose.no-ssl-download.yml up
-```
-
 Config file: `local/dockerized-config.json`
 
 ## Server with built-in SSL
