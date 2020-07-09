@@ -55,62 +55,8 @@ Choose your Set-up
   - [Download docker images](#docker)
   - [Native installation](#native-setup-with-external-ssl)
 
-### Config
-
-For the native installation, edit `config.json`, otherwise `local/dockerized-config.json`:
-
-```json
-{
-  "dnsLess": {
-    "publicUrl":  "http://localhost:3000"
-  },
-  "http": {
-    "port": 3000,
-    "ip": "127.0.0.1"
-  },
-  "auth": {
-    "adminAccessKey": "replace_me_randomstring",
-    "trustedApps": "*@https://pryv.github.io, *@https://*.rec.la*"
-  },
-  "eventFiles": {
-    "attachmentsDirPath": "var-pryv/attachment-files"
-  },
-  "service": {
-    "name": "Test",
-    "support": "https://pryv.com/openpryv/unconfigured.html",
-    "terms": "https://pryv.com/openpryv/unconfigured.html",
-    "home": "https://pryv.com/openpryv/unconfigured.html",
-    "eventTypes": "https://api.pryv.com/event-types/flat.json",
-    "assets": {
-      "definitions": "http://localhost:3000/www/assets/index.json"
-    }
-  },
-  "services": {
-    "email": {
-      "enabled": {
-        "welcome": true,
-        "resetPassword": true
-      }
-    }
-  }
-}
-```
-
-- **publicUrl** Is the "Public" URL to reach the service, usually exposed in **https** by a third party SSL service such as NGNIX.
-- **http**
-  - **port** The local port to listen
-  - **ip** The IP adress to use. Keep it 127.0.0.1 unless you explicitely want to expose the service in `http` to another network.
-- **auth**
-  - **adminAccesskey** key to use for system calls such as `/reg/admin/users`. A random key should be generated on setup.
-  - **trustedApps** list of web apps that can be trusted-app functionalities
-     API for trusted apps: [API reference](https://api.pryv.com/reference/)
-    see: [SETUP Guide - customize authentication](https://api.pryv.com/customer-resources/pryv.io-setup/#customize-authentication-registration-and-reset-password-apps)
-- **eventFiles**
-  - **attachmentsDirPath** Directory where event attachment files will be stored on the file system.
-- **service** [API documentation on Service Information](https://api.pryv.com/reference/#service-info)
-- **services:email** see [Options & Customization](#custom-email) below
-
-## Setup
+  - Download docker images
+  - Native installation
 
 ### Docker
 
@@ -177,6 +123,61 @@ To set an automatic renewal, run `crontab -e` and append the following line:
 ```cron
 0 12 * * * /usr/bin/certbot renew --quiet
 ```
+
+### Config
+
+For the native installation, edit `config.json`, otherwise `local/dockerized-config.json`:
+
+```json
+{
+  "dnsLess": {
+    "publicUrl":  "http://localhost:3000"
+  },
+  "http": {
+    "port": 3000,
+    "ip": "127.0.0.1"
+  },
+  "auth": {
+    "adminAccessKey": "replace_me_randomstring",
+    "trustedApps": "*@https://pryv.github.io, *@https://*.rec.la*"
+  },
+  "eventFiles": {
+    "attachmentsDirPath": "var-pryv/attachment-files"
+  },
+  "service": {
+    "name": "Test",
+    "support": "https://pryv.com/openpryv/unconfigured.html",
+    "terms": "https://pryv.com/openpryv/unconfigured.html",
+    "home": "https://pryv.com/openpryv/unconfigured.html",
+    "eventTypes": "https://api.pryv.com/event-types/flat.json",
+    "assets": {
+      "definitions": "http://localhost:3000/www/assets/index.json"
+    }
+  },
+  "services": {
+    "email": {
+      "enabled": {
+        "welcome": true,
+        "resetPassword": true
+      }
+    }
+  }
+}
+```
+
+- **publicUrl** Is the "Public" URL to reach the service, usually exposed in **https** by a third party SSL service such as NGNIX.
+- **http**
+  - **port** The local port to listen
+  - **ip** The IP adress to use. Keep it 127.0.0.1 unless you explicitely want to expose the service in `http` to another network.
+- **auth**
+  - **adminAccesskey** key to use for system calls such as `/reg/admin/users`. A random key should be generated on setup.
+  - **trustedApps** list of web apps that can be trusted-app functionalities
+     API for trusted apps: [API reference](https://api.pryv.com/reference/)
+    see: [SETUP Guide - customize authentication](https://api.pryv.com/customer-resources/pryv.io-setup/#customize-authentication-registration-and-reset-password-apps)
+- **eventFiles**
+  - **attachmentsDirPath** Directory where event attachment files will be stored on the file system.
+- **service** [API documentation on Service Information](https://api.pryv.com/reference/#service-info)
+- **services:email** see [Options & Customization](#custom-email) below
 
 ## Start
 
