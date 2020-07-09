@@ -100,7 +100,7 @@ Each service independently - logs will be displayed on the console
 
 - `yarn proxy` based on [rec-la](https://github.com/pryv/rec-la), it will expose the server running on http://localhost:3000 with an SSL certificate on https://my-computer.rec.la:4443 in this case you need to edit `configs/local-native/rec-la.json`.
 
-#### Native Server setup with the built-in SSL
+#### Native Server setup with built-in SSL
 
 [setup the environment](#native)
 
