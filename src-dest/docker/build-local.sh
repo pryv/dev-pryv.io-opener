@@ -18,6 +18,7 @@ if [ ! -d "var-pryv/logs" ]; then `mkdir -p var-pryv/logs`; fi
 # ================= Download authentication frontend ==================
 # =====================================================================
 # download git dependencies (so there would be no need to github authentication inside docker container)
+
 APP_WEB_AUTH_FOLDER="app-web-auth3"
 if [ ! -d $APP_WEB_AUTH_FOLDER ]; then
   git clone --depth=1 --branch=master https://github.com/pryv/app-web-auth3.git $APP_WEB_AUTH_FOLDER
