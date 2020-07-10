@@ -65,14 +65,14 @@ PORT_SSL=4443
 if [ -z "$DOCKER_COMPOSE_FILE" ]
 then
     echo "No docker compose file was given so starting default with ./local/docker-compose.no-ssl.yml"
-    HOSTNAME=$HOSTNAME TAG=latest PORT=$PORT PORT_SSL=$PORT_SSL docker-compose -f local/docker-compose.no-ssl.yml up --build
+    HOSTNAME=$HOSTNAME TAG=latest docker-compose -f local/docker-compose.no-ssl.yml up --build
 else
     if [ -z "$DOCKER_COMMAND" ]
     then
-        echo "Running: HOSTNAME=$HOSTNAME TAG=latest PORT=$PORT PORT_SSL=$PORT_SSL docker-compose -f $DOCKER_COMPOSE_FILE up --build"
-        HOSTNAME=$HOSTNAME TAG=latest PORT=$PORT PORT_SSL=$PORT_SSL docker-compose -f $DOCKER_COMPOSE_FILE up --build
+        echo "Running: HOSTNAME=$HOSTNAME TAG=latest docker-compose -f $DOCKER_COMPOSE_FILE up --build"
+        HOSTNAME=$HOSTNAME TAG=latest docker-compose -f $DOCKER_COMPOSE_FILE up --build
     else
-        echo "Running: HOSTNAME=$HOSTNAME TAG=latest PORT=$PORT PORT_SSL=$PORT_SSL docker-compose -f $DOCKER_COMPOSE_FILE $DOCKER_COMMAND"
-        HOSTNAME=$HOSTNAME TAG=latest PORT=$PORT PORT_SSL=$PORT_SSL docker-compose -f $DOCKER_COMPOSE_FILE $DOCKER_COMMAND
+        echo "Running: HOSTNAME=$HOSTNAME TAG=latest docker-compose -f $DOCKER_COMPOSE_FILE $DOCKER_COMMAND"
+        HOSTNAME=$HOSTNAME TAG=latest docker-compose -f $DOCKER_COMPOSE_FILE $DOCKER_COMMAND
     fi
 fi
