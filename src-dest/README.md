@@ -59,7 +59,7 @@ Choose your Set-up
 
 The dockerized versions are available at this link: [Download link]().
 
-If you wish to build the images yourself, refer to the following README: [docker/README.md](docker/README.md).
+If you wish to build the images yourself, refer to the following README: [docker/README-build.md](docker/README-build.md).
 
 Once it is running, you can continue with the [tutorials](#dockerized).
 

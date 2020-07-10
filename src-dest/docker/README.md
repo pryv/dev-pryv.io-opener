@@ -1,23 +1,47 @@
-#### Build your own docker images without SSL
+# Dockerized Open Pryv.io
 
-Run `./build-local.sh local/docker-compose.no-ssl-build.yml "up --build"`
+This archive contains the necessary files to download and run Open Pryv.io.
 
-- configuration file: `local/dockerized-config.json`
+*Prerequisites*:
 
-- download app-web-auth3 to app-web-auth3 directory
-- download assets to public_html directory
-- it will use the configuration file 
-- build images and start `local/docker-compose.no-ssl.yml` docker-compose.
-- launch API on `http://localhost:3000`
+- [Docker v19.03](https://docs.docker.com/engine/install/)
+- [Docker-compose v1.26](https://docs.docker.com/compose/install/)
 
-After images are built, you can run the command above just without "--build" part.
+## Local dev with SSL
 
-#### Build your own docker images with SSL
+Run: 
 
-Run `./build-local.sh local/docker-compose.with-ssl-build.yml "up --build"`
+```bash
+docker-compose -f local/docker-compose.with-ssl.yml up
+```
 
-- Edit the config file `local/dockerized-config.json`
-- Start `local/docker-compose.with-ssl.yml` docker-compose.
-- Launch API on `https://my-computer.rec.la`
+Config file: `local/dockerized-config.json`
 
-After images are built, you can run the command above just without "--build" part. 
+It will run Open Pryv.io on https://my-computer.rec.la:4443, using [rec-la](https://github.com/pryv/rec-la).
+
+## Server with built-in SSL
+
+1. Edit the following values in the [Config](https://github.com/pryv/open-pryv.io#config) file `production-with-ssl/dockerized-config.json` and docker-compose file: `production-with-ssl/docker-compose.yml`:
+
+   - ${HOSTNAME}: the hostname part of the public URL
+   
+2. Run:
+
+```bash
+docker-compose -f production-with-ssl/docker-compose.yml up
+```
+
+It will run Open Pryv.io on https://${HOSTNAME}.
+
+## Server with external SSL
+
+1. Edit the following value in the [Config](https://github.com/pryv/open-pryv.io#config) file `production-with-ssl/dockerized-config.json`:
+   - ${HOSTNAME}: the hostname part of the public URL
+
+2. Run:
+
+```bash
+docker-compose -f production-no-ssl/docker-compose.yml up
+```
+
+It will run Open Pryv.io on http://0.0.0.0:80.
