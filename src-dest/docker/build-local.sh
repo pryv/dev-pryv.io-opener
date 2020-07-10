@@ -27,7 +27,8 @@ fi
 # ================= Setup assets to public_html/assets/================
 # ================= like registration button style and etc=============
 # =====================================================================
-bash ./scripts/setup-assets.bash
+
+bash ../scripts/setup-assets.bash
 
 # =====================================================================
 # ================= Config parsing starts         =====================
@@ -50,7 +51,7 @@ echo "Hostname is $HOSTNAME"
 # =====================================================================
 
 # download or update rec.la domain certificates
-bash ./scripts/download-recla-certificates.sh
+bash ../scripts/download-recla-certificates.sh
 
 # =====================================================================
 # ================= Start docker compose          =====================
