@@ -15,7 +15,7 @@ Run:
 docker-compose -f local/docker-compose.with-ssl.yml up
 ```
 
-Config file: `local/dockerized-config.json`
+[Config](https://github.com/pryv/open-pryv.io#config) file: `local/dockerized-config.json`
 
 It will run Open Pryv.io on https://my-computer.rec.la:4443, using [rec-la](https://github.com/pryv/rec-la).
 
