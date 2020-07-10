@@ -16,8 +16,6 @@ Prepare the various assets:
 
 Run `HOSTNAME=my-computer.rec.la TAG=latest docker-compose -f local/docker-compose.no-ssl-build.yml up --build`
 
-- download app-web-auth3 to app-web-auth3 directory
-- download assets to public_html directory
 - [Config](https://github.com/pryv/open-pryv.io#config) file `local/docker-compose.no-ssl.yml`
 - launch API on `http://localhost:3000`
 
