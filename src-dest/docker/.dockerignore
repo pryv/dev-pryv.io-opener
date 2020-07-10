@@ -10,7 +10,7 @@ var-pryv/
 # skip build related files except for dockerized-config
 production-with-ssl-docker
 production-no-ssl-docker
-local/rec.la-certificates
+rec.la-certificates
 local/dhparam.pem
 local/docker-compose.no-ssl.yml
 local/docker-compose.with-ssl.yml

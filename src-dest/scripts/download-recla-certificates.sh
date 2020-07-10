@@ -1,5 +1,5 @@
 # download rec.la certificates
-CERTIFICATED_FOLDER="./local/rec.la-certificates"
+CERTIFICATED_FOLDER="./rec.la-certificates"
 if [ ! -d $CERTIFICATED_FOLDER ]; then
 	echo "Downloading default certificates to $CERTIFICATED_FOLDER"
 	mkdir $CERTIFICATED_FOLDER
