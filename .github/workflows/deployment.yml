@@ -46,19 +46,7 @@ jobs:
       run: cd dest; bash ./scripts/download-recla-certificates.sh; bash ./scripts/setup-assets.bash
 
     - name: Create docker tarball without ssl
-      run: cd dest; tar czfv dockerized-open-pryv.io.tgz \
-          ./configs/local-docker/dockerized-config.json \
-          ./configs/local-docker/dockerized-config-no-ssl.json \
-          ./configs/local-docker/dockerized-service-mail-config.hjson \
-          ./configs/local-docker/nginx-templates/ \
-          ./configs/local-docker/dhparam.pem \
-          ./configs/local-docker/docker-compose.no-ssl-download.yml \
-          ./configs/local-docker/docker-compose.with-ssl-download.yml \
-          ./configs/local-docker/rec.la-certificates/src/rec.la-bundle.crt \
-          ./configs/local-docker/rec.la-certificates/src/rec.la-key.pem \
-          ./public_html/ build-local-tarball.sh \
-          ./configs/production-no-ssl-docker \
-          ./configs/production-with-ssl-docker \
+      run: cd dest/docker; bash build-tarall.sh
 
     - name: Check the prepared commit to Open Pryv
       run: cd dest && yarn remove test-helpers && git status && git diff && echo '${{ env.RELEASE_VERSION }} version'
