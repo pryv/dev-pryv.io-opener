@@ -1,3 +1,8 @@
+#!/bin/bash
+
+SCRIPT_FOLDER=$(cd $(dirname "$0"); pwd)
+cd $SCRIPT_FOLDER/.. # root
+
 # download rec.la certificates
 CERTIFICATED_FOLDER="./rec.la-certificates"
 if [ ! -d $CERTIFICATED_FOLDER ]; then

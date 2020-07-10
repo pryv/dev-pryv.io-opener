@@ -3,7 +3,6 @@
 SCRIPT_FOLDER=$(cd $(dirname "$0"); pwd)
 cd $SCRIPT_FOLDER/.. # root
 
-
 # Set up app-web-auth3
 APP_WEB_AUTH_FOLDER="app-web-auth3"
 if [[ ! -d $APP_WEB_AUTH_FOLDER ]]; then
