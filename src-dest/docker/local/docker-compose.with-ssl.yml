@@ -7,7 +7,7 @@ services:
         restart: "always"
         volumes:
           - ./dockerized-config.json:/app/config.json
-          - ../public_html/:/app/public_html/
+          - ../../public_html/:/app/public_html/
         depends_on:
             - open-pryv-mongo
         networks:
@@ -45,8 +45,8 @@ services:
           # You can load custom nginx config and use env variables in it
           - ./nginx-templates:/etc/nginx/templates
           # Load default *.rec.la (or your) certificates
-          - ../rec.la-certificates/src/rec.la-bundle.crt:/etc/letsencrypt/live/${HOSTNAME}/fullchain.pem
-          - ../rec.la-certificates/src/rec.la-key.pem:/etc/letsencrypt/live/${HOSTNAME}/privkey.pem
+          - ../../rec.la-certificates/src/rec.la-bundle.crt:/etc/letsencrypt/live/${HOSTNAME}/fullchain.pem
+          - ../../rec.la-certificates/src/rec.la-key.pem:/etc/letsencrypt/live/${HOSTNAME}/privkey.pem
           - ./dhparam.pem:/etc/letsencrypt/ssl-dhparams.pem
         ports:
           - 80:80
