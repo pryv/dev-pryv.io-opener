@@ -1,23 +1,37 @@
-#### Build your own docker images without SSL
+# Build your own docker images
 
-Run `./build-local.sh local/docker-compose.no-ssl-build.yml "up --build"`
+This guide explains how to build your own docker Open Pryv.io docker images.
 
-- configuration file: `local/dockerized-config.json`
+*Prerequisites*:
+
+- [Docker v19.03](https://docs.docker.com/engine/install/)
+- [Docker-compose v1.26](https://docs.docker.com/compose/install/)
+
+Prepare the various assets:
+
+- Run `sh ../scripts/setup-app-web-auth3.bash`
+- Run `sh ../scripts/setup-assets.bash`
+
+## without SSL
+
+Run `HOSTNAME=my-computer.rec.la TAG=latest docker-compose -f local/docker-compose.no-ssl-build.yml up --build`
 
 - download app-web-auth3 to app-web-auth3 directory
 - download assets to public_html directory
-- it will use the configuration file 
-- build images and start `local/docker-compose.no-ssl.yml` docker-compose.
+- [Config](https://github.com/pryv/open-pryv.io#config) file `local/docker-compose.no-ssl.yml`
 - launch API on `http://localhost:3000`
 
 After images are built, you can run the command above just without "--build" part.
 
-#### Build your own docker images with SSL
+## with SSL
 
-Run `./build-local.sh local/docker-compose.with-ssl-build.yml "up --build"`
+Fetch the [rec-la](https://github.com/pryv/rec-la) SSL certificates:
 
-- Edit the config file `local/dockerized-config.json`
-- Start `local/docker-compose.with-ssl.yml` docker-compose.
-- Launch API on `https://my-computer.rec.la`
+- Run `sh ../scripts/download-recla-certificates.sh`
 
-After images are built, you can run the command above just without "--build" part. 
+Run `HOSTNAME=my-computer.rec.la TAG=latest docker-compose -f local/docker-compose.with-ssl-build.yml up --build`
+
+- [Config](https://github.com/pryv/open-pryv.io#config) file `local/dockerized-config.json`
+- Launch API on `https://my-computer.rec.la:4443`
+
+After images are built, you can run the command above just without "--build" part.
