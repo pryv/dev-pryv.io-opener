@@ -1,5 +1,8 @@
 #!/bin/bash
 
+SCRIPT_FOLDER=$(cd $(dirname "$0"); pwd)
+cd $SCRIPT_FOLDER
+
 mkdir -p ./rec.la-certificates
 mkdir -p ./public_html
 cp ../rec.la-certificates/src/rec.la-bundle.crt ./rec.la-certificates
@@ -18,3 +21,5 @@ tar czfv dockerized-open-pryv.io.tgz \
   ./rec.la-certificates \
   ./public_html \
   
+rm -r ./rec.la-certificates
+rm -r ./public_html
