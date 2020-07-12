@@ -46,7 +46,7 @@ jobs:
       run: cd dest; bash ./scripts/download-recla-certificates.sh; bash ./scripts/setup-assets.bash
 
     - name: Create docker tarball without ssl
-      run: cd dest/docker; bash build-tarall.sh
+      run: cd dest/docker; bash build-tarball.sh
 
     - name: Check the prepared commit to Open Pryv
       run: cd dest && yarn remove test-helpers && git status && git diff && echo '${{ env.RELEASE_VERSION }} version'
