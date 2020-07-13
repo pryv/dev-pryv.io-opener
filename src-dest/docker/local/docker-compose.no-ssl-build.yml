@@ -3,7 +3,7 @@ services:
   open-pryv-core:
     build: 
       context: ../..
-      dockerfile: ./Dockerfile
+      dockerfile: ./docker/local/Dockerfile
     image: pryvio/open-pryv-core:${TAG}
     command: "yarn api"
     container_name: "open-pryv-core"

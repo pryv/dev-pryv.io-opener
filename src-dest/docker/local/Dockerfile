@@ -6,9 +6,9 @@ WORKDIR /app
 COPY . /app/
 
 # Choose dockerized config instead of default local env
-COPY ./local/dockerized-config.json /app/config.json
+COPY ./docker/local/dockerized-config.json /app/config.json
 # the same for mail service
-COPY ./local/dockerized-service-mail-config.hjson /app/service-mail/config.json
+COPY ./docker/local/dockerized-service-mail-config.hjson /app/service-mail/config.json
 
 RUN apt-get update -y 
 # install rsync needed for copying files to dist folder

@@ -3,7 +3,7 @@ services:
   open-pryv-core:
     build: 
       context: ../..
-      dockerfile: ./Dockerfile
+      dockerfile: ./docker/local/Dockerfile
     image: pryvio/open-pryv-core:${TAG}
     command: "yarn api"
     container_name: "open-pryv-core"
@@ -48,8 +48,8 @@ services:
       # You can load custom nginx config and use env variables in it
       - ./nginx-templates:/etc/nginx/templates
       # Load default *.rec.la (or your) certificates
-      - ../../rec.la-certificates/src/rec.la-bundle.crt:/etc/letsencrypt/live/${HOSTNAME}/fullchain.pem
-      - ../../rec.la-certificates/src/rec.la-key.pem:/etc/letsencrypt/live/${HOSTNAME}/privkey.pem
+      - ../../rec.la-certificates/src/rec.la-bundle.crt:/etc/letsencrypt/live/my-computer.rec.la/fullchain.pem
+      - ../../rec.la-certificates/src/rec.la-key.pem:/etc/letsencrypt/live/my-computer.rec.la/privkey.pem
       - ./dhparam.pem:/etc/letsencrypt/ssl-dhparams.pem
     ports:
       - 80:80
@@ -62,7 +62,7 @@ services:
     environment:
       - PORT=80
       - PORT_SSL=4443
-      - HOSTNAME=${HOSTNAME}
+      - HOSTNAME=my-computer.rec.la
       - NGINX_ENVSUBST_OUTPUT_DIR=/etc/nginx
 
 networks:
