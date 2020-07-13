@@ -1,63 +1,63 @@
 version: "3"
 services:
-    open-pryv-core:
-        image:  pryvio/open-pryv-core:latest
-        command: "yarn api"
-        container_name: "open-pryv-core"
-        restart: "always"
-        volumes:
-            - ./dockerized-config.json:/app/config.json
-            - ../public_html/:/app/public_html/
-        depends_on:
-            - open-pryv-mongo
-        networks:
-          - app-network
+  open-pryv-core:
+    image:  pryvio/open-pryv-core:latest
+    command: "yarn api"
+    container_name: "open-pryv-core"
+    restart: "always"
+    volumes:
+        - ./dockerized-config.json:/app/config.json
+        - ../public_html/:/app/public_html/
+    depends_on:
+        - open-pryv-mongo
+    networks:
+      - app-network
 
-    open-pryv-mail:
-        image: pryvio/open-pryv-core:latest
-        command: "yarn mail"
-        container_name: "open-pryv-mail"
-        restart: "always"
-        volumes:
-          - ../var-pryv/logs/:/app/var-pryv/logs/
-          - ./dockerized-service-mail-config.hjson:/app/service-mail/config.hjson
-        depends_on:
-            - open-pryv-core
-        networks:
-          - app-network
+  open-pryv-mail:
+    image: pryvio/open-pryv-core:latest
+    command: "yarn mail"
+    container_name: "open-pryv-mail"
+    restart: "always"
+    volumes:
+      - ../var-pryv/logs/:/app/var-pryv/logs/
+      - ./dockerized-service-mail-config.hjson:/app/service-mail/config.hjson
+    depends_on:
+        - open-pryv-core
+    networks:
+      - app-network
 
-    open-pryv-mongo:
-        image: mongo:3.6.18
-        container_name: "open-pryv-mongo"
-        restart: "always"
-        volumes:
-          - ../var-pryv/mongodb/data/:/data/db/
-        networks:
-          - app-network
+  open-pryv-mongo:
+    image: mongo:3.6.18
+    container_name: "open-pryv-mongo"
+    restart: "always"
+    volumes:
+      - ../var-pryv/mongodb/data/:/data/db/
+    networks:
+      - app-network
 
-    letsencrypt:
-        # nginx + ssl certificate by https://github.com/linuxserver/docker-letsencrypt
-        image: linuxserver/letsencrypt
-        container_name: "open-pryv-nginx"
-        cap_add:
-          - NET_ADMIN
-        networks:
-          - app-network
-        environment:
-          - PUID=1000
-          - PGID=1000
-          - TZ=Europe/London
-          - URL=${HOSTNAME}
-          - VALIDATION=http
-          - ONLY_SUBDOMAINS=false #optional
-          - STAGING=false #optional - change this to not be banned
-        volumes:
-          - ./config:/config
-          - ./nginx.conf:/config/nginx/site-confs/default
-        ports:
-          - 443:443
-          - 80:80 #optional
-        restart: unless-stopped
+  letsencrypt:
+    # nginx + ssl certificate by https://github.com/linuxserver/docker-letsencrypt
+    image: linuxserver/letsencrypt
+    container_name: "open-pryv-nginx"
+    cap_add:
+      - NET_ADMIN
+    networks:
+      - app-network
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - URL=${HOSTNAME}
+      - VALIDATION=http
+      - ONLY_SUBDOMAINS=false #optional
+      - STAGING=false #optional - change this to not be banned
+    volumes:
+      - ./config:/config
+      - ./nginx.conf:/config/nginx/site-confs/default
+    ports:
+      - 443:443
+      - 80:80 #optional
+    restart: unless-stopped
         
 networks:
   app-network:
