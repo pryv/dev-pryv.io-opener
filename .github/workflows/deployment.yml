@@ -43,7 +43,7 @@ jobs:
       run: echo 'I pretend that I run the tests'
 
     - name: Download public_html assets and rec.la certificates
-      run: cd dest; bash ./scripts/download-recla-certificates.sh; bash ./scripts/setup-assets.bash; bash ./setup-app-web-auth3.bash;
+      run: cd dest; bash ./scripts/download-recla-certificates.sh; bash ./scripts/setup-assets.bash; bash ./scripts/setup-app-web-auth3.bash;
 
     - name: Create docker tarball without ssl
       run: cd dest/docker; bash build-tarball.sh
