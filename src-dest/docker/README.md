@@ -37,7 +37,7 @@ It will run Open Pryv.io on https://${HOSTNAME}.
 
 ## Server with external SSL
 
-1. Edit the following value in the [Config](https://github.com/pryv/open-pryv.io#config) file `production-with-ssl/dockerized-config.json`:
+1. Edit the following value in the [Config](https://github.com/pryv/open-pryv.io#config) file `production-no-ssl/dockerized-config.json`:
    - ${HOSTNAME}: the hostname part of the public URL
    - auth:adminAccessKey: secret for admin functions, change it from its default value otherwise Open Pryv.io will crash on boot.
 

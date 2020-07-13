@@ -98,7 +98,7 @@ Each service independently - logs will be displayed on the console
 
 - `yarn local` is the equivalent of running `yarn pryv` + `yarn proxy` using `configs/rec-la.json`. This setup is useful to test Open Pryv.io locally.
 
-- `yarn proxy` based on [rec-la](https://github.com/pryv/rec-la), it will expose the server running on http://localhost:3000 with an SSL certificate on https://my-computer.rec.la:4443 in this case you need to edit `configs/local-native/rec-la.json`.
+- `yarn proxy` based on [rec-la](https://github.com/pryv/rec-la), it will expose the server running on http://localhost:3000 with an SSL certificate on https://my-computer.rec.la:4443 in this case you need to edit `configs/rec-la.json`.
 
 #### Native Server setup with built-in SSL
 
@@ -107,7 +107,7 @@ Each service independently - logs will be displayed on the console
 1. Run `yarn pryv` to start the API
 2. Configure NGINX and certificate
 
-You can find a NGINX configuration that you can include in your `sites-enabled/` in [configs/local-native/site.conf](configs/local-native/site.conf).
+You can find a NGINX configuration that you can include in your `sites-enabled/` in [configs/site.conf](configs/site.conf).
 
 You must change `${HOSTNAME}` to match the hostname of the public URL.
 
@@ -178,7 +178,7 @@ For the native installation, edit `config.json`, otherwise `local/dockerized-con
 
 ## Start
 
-At this moment you should have your application running on the public URL you defined. For a **production environment**, please refer to [this part](#nginx-configuration) on how to setup a SSL certificate for your domain.
+At this moment you should have your application running on the public URL you defined.
 
 ### Native
 

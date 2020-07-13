@@ -7,11 +7,11 @@ This guide explains how to build your own docker Open Pryv.io docker images.
 - [Docker v19.03](https://docs.docker.com/engine/install/)
 - [Docker-compose v1.26](https://docs.docker.com/compose/install/)
 
-Prepare the various assets:
+Prepare the various assets, run the following commands from the `docker/` directory:
 
-- Run `sh ../scripts/setup-app-web-auth3.bash`
-- Run `sh ../scripts/setup-assets.bash`
-- Run `sh ../scripts/setup-admin-key.bash`
+- `sh ../scripts/setup-app-web-auth3.bash`
+- `sh ../scripts/setup-assets.bash`
+- `sh ../scripts/setup-admin-key.bash`
 
 ## without SSL
 
