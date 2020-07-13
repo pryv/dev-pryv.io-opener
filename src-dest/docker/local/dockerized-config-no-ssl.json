@@ -15,7 +15,7 @@
     "trustedApps": "*@https://pryv.github.io, *@http://*localhost*"
   },
   "eventFiles": {
-    "attachmentsDirPath": "var-pryv/attachment-files"
+    "attachmentsDirPath": "/app/data/attachments"
   },
   "service": {
     "name": "Open-Pryv.io",

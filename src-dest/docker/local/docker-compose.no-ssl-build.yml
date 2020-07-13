@@ -13,6 +13,7 @@ services:
     volumes:
       - ./dockerized-config-no-ssl.json:/app/config.json
       - ../../public_html/:/app/public_html/
+      - ../../var-pryv/core/data/:/app/data/
     depends_on:
       - open-pryv-mongo
     networks:
