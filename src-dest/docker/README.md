@@ -44,4 +44,4 @@ It will run Open Pryv.io on https://${HOSTNAME}.
 docker-compose -f production-no-ssl/docker-compose.yml up
 ```
 
-It will run Open Pryv.io on http://0.0.0.0:3000.
+It will run Open Pryv.io on http://0.0.0.0:3000. However, all resource will be advertised through https://${HOSTNAME}.
