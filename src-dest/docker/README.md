@@ -9,13 +9,14 @@ This archive contains the necessary files to download and run Open Pryv.io.
 
 ## Local dev with SSL
 
-Run:
+1. Edit the following value in the [Config](https://github.com/pryv/open-pryv.io#config) file `local/dockerized-config.json`:
+   - auth:adminAccessKey: secret for admin functions, change it from its default value otherwise Open Pryv.io will crash on boot.
+
+2. Run:
 
 ```bash
 docker-compose -f local/docker-compose.with-ssl.yml up
 ```
-
-[Config](https://github.com/pryv/open-pryv.io#config) file: `local/dockerized-config.json`
 
 It will run Open Pryv.io on https://my-computer.rec.la:4443, using [rec-la](https://github.com/pryv/rec-la).
 
@@ -24,6 +25,7 @@ It will run Open Pryv.io on https://my-computer.rec.la:4443, using [rec-la](http
 1. Edit the following values in the [Config](https://github.com/pryv/open-pryv.io#config) file `production-with-ssl/dockerized-config.json` and docker-compose file: `production-with-ssl/docker-compose.yml`:
 
    - ${HOSTNAME}: the hostname part of the public URL
+   - auth:adminAccessKey: secret for admin functions, change it from its default value otherwise Open Pryv.io will crash on boot.
 
 2. Run:
 
@@ -37,6 +39,7 @@ It will run Open Pryv.io on https://${HOSTNAME}.
 
 1. Edit the following value in the [Config](https://github.com/pryv/open-pryv.io#config) file `production-with-ssl/dockerized-config.json`:
    - ${HOSTNAME}: the hostname part of the public URL
+   - auth:adminAccessKey: secret for admin functions, change it from its default value otherwise Open Pryv.io will crash on boot.
 
 2. Run:
 

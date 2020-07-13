@@ -11,6 +11,7 @@ Prepare the various assets:
 
 - Run `sh ../scripts/setup-app-web-auth3.bash`
 - Run `sh ../scripts/setup-assets.bash`
+- Run `sh ../scripts/setup-admin-key.bash`
 
 ## without SSL
 
