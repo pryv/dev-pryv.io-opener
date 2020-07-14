@@ -14,8 +14,9 @@ RUN apt-get update -y
 # install rsync needed for copying files to dist folder
 RUN apt-get -y install rsync sendmail
 
-RUN yarn setup
-RUN yarn release
+RUN echo 'echo "$(tail -n 1 /etc/hosts) localhost localhost.localdomain $HOSTNAME" >> /etc/hosts' > /app/mail.sh
+RUN echo 'yarn mail' >> /app/mail.sh
+RUN yarn setup && yarn release
 
 RUN apt-get install nano
 

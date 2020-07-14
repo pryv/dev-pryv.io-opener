@@ -19,7 +19,7 @@ services:
 
   open-pryv-mail:
     image: pryvio/open-pryv-core:${TAG}
-    command: "yarn mail"
+    command: "/bin/sh /app/mail.sh"
     container_name: "open-pryv-mail"
     restart: "always"
     depends_on:
