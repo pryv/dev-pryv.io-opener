@@ -10,7 +10,7 @@
       // Sender name and email address
       from: {
         name: "Your Email address",
-        address: "change@my.email"
+        address: "changeme@pryv.com"
       }
     },
     preview: false, // If true, it will open a webpage with a preview
