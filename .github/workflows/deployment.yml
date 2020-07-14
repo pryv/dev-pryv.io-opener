@@ -29,10 +29,15 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         
+    - name: Set env
+      run: |
+        echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF/refs\/tags\//})
+        echo "Tag $RELEASE_VERSION ${{ env.RELEASE_VERSION }}"
+
     - name: Download pryv.io-open-source
       uses: actions/checkout@v2
       with:
-        repository: pryv/pryv.io-open-source
+        repository: pryv/open-pryv.io
         token: ${{ secrets.SECRET_FOR_READING_SUBMODULES }}
         path: dest
       
@@ -41,7 +46,7 @@ jobs:
       
     - name: yarn build and prepend licenses
       run: cd licenser && yarn install && cd .. && yarn build
-      
+
     - name: Run tests on build
       run: echo 'I pretend that I run the tests'
 
@@ -50,9 +55,6 @@ jobs:
 
     - name: Create docker tarball without ssl
       run: cd dest/docker; bash build-tarball.sh
-
-    - name: Set env
-      run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF#refs/*/}
 
     - name: Check the prepared commit to Open Pryv
       run: cd dest && yarn remove test-helpers && git status && git diff && echo '${{ env.RELEASE_VERSION }} version'
