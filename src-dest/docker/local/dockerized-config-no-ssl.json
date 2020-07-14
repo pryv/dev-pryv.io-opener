@@ -4,28 +4,25 @@
   },
   "dnsLess": {
     "isActive": true,
-    "publicUrl": "https://my-computer.rec.la"
+    "publicUrl": "http://localhost:3000"
   },
   "http": {
     "port": 3000,
     "ip": "0.0.0.0"
   },
   "auth": {
-    "adminAccessKey": "{ADMIN_ACCESS_KEY}",
-    "trustedApps": "*@https://pryv.github.io, *@https://*.rec.la*"
+    "adminAccessKey": "CHANGE_ME_ADMIN_KEY",
+    "trustedApps": "*@https://pryv.github.io, *@http://*localhost*"
   },
   "eventFiles": {
-    "attachmentsDirPath": "var-pryv/attachment-files"
+    "attachmentsDirPath": "/app/data/attachments"
   },
   "service": {
     "name": "Open-Pryv.io",
     "support": "https://pryv.com/open-pryv-non-configured-page/",
     "terms": "https://pryv.com/open-pryv-non-configured-page/",
     "home": "https://pryv.com/open-pryv-non-configured-page/",
-    "eventTypes": "https://api.pryv.com/event-types/flat.json",
-    "assets": {
-      "definitions": "https://my-computer.rec.la/www/assets/index.json"
-    }
+    "eventTypes": "https://api.pryv.com/event-types/flat.json"
   },
   "services": {
     "email": {
@@ -33,10 +30,10 @@
         "welcome": true,
         "resetPassword": true
       },
-      "url": "http://open_pryv_mail:9000/sendmail/"
+      "url": "http://open-pryv-mail:9000/sendmail/"
     }
   },
   "database": {
-    "host": "pryv_mongo"
+    "host": "open-pryv-mongo"
   }
 }
