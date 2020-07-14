@@ -12,9 +12,10 @@ COPY ./docker/local/dockerized-service-mail-config.hjson /app/service-mail/confi
 
 RUN apt-get update -y 
 # install rsync needed for copying files to dist folder
-RUN apt-get -y install rsync sendmail
+RUN apt-get -y install rsync sendmail && yes "Y" | /usr/sbin/sendmailconfig
 
 RUN echo 'echo "$(tail -n 1 /etc/hosts) localhost localhost.localdomain $HOSTNAME" >> /etc/hosts' > /app/mail.sh
+RUN echo 'yes "Y" | /usr/sbin/sendmailconfig' >> /app/mail.sh
 RUN echo 'yarn mail' >> /app/mail.sh
 RUN yarn setup && yarn release
 
