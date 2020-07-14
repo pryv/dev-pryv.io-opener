@@ -11,7 +11,7 @@
     "ip": "127.0.0.1"
   },
   "auth": {
-    "adminAccessKey": "{ADMIN_ACCESS_KEY}",
+    "adminAccessKey": "REPLACE_ME",
     "trustedApps": "*@https://pryv.github.io*, *@https://*.rec.la*"
   },
   "eventFiles": {
