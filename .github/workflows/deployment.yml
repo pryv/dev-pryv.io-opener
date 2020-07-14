@@ -4,8 +4,6 @@ on:
   push:
     tags:
       - '*'
-    branches:
-      - master
 
 jobs:
   build:
@@ -59,9 +57,7 @@ jobs:
       run: cd dest/docker; bash build-tarball.sh
 
     - name: Check the prepared commit to Open Pryv
-      run: cd dest && yarn remove test-helpers && git status && git diff && echo '$SOURCE_TAG version'
-      env:
-          SOURCE_TAG: ${{ steps.set_tag.outputs.SOURCE_TAG }}
+      run: cd dest && yarn remove test-helpers && git status && git diff && echo '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
 
     - name: Commit and push to open Pryv and release docker tarball
       uses: EndBug/add-and-commit@v4
@@ -80,14 +76,13 @@ jobs:
         force: false
         # The message for the commit
         # Default: 'Commit from GitHub Actions'
-        message: '$SOURCE_TAG version'
+        message: '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
         # Name of the branch to use, if different from the one that triggered the workflow
         # Default: the branch that triggered the workflow (from GITHUB_REF)
         ref: 'master'
       env:
         # This is necessary in order to push a commit to the repo
         GITHUB_TOKEN: ${{ secrets.SECRET_FOR_COMMITING }} # Leave this line unchanged
-        SOURCE_TAG: ${{ steps.set_tag.outputs.SOURCE_TAG }}
 
     - name: Login to the docker hub containers registry
       uses: azure/docker-login@v1
