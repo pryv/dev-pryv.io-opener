@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - '*'
+    branches:
+      - feature/automate-build
 jobs:
   build:
 
