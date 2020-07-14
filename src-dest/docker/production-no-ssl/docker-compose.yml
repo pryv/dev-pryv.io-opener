@@ -1,9 +1,9 @@
 version: "3"
 services:
-  open-pryv-core:
-    image:  pryvio/open-pryv-core:latest
+  open-pryv.io:
+    image:  pryvio/open-pryv.io:latest
     command: "yarn api"
-    container_name: "open-pryv-core"
+    container_name: "open-pryv.io"
     restart: "always"
     ports:
       - 3000:3000
@@ -17,7 +17,7 @@ services:
       - app-network
 
   open-pryv-mail:
-    image: pryvio/open-pryv-core:latest
+    image: pryvio/open-pryv.io:latest
     command: "/bin/sh /app/mail.sh"
     container_name: "open-pryv-mail"
     restart: "always"
@@ -25,7 +25,7 @@ services:
       - ../var-pryv/logs/:/app/var-pryv/logs/
       - ./dockerized-service-mail-config.hjson:/app/service-mail/config.hjson
     depends_on:
-        - open-pryv-core
+        - open-pryv.io
     networks:
       - app-network
 

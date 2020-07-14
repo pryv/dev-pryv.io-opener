@@ -84,10 +84,10 @@ jobs:
         password: ${{ secrets.REGISTRY_PRYV_PASSWORD_DOCKERHUB }}
 
     - name: Build core image
-      run: cd dest && TAG=latest docker-compose -f docker/local/docker-compose.no-ssl-build.yml build open-pryv-core
+      run: cd dest && TAG=latest docker-compose -f docker/local/docker-compose.no-ssl-build.yml build open-pryv.io
 
     - name: Upload new image to docker hub
-      run: docker images && docker push pryvio/open-pryv-core:latest
+      run: docker images && docker push pryvio/open-pryv.io:latest
 
     - name: Upload image with version tag to docker hub
-      run: docker tag pryvio/open-pryv-core:latest pryvio/open-pryv-core:${{ env.RELEASE_VERSION }} && docker images && docker push pryvio/open-pryv-core:${{ env.RELEASE_VERSION }}
+      run: docker tag pryvio/open-pryv.io:latest pryvio/open-pryv.io:${{ env.RELEASE_VERSION }} && docker images && docker push pryvio/open-pryv.io:${{ env.RELEASE_VERSION }}
