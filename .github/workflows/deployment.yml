@@ -23,16 +23,18 @@ jobs:
         token: ${{ secrets.SECRET_FOR_READING_SUBMODULES }}
         fetch-depth: 3
         clean: false
-        
+
     - name: Install Node.js with version ${{ matrix.node-version }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-        
-    - name: Set env
+
+    - name: Set tag
+      id: set_tag
       run: |
-        echo ::set-env name=RELEASE_VERSION::$(echo ${GITHUB_REF/refs\/tags\//})
-        echo "Tag $RELEASE_VERSION ${{ env.RELEASE_VERSION }}"
+          SOURCE_TAG=$(git describe --abbrev=0 --tags)
+          echo $SOURCE_TAG
+          echo ::set-output name=SOURCE_TAG::$SOURCE_TAG
 
     - name: Download pryv.io-open-source
       uses: actions/checkout@v2
@@ -40,7 +42,7 @@ jobs:
         repository: pryv/open-pryv.io
         token: ${{ secrets.SECRET_FOR_READING_SUBMODULES }}
         path: dest
-      
+
     - name: yarn install
       run: yarn install
       
@@ -57,7 +59,9 @@ jobs:
       run: cd dest/docker; bash build-tarball.sh
 
     - name: Check the prepared commit to Open Pryv
-      run: cd dest && yarn remove test-helpers && git status && git diff && echo '${{ env.RELEASE_VERSION }} version'
+      run: cd dest && yarn remove test-helpers && git status && git diff && echo '$SOURCE_TAG version'
+      env:
+          SOURCE_TAG: ${{ steps.set_tag.outputs.SOURCE_TAG }}
 
     - name: Commit and push to open Pryv and release docker tarball
       uses: EndBug/add-and-commit@v4
@@ -76,13 +80,14 @@ jobs:
         force: false
         # The message for the commit
         # Default: 'Commit from GitHub Actions'
-        message: '${{ env.RELEASE_VERSION }} version'
+        message: '$SOURCE_TAG version'
         # Name of the branch to use, if different from the one that triggered the workflow
         # Default: the branch that triggered the workflow (from GITHUB_REF)
         ref: 'master'
       env:
         # This is necessary in order to push a commit to the repo
         GITHUB_TOKEN: ${{ secrets.SECRET_FOR_COMMITING }} # Leave this line unchanged
+        SOURCE_TAG: ${{ steps.set_tag.outputs.SOURCE_TAG }}
 
     - name: Login to the docker hub containers registry
       uses: azure/docker-login@v1
@@ -98,4 +103,6 @@ jobs:
       run: docker images && docker push pryvio/open-pryv.io:latest
 
     - name: Upload image with version tag to docker hub
-      run: docker tag pryvio/open-pryv.io:latest pryvio/open-pryv.io:${{ env.RELEASE_VERSION }} && docker images && docker push pryvio/open-pryv.io:${{ env.RELEASE_VERSION }}
+      run: docker tag pryvio/open-pryv.io:latest pryvio/open-pryv.io:$SOURCE_TAG && docker images && docker push pryvio/open-pryv.io:$SOURCE_TAG
+      env:
+          SOURCE_TAG: ${{ steps.set_tag.outputs.SOURCE_TAG }}
