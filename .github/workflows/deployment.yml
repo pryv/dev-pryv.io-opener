@@ -4,6 +4,8 @@ on:
   push:
     tags:
       - '*'
+    branches:
+      - master
 
 jobs:
   build:
@@ -45,7 +47,16 @@ jobs:
       run: yarn install
       
     - name: yarn build and prepend licenses
-      run: cd licenser && yarn install && cd .. && yarn build
+      run: cd licenser |
+           yarn install |
+           cd .. |
+           yarn build |
+           cd dest |
+           yarn install |
+           yarn upgrade |
+           cd service-mail |
+           yarn install |
+           yarn upgrade
 
     - name: Run tests on build
       run: echo 'I pretend that I run the tests'
