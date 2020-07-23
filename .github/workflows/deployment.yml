@@ -6,7 +6,6 @@ on:
       - '*'
     branches:
       - master
-      - fix/gh-pages-merge
 
 jobs:
   build:
@@ -49,69 +48,69 @@ jobs:
     - name: yarn install
       run: |
         yarn setup
-#        yarn install
-#
-#    - name: yarn build and prepend licenses
-#      run: |
-#        cd licenser
-#        yarn install
-#        cd ..
-#        yarn build
-#
-#    - name: Run tests on build
-#      run: echo 'I pretend that I run the tests'
-#
-#    - name: Download public_html assets and rec.la certificates
-#      run: cd dest; bash ./scripts/download-recla-certificates.sh; bash ./scripts/setup-assets.bash; bash ./scripts/setup-app-web-auth3.bash;
-#
-#    - name: Create docker tarball without ssl
-#      run: cd dest/docker; bash build-tarball.sh
-#
-#    - name: Check the prepared commit to Open Pryv
-#      run: cd dest && yarn remove test-helpers pre-commit && git status && git diff && echo '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
-#
-#    - name: Commit and push to open Pryv and release docker tarball
-#      uses: EndBug/add-and-commit@v4
-#      with:
-#        # The name of the user that will be displayed as the author of the commit
-#        # Default: author of the commit that triggered the run
-#        author_name: Pryvio
-#        # The email of the user that will be displayed as the author of the commit
-#        # Default: author of the commit that triggered the run
-#        author_email: ilia@pryv.com
-#        # The local path to the directory where your repository is located. You should use actions/checkout first to set it up
-#        # Default: '.'
-#        cwd: './dest'
-#        # Whether to use the --force option on `git add`, in order to bypass eventual gitignores
-#        # Default: false
-#        force: false
-#        # The message for the commit
-#        # Default: 'Commit from GitHub Actions'
-#        message: '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
-#        # Name of the branch to use, if different from the one that triggered the workflow
-#        # Default: the branch that triggered the workflow (from GITHUB_REF)
-#        ref: 'master'
-#      env:
-#        # This is necessary in order to push a commit to the repo
-#        GITHUB_TOKEN: ${{ secrets.SECRET_FOR_COMMITING }} # Leave this line unchanged
-#
-#    - name: Login to the docker hub containers registry
-#      uses: azure/docker-login@v1
-#      with:
-#        login-server: ${{ secrets.REGISTRY_PRYV_SERVER_DOCKERHUB }}
-#        username: ${{ secrets.REGISTRY_PRYV_USERNAME_DOCKERHUB }}
-#        password: ${{ secrets.REGISTRY_PRYV_PASSWORD_DOCKERHUB }}
-#
-#    - name: Build core image
-#      run: cd dest && TAG=latest docker-compose -f docker/local/docker-compose.no-ssl-build.yml build open-pryv.io
-#
-#    - name: Upload new image to docker hub
-#      run: docker images && docker push pryvio/open-pryv.io:latest
-#
-#    - name: Upload image with version tag to docker hub
-#      run: docker tag pryvio/open-pryv.io:latest pryvio/open-pryv.io:$SOURCE_TAG && docker images && docker push pryvio/open-pryv.io:$SOURCE_TAG
-#      env:
-#          SOURCE_TAG: ${{ steps.set_tag.outputs.SOURCE_TAG }}
+        yarn install
+
+    - name: yarn build and prepend licenses
+      run: |
+        cd licenser
+        yarn install
+        cd ..
+        yarn build
+
+    - name: Run tests on build
+      run: echo 'I pretend that I run the tests'
+
+    - name: Download public_html assets and rec.la certificates
+      run: cd dest; bash ./scripts/download-recla-certificates.sh; bash ./scripts/setup-assets.bash; bash ./scripts/setup-app-web-auth3.bash;
+
+    - name: Create docker tarball without ssl
+      run: cd dest/docker; bash build-tarball.sh
+
+    - name: Check the prepared commit to Open Pryv
+      run: cd dest && yarn remove test-helpers pre-commit && git status && git diff && echo '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
+
+    - name: Commit and push to open Pryv and release docker tarball
+      uses: EndBug/add-and-commit@v4
+      with:
+        # The name of the user that will be displayed as the author of the commit
+        # Default: author of the commit that triggered the run
+        author_name: Pryvio
+        # The email of the user that will be displayed as the author of the commit
+        # Default: author of the commit that triggered the run
+        author_email: ilia@pryv.com
+        # The local path to the directory where your repository is located. You should use actions/checkout first to set it up
+        # Default: '.'
+        cwd: './dest'
+        # Whether to use the --force option on `git add`, in order to bypass eventual gitignores
+        # Default: false
+        force: false
+        # The message for the commit
+        # Default: 'Commit from GitHub Actions'
+        message: '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
+        # Name of the branch to use, if different from the one that triggered the workflow
+        # Default: the branch that triggered the workflow (from GITHUB_REF)
+        ref: 'master'
+      env:
+        # This is necessary in order to push a commit to the repo
+        GITHUB_TOKEN: ${{ secrets.SECRET_FOR_COMMITING }} # Leave this line unchanged
+
+    - name: Login to the docker hub containers registry
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY_PRYV_SERVER_DOCKERHUB }}
+        username: ${{ secrets.REGISTRY_PRYV_USERNAME_DOCKERHUB }}
+        password: ${{ secrets.REGISTRY_PRYV_PASSWORD_DOCKERHUB }}
+
+    - name: Build core image
+      run: cd dest && TAG=latest docker-compose -f docker/local/docker-compose.no-ssl-build.yml build open-pryv.io
+
+    - name: Upload new image to docker hub
+      run: docker images && docker push pryvio/open-pryv.io:latest
+
+    - name: Upload image with version tag to docker hub
+      run: docker tag pryvio/open-pryv.io:latest pryvio/open-pryv.io:$SOURCE_TAG && docker images && docker push pryvio/open-pryv.io:$SOURCE_TAG
+      env:
+          SOURCE_TAG: ${{ steps.set_tag.outputs.SOURCE_TAG }}
 
     - name: Merge master to gh-pages branch
       run: |
@@ -124,28 +123,3 @@ jobs:
         git status
         git diff
         git push
-
-#    - name: Push on gh-pages also
-#      uses: EndBug/add-and-commit@v4
-#      with:
-#        # The name of the user that will be displayed as the author of the commit
-#        # Default: author of the commit that triggered the run
-#        author_name: Pryvio
-#        # The email of the user that will be displayed as the author of the commit
-#        # Default: author of the commit that triggered the run
-#        author_email: ilia@pryv.com
-#        # The local path to the directory where your repository is located. You should use actions/checkout first to set it up
-#        # Default: '.'
-#        cwd: './dest'
-#        # Whether to use the --force option on `git add`, in order to bypass eventual gitignores
-#        # Default: false
-#        force: false
-#        # The message for the commit
-#        # Default: 'Commit from GitHub Actions'
-#        message: '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
-#        # Name of the branch to use, if different from the one that triggered the workflow
-#        # Default: the branch that triggered the workflow (from GITHUB_REF)
-#        ref: 'gh-pages'
-#      env:
-#        # This is necessary in order to push a commit to the repo
-#        GITHUB_TOKEN: ${{ secrets.SECRET_FOR_COMMITING }} # Leave this line unchanged
