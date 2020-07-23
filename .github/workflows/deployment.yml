@@ -45,10 +45,16 @@ jobs:
         path: dest
 
     - name: yarn install
-      run: yarn install
-      
+      run: |
+        yarn setup
+        yarn install
+
     - name: yarn build and prepend licenses
-      run: cd licenser && yarn install && cd .. && yarn build
+      run: |
+        cd licenser
+        yarn install
+        cd ..
+        yarn build
 
     - name: Run tests on build
       run: echo 'I pretend that I run the tests'
