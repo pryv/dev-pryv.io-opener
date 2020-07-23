@@ -44,13 +44,16 @@ jobs:
         path: dest
 
     - name: yarn install
-      run: yarn install
-      
+      run: |
+        yarn setup
+        yarn install
+
     - name: yarn build and prepend licenses
-      run: cd licenser |
-           yarn install |
-           cd .. |
-           yarn build
+      run: |
+        cd licenser
+        yarn install
+        cd ..
+        yarn build
 
     - name: Run tests on build
       run: echo 'I pretend that I run the tests'
@@ -62,7 +65,7 @@ jobs:
       run: cd dest/docker; bash build-tarball.sh
 
     - name: Check the prepared commit to Open Pryv
-      run: cd dest && yarn remove test-helpers && git status && git diff && echo '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
+      run: cd dest && yarn remove test-helpers pre-commit && git status && git diff && echo '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
 
     - name: Commit and push to open Pryv and release docker tarball
       uses: EndBug/add-and-commit@v4

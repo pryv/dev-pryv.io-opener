@@ -67,7 +67,8 @@ function loadTasks() {
         "dependencies": {
           "pryv": "^2.0.2",
           "rec-la": "^0.1.13"
-        }
+        },
+        "pre-commit": ""
       }
     },
     sed: ['hfs', 'metdata', 'webhooks', 'gnat', 'influx', 'jsdoc', 'test-root', 'cover', 'flow-coverage', 'tag-tests', 'test-results', 'tprpc', 'jaeger', 'pryvuser-cli', 'metadata', 'nats', 'reporting']
