@@ -42,6 +42,8 @@ jobs:
         repository: pryv/open-pryv.io
         token: ${{ secrets.SECRET_FOR_COMMITING }}
         path: dest
+        fetch-depth: 0
+        clean: false
 
     - name: yarn install
       run: |
@@ -92,31 +94,6 @@ jobs:
         # This is necessary in order to push a commit to the repo
         GITHUB_TOKEN: ${{ secrets.SECRET_FOR_COMMITING }} # Leave this line unchanged
 
-    - name: Push on gh-pages also
-      uses: EndBug/add-and-commit@v4
-      with:
-        # The name of the user that will be displayed as the author of the commit
-        # Default: author of the commit that triggered the run
-        author_name: Pryvio
-        # The email of the user that will be displayed as the author of the commit
-        # Default: author of the commit that triggered the run
-        author_email: ilia@pryv.com
-        # The local path to the directory where your repository is located. You should use actions/checkout first to set it up
-        # Default: '.'
-        cwd: './dest'
-        # Whether to use the --force option on `git add`, in order to bypass eventual gitignores
-        # Default: false
-        force: false
-        # The message for the commit
-        # Default: 'Commit from GitHub Actions'
-        message: '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
-        # Name of the branch to use, if different from the one that triggered the workflow
-        # Default: the branch that triggered the workflow (from GITHUB_REF)
-        ref: 'gh-pages'
-      env:
-        # This is necessary in order to push a commit to the repo
-        GITHUB_TOKEN: ${{ secrets.SECRET_FOR_COMMITING }} # Leave this line unchanged
-
     - name: Login to the docker hub containers registry
       uses: azure/docker-login@v1
       with:
@@ -134,3 +111,15 @@ jobs:
       run: docker tag pryvio/open-pryv.io:latest pryvio/open-pryv.io:$SOURCE_TAG && docker images && docker push pryvio/open-pryv.io:$SOURCE_TAG
       env:
           SOURCE_TAG: ${{ steps.set_tag.outputs.SOURCE_TAG }}
+
+    - name: Merge master to gh-pages branch
+      run: |
+        cd dest
+        git fetch
+        git branch
+        git checkout gh-pages
+        git pull origin gh-pages --rebase --allow-unrelated-histories
+        git merge master
+        git status
+        git diff
+        git push
