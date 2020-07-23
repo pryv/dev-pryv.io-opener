@@ -43,10 +43,10 @@ jobs:
         repository: pryv/open-pryv.io
         token: ${{ secrets.SECRET_FOR_COMMITING }}
         path: dest
-#
-#    - name: yarn install
-#      run: |
-#        yarn setup
+
+    - name: yarn install
+      run: |
+        yarn setup
 #        yarn install
 #
 #    - name: yarn build and prepend licenses
@@ -117,6 +117,7 @@ jobs:
         git fetch
         git branch
         git checkout gh-pages
+        git pull origin gh-pages --allow-unrelated-histories
         git merge master
         git diff
 
