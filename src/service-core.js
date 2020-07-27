@@ -66,7 +66,7 @@ function loadTasks() {
         },
         "dependencies": {
           "pryv": "^2.0.2",
-          "rec-la": "^0.1.13"
+          "rec-la": "^0.1.14"
         },
         "pre-commit": ""
       }
