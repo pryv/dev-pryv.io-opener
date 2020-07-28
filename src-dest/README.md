@@ -212,7 +212,7 @@ To use a new build, simply copy the contents of the generated files from `app-we
 
 ### Event types
 
-Open Pryv.io comes with default [Event types](https://github.com/pryv/open-pryv.io/blob/master/components/business/src/types/event-types.default.json).
+Open Pryv.io comes with default [Event types](https://api.pryv.com/event-types/flat.json).
 
 To add new types for your events, you can modify the file `components/business/src/types/event-types.default.json`.
 
