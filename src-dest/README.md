@@ -212,9 +212,10 @@ To use a new build, simply copy the contents of the generated files from `app-we
 
 ### Event types
 
-Open Pryv.io comes with default [Event types](https://api.pryv.com/event-types/flat.json).
+Open Pryv.io comes with default **event types**.
+The default ones are fetched at boot from the URL defined in service:eventTypes in the .json config file, set to https://api.pryv.com/event-types/flat.json.
 
-To add new types for your events, you can modify the file `components/business/src/types/event-types.default.json`.
+To customize your own, clone the [Data Types repository](https://github.com/pryv/data-types) and follow the guide there.
 
 ### MongoDB data folder
 
