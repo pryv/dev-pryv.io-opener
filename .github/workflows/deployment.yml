@@ -29,13 +29,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Set tag
-      id: set_tag
-      run: |
-          SOURCE_TAG=$(git describe --abbrev=0 --tags)
-          echo $SOURCE_TAG
-          echo ::set-output name=SOURCE_TAG::$SOURCE_TAG
-
     - name: Download pryv.io-open-source
       uses: actions/checkout@v2
       with:
@@ -66,6 +59,13 @@ jobs:
     - name: Create docker tarball without ssl
       run: cd dest/docker; bash build-tarball.sh
 
+    - name: Set tag
+      id: set_tag
+      run: |
+          SOURCE_TAG=$(cat dest/.api-version)
+          echo $SOURCE_TAG
+          echo ::set-output name=SOURCE_TAG::$SOURCE_TAG
+          
     - name: Check the prepared commit to Open Pryv
       run: cd dest && yarn remove test-helpers pre-commit && git status && git diff && echo '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
 
