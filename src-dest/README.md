@@ -225,7 +225,6 @@ To customize your own, clone the [Data Types repository](https://github.com/pryv
 
 By default the MongoDB data are stored in `var-pryv/mongodb-data`. If you want to modify the folder where the MongoDB data files are stored, you can modify in `scripts/setup-mongodb.bash` the variable `MONGO_DATA_FOLDER`.
 
-
 ### Visual assets and icons
 
 Your platforms visuals can be customized in `public_html/assets/`, please refer to the README inside. These assets are a clone of the [assets-open-pryv.io](https://github.com/pryv/assets-open-pryv.io).
@@ -237,6 +236,10 @@ Pryv.io can send e-mails at registration and password reset request.
 The emails can be sent either by local sendmail (default) or SMTP. 
 
 This service, its documentation and mail templates can be found in [`service-mail/`](service-mail/).
+
+## Backup your platform
+
+You can perform a backup of your Open Pryv.io platform and restore it in case of any data loss as explained in the dedicated guide ["Pryv.io backup"](https://api.pryv.com/guides/backup-platform/).
 
 ## Contributing
 
