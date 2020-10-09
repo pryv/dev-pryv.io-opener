@@ -20,6 +20,8 @@ tar czfv dockerized-open-pryv.io.tgz \
   ./README.md \
   ./rec.la-certificates \
   ./public_html \
+  ./scripts/backup-database-docker.sh \
+  ./scripts/restore-database-docker.sh \
   
 rm -r ./rec.la-certificates
 rm -r ./public_html

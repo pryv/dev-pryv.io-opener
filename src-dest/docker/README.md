@@ -49,3 +49,9 @@ docker-compose -f production-no-ssl/docker-compose.yml up
 ```
 
 It will run Open Pryv.io on http://0.0.0.0:3000. However, all [service information](https://api.pryv.com/reference/#service-info) resources will be advertised on https://${HOSTNAME}.
+
+## Backup
+
+Run `./scripts/backup-database-docker.sh` to generate a dump of the current database contents in `var-pryv/backup/`.
+
+Run `./scripts/restore-database-docker.sh` to restore data from `var-pryv/backup/`.

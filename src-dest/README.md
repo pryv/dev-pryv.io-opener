@@ -57,7 +57,7 @@ Choose your Set-up
 
 ### Docker
 
-The dockerized versions are available at this link: [Download link](https://api.pryv.com/open-pryv.io/docker/dockerized-open-pryv.io.tgz).
+The dockerized versions and their instructions are available at this link: [Download link](https://api.pryv.com/open-pryv.io/docker/dockerized-open-pryv.io.tgz).
 
 If you wish to build the images yourself, refer to the following README: [docker/README-build.md](docker/README-build.md).
 
@@ -228,6 +228,20 @@ Pryv.io can send e-mails at registration and password reset request.
 The emails can be sent either by local sendmail (default) or SMTP. 
 
 This service, its documentation and mail templates can be found in [`service-mail/`](service-mail/).
+
+## Backup
+
+To make a backup of your data
+
+### Backup: native
+
+Run `./scripts/backup-database-native.sh ${BACKUP_FOLDER}` to generate a dump of the current database contents
+
+To restore it, run `./scripts/restore-database-native.sh ${BACKUP_FOLDER}` to restore data from the provided backup folder.
+
+### Backup: dockerized
+
+Follow the guide in the [docker](#docker) package.
 
 ## Contributing
 
