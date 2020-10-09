@@ -225,7 +225,7 @@ Your platforms visuals can be customized in `public_html/assets/`, please refer 
 
 Pryv.io can send e-mails at registration and password reset request.
 
-The emails can be sent either by local sendmail (default) or SMTP. 
+The emails can be sent either by local sendmail (default) or SMTP.  
 
 This service, its documentation and mail templates can be found in [`service-mail/`](service-mail/).
 
@@ -236,8 +236,10 @@ To make a backup of your data
 ### Backup: native
 
 Run `./scripts/backup-database-native.sh ${BACKUP_FOLDER}` to generate a dump of the current database contents
+Run `./scripts/backup-attachments-native.sh ${BACKUP_FOLDER}` to copy the current attachment files.
 
-To restore it, run `./scripts/restore-database-native.sh ${BACKUP_FOLDER}` to restore data from the provided backup folder.
+To restore the database, run `./scripts/restore-database-native.sh ${BACKUP_FOLDER}` to restore data from the provided backup folder.
+To restore attachments, run `./scripts/restore-attachments-native.sh ${BACKUP_FOLDER}` to restore data from the provided backup folder.
 
 ### Backup: dockerized
 

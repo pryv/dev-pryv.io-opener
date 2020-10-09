@@ -5,4 +5,5 @@ SCRIPT_FOLDER=$(cd $(dirname "$0"); pwd)
 cd $SCRIPT_FOLDER/..
 
 export VAR_PRYV_FOLDER=$SCRIPT_FOLDER/../var-pryv
-${VAR_PRYV_FOLDER}/mongodb-bin/bin/mongorestore $1
+rsync --recursive --times --human-readable --verbose --perms $1 ${VAR_PRYV_FOLDER}/core/
+
