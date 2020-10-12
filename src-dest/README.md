@@ -231,7 +231,11 @@ This service, its documentation and mail templates can be found in [`service-mai
 
 ## Backup
 
-To make a backup of your data
+*Prerequisites*:
+
+- rsync
+
+To make a backup of your data:
 
 ### Backup: native
 
