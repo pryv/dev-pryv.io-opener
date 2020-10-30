@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@v2
       with:
         submodules: true
-        token: ${{ secrets.SECRET_FOR_READING_SUBMODULES }}
+        token: ${{ secrets.SECRET_FOR_COMMITING }}
         fetch-depth: 0
         clean: false
 
