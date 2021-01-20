@@ -1,4 +1,4 @@
-
+require('components/test-helpers/src/boiler-init');
 const { databaseFixture } = require('components/test-helpers');
 const { produceMongoConnection, context } = require('components/api-server/test/test-helpers');
 const regPath = require('components/api-server/src/routes/Paths').Register;

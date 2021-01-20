@@ -1,4 +1,5 @@
 
+require('components/test-helpers/src/boiler-init');
 const { context } = require('components/api-server/test/test-helpers');
 const wwwPath = require('components/api-server/src/routes/Paths').WWW;
 
@@ -20,6 +21,6 @@ describe('www', function () {
       .get(wwwPath + '/');
     assert.equal(res.status, 200);
     const firstLine = res.text.split('\n')[0];
-    assert.equal(firstLine, '<HTML>'); // todo
+    assert(firstLine.startsWith('<!DOCTYPE html>'), 'Should start with <!DOCTYPE html>'); 
   });
 });

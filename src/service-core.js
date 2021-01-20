@@ -43,6 +43,10 @@ function loadTasks() {
     patterns: ['-test*']
   },
   {
+    target: './test',
+    excludes: ['acceptance/high-frequency.test.js']
+  },
+  {
     target: './babel.config.json'
   },
   {

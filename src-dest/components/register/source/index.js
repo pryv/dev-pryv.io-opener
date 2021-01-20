@@ -31,7 +31,7 @@ class mockExpress {
 }
 
 module.exports = async (expressApp, application) => {
-  config.loadSettings(application.settings);
+  config.loadSettings(application.config);
   database.setReference('storage', application.storageLayer);
   database.setReference('systemAPI', application.systemAPI);
   

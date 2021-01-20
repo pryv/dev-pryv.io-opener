@@ -1,4 +1,4 @@
-
+require('components/test-helpers/src/boiler-init');
 const { context } = require('components/api-server/test/test-helpers');
 const regPath = require('components/api-server/src/routes/Paths').Register;
 

@@ -13,15 +13,15 @@ module.exports = {
     return config[key];
   },
   loadSettings: function(settings) {
-    config.service = settings.get('service').obj();
-    let publicUrl = settings.get('dnsLess.publicUrl').str();
+    config.service = settings.get('service');
+    let publicUrl = settings.get('dnsLess:publicUrl');
     if (publicUrl.slice(-1) === '/') publicUrl = publicUrl.slice(0, -1);
     config.publicUrl = publicUrl;
     config['access:trustedAuthUrls'] = [publicUrl];
     config['access:defaultAuthUrl'] = [publicUrl + wwwPath +'/access/access.html'];
 
     // load admin keys
-    config.adminKey = settings.get('auth.adminAccessKey').str();
+    config.adminKey = settings.get('auth:adminAccessKey');
     if (config.adminKey) {
       config['auth:authorizedKeys'][config.adminKey] = { roles: ['admin'] }
     }
