@@ -2,9 +2,11 @@ var logger = require('winston');
 var database = require('./storage/database');
 var config = require('./config');
 var messages = require('./utils/messages');
+
+
 logger['default'].transports.console.level = 'info';
 
-const headPath = require('components/api-server/src/routes/Paths').Register;
+const headPath = require('api-server/src/routes/Paths').Register;
 
 class mockExpress {
   constructor(expressApp) {
@@ -41,7 +43,6 @@ module.exports = async (expressApp, application) => {
   require('./routes/service')(app);
   require('./routes/access')(app);
   require('./routes/admin')(app);
-  require('./routes/server')(app); // only used for backwards compatiblity with DNS set-up
   require('./middleware/app-errors')(app);
 
   // register all reg routes

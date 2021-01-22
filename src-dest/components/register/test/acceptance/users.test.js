@@ -1,7 +1,7 @@
-require('components/test-helpers/src/boiler-init');
-const { databaseFixture } = require('components/test-helpers');
-const { produceMongoConnection, context } = require('components/api-server/test/test-helpers');
-const regPath = require('components/api-server/src/routes/Paths').Register;
+require('test-helpers/src/boiler-init');
+const { databaseFixture } = require('test-helpers');
+const { produceMongoConnection, context } = require('api-server/test/test-helpers');
+const regPath = require('api-server/src/routes/Paths').Register;
 
 const cuid = require('cuid');
 

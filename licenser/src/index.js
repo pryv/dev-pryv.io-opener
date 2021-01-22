@@ -29,7 +29,7 @@ const fileSpecs = {
       force: {
         author: "Pryv S.A. <support@pryv.com> (http://pryv.com)",
         license: "BSD-3-Clause",
-        private: false,
+        private: true,
       },
       defaults: {
         homepage: "http://pryv.com",

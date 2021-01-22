@@ -1,3 +1,6 @@
-module.exports = {
-  InfluxConnection: null
+
+
+class InfluxConnection {
 }
+
+module.exports = InfluxConnection;

@@ -1,7 +1,7 @@
 
-require('components/test-helpers/src/boiler-init');
-const { context } = require('components/api-server/test/test-helpers');
-const wwwPath = require('components/api-server/src/routes/Paths').WWW;
+require('test-helpers/src/boiler-init');
+const { context } = require('api-server/test/test-helpers');
+const wwwPath = require('api-server/src/routes/Paths').WWW;
 
 const chai = require('chai');
 const assert = chai.assert;

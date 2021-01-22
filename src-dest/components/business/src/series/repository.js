@@ -1,3 +1,4 @@
-module.exports = {
-  Repository: null
-}
+class InfluxRepository { }
+
+
+module.exports = InfluxRepository;

@@ -5,7 +5,8 @@ const wwwPath = require('../../api-server/src/routes/Paths').WWW;
 const config = {
   'auth:authorizedKeys': {},
   'dns:domain': 'open-pryv.io',
-  'appList': []
+  'appList': [],
+  'dnsLess:isActive': true
 }
 
 module.exports = {

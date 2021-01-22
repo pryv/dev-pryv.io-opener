@@ -10,6 +10,7 @@
    "_test": "NODE_ENV=test PRYV_CONFIG=../api-server/config/test.json  ../../node_modules/.bin/mocha --reporter=dot 'test/**/*.test.js' --exit"
   },
   "dependencies": {
+    "winston": "^2.3.0"
   },
   "devDependencies": {
   }
