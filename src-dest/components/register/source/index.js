@@ -14,7 +14,7 @@ class mockExpress {
   }
 
   use(fn) {
-    this.app.use(fn);
+    this.app.use(headPath, fn);
   }
 
   get(path, cb1, cb2) {
