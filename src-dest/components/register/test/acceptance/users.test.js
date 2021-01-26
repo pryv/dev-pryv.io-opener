@@ -70,24 +70,18 @@ describe('register /users', function () {
         .post(regPath + '/username/check')
         .send({ username: username })
         .set('Accept', 'application/json');;
-      assert.equal(res.status, 200);
+      assert.equal(res.status, 410);
     });
-
-    it('[REU8] POST /username/check', async function () {
-      const res = await server.request()
-        .post(regPath + '/username/check')
-        .send({ username: cuid().substr(5) });
-      assert.equal(res.status, 200);
-      assert.equal(res.text, 'true');
-    });
-
 
     it('[REU9] GET/:username/check_username ', async function () {
       const res = await server.request()
         .get(regPath + '/' + username + '/check_username')
         .set('Accept', 'application/json');
-      assert.equal(res.status, 200);
-      expect(res.body).to.eql({ reserved: true });
+      assert.equal(res.status, 409);
+      const body = res.body;
+      assert.exists(body.error);
+      assert.equal(body.error.id, 'item-already-exists');
+      assert.isTrue(body.error.message.includes(username));
     });
 
     it('[REU6] GET/:username/check_username', async function () {
@@ -95,7 +89,9 @@ describe('register /users', function () {
         .get(regPath + '/' + cuid().substr(5) + '/check_username')
         .set('Accept', 'application/json');
       assert.equal(res.status, 200);
-      expect(res.body).to.eql({ reserved: null });
+      const body = res.body;
+      assert.exists(body);
+      assert.isFalse(body.reserved);
     });
   });
 
