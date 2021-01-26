@@ -47,7 +47,27 @@ describe('service', function () {
       .get(regPath + '/hostings')
       .set('Accept', 'application/json');
     assert.equal(res.status, 200);
-    expect(res.body).to.eql({ "regions": { "region1": { "name": "region1", "zones": { "zone1": { "name": "zone1", "hostings": { "hosting1": { "url": "https://pryv.com/openpryv/unconfigured.html", "name": "Pryv.io", "description": "Self hosted", "available": true } } } } } } }); 
+    expect(res.body).to.eql({ 
+      "regions": { 
+        "region1": { 
+          "name": "region1",
+          "zones": {
+            "zone1": { 
+              "name": "zone1",
+              "hostings": {
+                "hosting1": {
+                  "url": "https://sw.pryv.me",
+                  "name": "Pryv.io",
+                  "description": "Self hosted",
+                  "available": true,
+                  "availableCore": "http://localhost:3000" 
+                } 
+              } 
+            } 
+          } 
+        } 
+      } 
+    }); 
   });
 
 });
