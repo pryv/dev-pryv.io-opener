@@ -40,12 +40,15 @@ describe('register /email', function () {
   });
 
   describe('GET /:email/check_email', function () {
-    it('[RET1] should return true if email exists ', async function () {
+    it('[RET1] should return item-already-exists if email exists ', async function () {
       const res = await server.request()
         .get(regPath + '/' + email + '/check_email')
         .set('Accept', 'application/json');
-      assert.equal(res.status, 200);
-      assert.equal(res.body.exists, true);
+      assert.equal(res.status, 409);
+      const body = res.body;
+      assert.exists(body.error);
+      assert.equal(body.error.id, 'item-already-exists');
+      assert.isTrue(body.error.message.includes(username));
     });
 
     it('[RER1] should return false if email does not exists ', async function () {
@@ -54,27 +57,17 @@ describe('register /email', function () {
         .get(regPath + '/' + wrongEmail + '/check_email')
         .set('Accept', 'application/json');
       assert.equal(res.status, 200);
-      assert.equal(res.body.exists, false);
+      assert.equal(res.body.reserved, false);
     });
   });
 
   describe('POST /email/check', function () {
     const callPath = regPath + '/email/check'
-    it('[REZ7] should return false in txt if email exists ', async function () {
+    it('[REZ7] should return 410 gone resource', async function () {
       const res = await server.request()
         .post(callPath)
         .send({ email: email });
-      assert.equal(res.status, 200);
-      assert.equal(res.text, 'false');
-    });
-
-    it('[REZ8] should return true in txt  if email exists ', async function () {
-      const wrongEmail = cuid() + '@toto.com';
-      const res = await server.request()
-        .post(callPath)
-        .send({ email: wrongEmail });
-      assert.equal(res.status, 200);
-      assert.equal(res.text, 'true');
+      assert.equal(res.status, 410);
     });
   });
 
