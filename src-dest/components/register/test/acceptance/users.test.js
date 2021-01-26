@@ -49,15 +49,18 @@ describe('register /users', function () {
         password: cuid(),
         email: cuid().substr(5) + '@pryv.io',
         referer: 'tests',
-        language: 'fr'
+        language: 'fr',
+        insurancenumber: '198263986123',
       }
       const res = await server.request()
         .post(regPath + '/user')
         .send(userData);
-      assert.equal(res.status, 200);
+      assert.equal(res.status, 201);
       assert.equal(res.body.username, userData.username);
-      assert.equal(res.body.server, res.body.username + '.open-pryv.io');
-      assert.equal(res.body.apiEndpoint, 'http://localhost:3000/' + res.body.username + '/');
+      const apiEndpoint = res.body.apiEndpoint
+      const url = new URL(apiEndpoint);
+      let apiEndpointNoToken = apiEndpoint.replace(url.username, '').replace('@','');
+      assert.equal(apiEndpointNoToken, 'http://localhost:3000/' + res.body.username + '/');
     });
   });
 
