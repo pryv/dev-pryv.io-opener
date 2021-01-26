@@ -22,7 +22,7 @@ describe('service', function () {
       .get(regPath + '/service/info')
       .set('Accept', 'application/json');
     assert.equal(res.status, 200);
-    assert.equal(res.body.name, 'Test'); // todo
+    assert.equal(res.body.name, 'Pryv Lab');
     assert.equal(res.body.api, 'http://localhost:3000/{username}/');
   });
 
