@@ -14,6 +14,7 @@ const assert = chai.assert;
 
 describe('register /admin', function () {
   let user;
+  this.timeout(10000);
 
   let mongoFixtures;
   before(async function () {
@@ -44,7 +45,7 @@ describe('register /admin', function () {
     });
   });
 
-  it('/admin/users ', async function () {
+  it('[6TZE] /admin/users ', async function () {
     const res = await server.request()
       .get(regPath + '/admin/users')
       .set('Authorization', adminKey)
