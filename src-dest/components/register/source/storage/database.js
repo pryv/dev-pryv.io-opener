@@ -47,9 +47,6 @@ function getRawEventCollection(callback) {
   function sucessCallback(col) { callback(null, col); })
 }
 
-function users() {
-  return references.storage.users;
-}
 function systemCall(...args) {
   return references.systemAPI.call(...args);
 }
@@ -80,10 +77,25 @@ exports.emailExists = emailExists;
  */
 exports.uidExists = function (uid: string, callback: Callback) {
   uid = uid.toLowerCase();
-  users().findOne({ username: uid }, null, function (error, res) {
-    if (!res) { return callback(null, null); }
-    return callback(error, res !== null);
-  });
+  const context = {};
+  async.series([
+    function (done) { 
+      getRawEventCollection(function(err, eventCollection) {  
+        context.eventCollection = eventCollection;
+        done(err);
+      });
+    },
+    function (done) { 
+      if (! context.userId) return done();
+      context.eventCollection.findOne({content: uid, streamIds: {$in : ['.username']}, type: 'identifier/string'}, function(err, res) {
+        context.username = res?.content;
+        done(err);
+      }); 
+    }
+  ], function(err) { 
+    callback(err, context.username !== null);
+  })
+ 
 };
 
 /**
@@ -118,7 +130,7 @@ function getUIDFromMail(mail: string, callback: GenericCallback<string>) {
     },
     function (done) { 
       if (! context.userId) return done();
-      context.eventCollection.findOne({streamIds: {$in : ['.username']}, type: 'identifier/string'}, function(err, res) {
+      context.eventCollection.findOne({userId: context.userId, streamIds: {$in : ['.username']}, type: 'identifier/string'}, function(err, res) {
         context.username = res?.content;
         done(err);
       }); 
@@ -134,8 +146,47 @@ exports.getUIDFromMail = getUIDFromMail;
  * Get all users
  */
 function getAllUsers(callback: GenericCallback<string>) {
-  const options = { projection: { 'id': 0, 'registeredTimestamp': '$created', 'username': 1, 'language': 1, 'email': 1, 'storageUsed': 1 } };
-  users().findAll(options, callback);
+  const context = {};
+  async.series([
+    function (done) { 
+      getRawEventCollection(function(err, eventCollection) {  
+        context.eventCollection = eventCollection;
+        done(err);
+      });
+    },
+    function (done) { 
+      const cursor = context.eventCollection.aggregate(QUERY_GET_ALL, { cursor: { batchSize: 1 }}); 
+  
+      context.users = [];
+      cursor.each(function(err, item) {
+        if (err) return done(err);
+        if (item === null) return done();
+        const user = {
+          id: item._id?.userId,
+          registeredTimestamp: item.smallestCreatedAt * 1000
+        }
+        if (item.events) {
+          for (let event of item.events) {
+            if (event.type === 'email/string' && event.streamIds.includes('.email')) {
+              user.email = event.content;
+            } else if (event.type === 'language/iso-639-1' && event.streamIds.includes('.language')) {
+              user.language = event.content;
+            } else if (event.type === 'identifier/string' && event.streamIds.includes('.username')) {
+              user.username = event.content;
+            } else if (event.type === 'identifier/string' && event.streamIds.includes('.referer')) {
+              user.referer = event.content;
+            } else {
+              console.log('Unkown field... ', event);
+            }
+          }
+        }
+        context.users.push(user);
+      });
+    }
+  ], function(err) { 
+    callback(err, context.users);
+  });
+
 };
 exports.getAllUsers = getAllUsers;
 
@@ -181,3 +232,22 @@ function cleanAccessState() {
 }
 
 cleanAccessState(); // launch cleaner
+
+
+const QUERY_GET_ALL = [
+  {
+    '$match': {
+      streamIds: { '$in': [ '.email', '.username', '.language', '.referer' ] }
+    }
+  },
+  {
+    '$group': {
+      _id: { userId: '$userId' },
+      smallestCreatedAt: { '$min': '$created' },
+      events: {
+        '$push': { content: '$content', streamIds: '$streamIds', type: '$type' }
+      }
+    }
+  },
+  {'$sort': { smallestCreatedAt: 1 }}
+];
