@@ -41,6 +41,12 @@ function setReference(key, value) {
 }
 exports.setReference = setReference;
 
+function getRawEventCollection(callback) {
+  references.storage.connection.getCollectionSafe({name: 'events'}, 
+  function errorCallback(err) { callback(err, null); },
+  function sucessCallback(col) { callback(null, col); })
+}
+
 function users() {
   return references.storage.users;
 }
@@ -89,7 +95,6 @@ exports.getServer = function (uid: string, callback: GenericCallback<string>) {
   return callback(null, 'SERVER_NAME');
 };
 
-
 /**
  * Get user id linked with provided email address
  * @param mail: the email address
@@ -97,10 +102,31 @@ exports.getServer = function (uid: string, callback: GenericCallback<string>) {
  */
 function getUIDFromMail(mail: string, callback: GenericCallback<string>) {
   mail = mail.toLowerCase();
-  users().findOne({ email: mail }, null, function (error, res) {
-    if (!res) { return callback(null, null); }
-    return callback(null, res.username);
-  });
+  const context = {};
+  async.series([
+    function (done) { 
+      getRawEventCollection(function(err, eventCollection) {  
+        context.eventCollection = eventCollection;
+        done(err);
+      });
+    },
+    function (done) { 
+      context.eventCollection.findOne({content: mail, streamIds: {$in : ['.email']}, type: 'email/string'}, function(err, res) {
+        context.userId = res?.userId;
+        done(err);
+      }); 
+    },
+    function (done) { 
+      if (! context.userId) return done();
+      context.eventCollection.findOne({streamIds: {$in : ['.username']}, type: 'identifier/string'}, function(err, res) {
+        context.username = res?.content;
+        done(err);
+      }); 
+    }
+  ], function(err) { 
+    callback(err, context.username);
+  })
+ 
 };
 exports.getUIDFromMail = getUIDFromMail;
 
