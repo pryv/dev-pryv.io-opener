@@ -67,7 +67,7 @@ jobs:
           echo ::set-output name=SOURCE_TAG::$SOURCE_TAG
           
     - name: Check the prepared commit to Open Pryv
-      run: cd dest && yarn remove test-helpers pre-commit && git status && git diff && echo '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
+      run: cd dest && yarn remove pre-commit && git status && git diff && echo '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
 
     - name: Commit and push to open Pryv and release docker tarball
       uses: EndBug/add-and-commit@v4
