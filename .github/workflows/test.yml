@@ -1,4 +1,4 @@
-name: App-node-opener deployment
+name: Open Pryv.io tests
 
 on: 
   pull_request:
@@ -48,4 +48,3 @@ jobs:
         yarn setup
         yarn release
         yarn test
-        
