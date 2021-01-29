@@ -55,6 +55,10 @@ jobs:
         yarn setup
         yarn release
 
+    - name: start MongoDB
+      working-directory: dest
+      run: yarn database
+
     - name: Run tests on Open Pryv.io
       working-directory: dest
       run: |
