@@ -22,6 +22,7 @@ jobs:
       with:
         submodules: true
         token: ${{ secrets.SECRET_FOR_COMMITING }}
+        fetch-depth: 0
         clean: false
 
     - name: Install Node.js with version ${{ matrix.node-version }}
