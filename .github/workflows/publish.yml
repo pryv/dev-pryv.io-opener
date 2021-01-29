@@ -39,12 +39,8 @@ jobs:
         yarn setup
         yarn install
 
-    - name: Setup licenser and generate Open Pryv.io
-      working-directory: licenser
-      run: |
-        yarn install
-        cd ..
-        yarn build
+    - name: Generate Open Pryv.io
+      run: yarn build
 
     #- name: Run tests
     #  run: echo 'I pretend that I run the tests'
