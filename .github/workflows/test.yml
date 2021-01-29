@@ -35,7 +35,6 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: pryv/open-pryv.io
-        token: ${{ secrets.SECRET_FOR_COMMITING }}
         path: dest
         fetch-depth: 0
         clean: false
