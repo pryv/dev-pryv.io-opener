@@ -1,11 +1,9 @@
-name: App-node-opener deployment
+name: Publish Open Pryv.io
 
 on: 
   push:
     tags:
       - '*'
-    branches:
-      - master
 
 jobs:
   build:
@@ -29,35 +27,34 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Download pryv.io-open-source
+    - name: Download Open Pryv.io repository in dest/
       uses: actions/checkout@v2
       with:
         repository: pryv/open-pryv.io
-        token: ${{ secrets.SECRET_FOR_COMMITING }}
         path: dest
-        fetch-depth: 0
         clean: false
 
-    - name: yarn install
+    - name: Setup opener
       run: |
         yarn setup
         yarn install
 
-    - name: yarn build and prepend licenses
-      run: |
-        cd licenser
-        yarn install
-        cd ..
-        yarn build
+    - name: Generate Open Pryv.io
+      run: yarn build
 
-    - name: Run tests on build
-      run: echo 'I pretend that I run the tests'
+    #- name: Run tests
+    #  run: echo 'I pretend that I run the tests'
 
     - name: Download public_html assets and rec.la certificates
-      run: cd dest; bash ./scripts/download-recla-certificates.sh; bash ./scripts/setup-assets.bash; bash ./scripts/setup-app-web-auth3.bash;
+      working-directory: dest
+      run: |
+        bash ./scripts/download-recla-certificates.sh
+        bash ./scripts/setup-assets.bash
+        bash ./scripts/setup-app-web-auth3.bash
 
     - name: Create docker tarball without ssl
-      run: cd dest/docker; bash build-tarball.sh
+      working-directory: dest/docker
+      run: bash build-tarball.sh
 
     - name: Set tag
       id: set_tag
@@ -102,7 +99,8 @@ jobs:
         password: ${{ secrets.REGISTRY_PRYV_PASSWORD_DOCKERHUB }}
 
     - name: Build core image
-      run: cd dest && TAG=latest docker-compose -f docker/local/docker-compose.no-ssl-build.yml build open-pryv.io
+      working-directory: dest
+      run: TAG=latest docker-compose -f docker/local/docker-compose.no-ssl-build.yml build open-pryv.io
 
     - name: Upload new image to docker hub
       run: docker images && docker push pryvio/open-pryv.io:latest
@@ -113,8 +111,8 @@ jobs:
           SOURCE_TAG: ${{ steps.set_tag.outputs.SOURCE_TAG }}
 
     - name: Merge master to gh-pages branch
+      working-directory: dest
       run: |
-        cd dest
         git fetch
         git branch
         git checkout gh-pages

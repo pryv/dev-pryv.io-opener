@@ -1,0 +1,68 @@
+name: Open Pryv.io tests
+
+on: 
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.13]
+
+    steps:
+    - name: Checkout repository with submodules
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+        token: ${{ secrets.SECRET_FOR_COMMITING }}
+        fetch-depth: 0
+        clean: false
+
+    - name: Install Node.js with version ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    # mainly used so that next step does not fail on "git clone git@github.com:pryv/open-pryv.io.git dest"
+    - name: Download Open Pryv.io repository in dest/
+      uses: actions/checkout@v2
+      with:
+        repository: pryv/open-pryv.io
+        path: dest
+        clean: false
+
+    - name: Setup opener
+      run: |
+        yarn setup
+        yarn install
+
+    - name: Generate Open Pryv.io
+      run: yarn build
+
+    - name: Setup Open Pryv.io
+      working-directory: dest
+      run: |
+        yarn setup
+        yarn release
+
+    # to remove when we remove components/previews-server
+    - name: Setup package for previews
+      working-directory: dest
+      run: sudo apt-get install graphicsmagick
+
+    - name: start MongoDB
+      working-directory: dest
+      run: yarn database
+
+    - name: Run tests on Open Pryv.io
+      working-directory: dest
+      run: |
+        yarn test
