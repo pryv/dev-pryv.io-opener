@@ -12,7 +12,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         node-version: [12.13]
@@ -52,6 +52,11 @@ jobs:
       run: |
         yarn setup
         yarn release
+
+    # to remove when we remove components/previews-server
+    - name: Setup package for previews
+      working-directory: dest
+      run: sudo apt-get install graphicsmagick
 
     - name: start MongoDB
       working-directory: dest
