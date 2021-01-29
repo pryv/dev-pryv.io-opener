@@ -31,7 +31,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     # mainly used so that next step does not fail on "git clone git@github.com:pryv/open-pryv.io.git dest"
-    - name: Download pryv.io-open-source
+    - name: Download Open Pryv.io repository in dest/
       uses: actions/checkout@v2
       with:
         repository: pryv/open-pryv.io
@@ -40,19 +40,19 @@ jobs:
         fetch-depth: 0
         clean: false
 
-    - name: yarn install
+    - name: Setup opener
       run: |
         yarn setup
         yarn install
 
-    - name: yarn build and prepend licenses
+    - name: Setup licenser and generate Open Pryv.io
       run: |
         cd licenser
         yarn install
         cd ..
         yarn build
 
-    - name: Run tests on build
+    - name: Setup Open Pryv.io
       run: |
         cd dest
         yarn setup
