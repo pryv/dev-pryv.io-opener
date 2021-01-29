@@ -45,15 +45,15 @@ jobs:
         yarn install
 
     - name: Setup licenser and generate Open Pryv.io
+      working-directory: licenser
       run: |
-        cd licenser
         yarn install
         cd ..
         yarn build
 
     - name: Setup Open Pryv.io
+      working-directory: dest
       run: |
-        cd dest
         yarn setup
         yarn release
         yarn test
