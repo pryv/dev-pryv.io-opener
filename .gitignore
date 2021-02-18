@@ -5,6 +5,6 @@ service-core-files
 dest-bkp
 # Netbeans IDE
 nbproject/
-
+*.log
 # Pycharm IDE
 .idea/

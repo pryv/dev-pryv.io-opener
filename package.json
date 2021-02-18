@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node src/index.js && yarn license",
     "setup": "./scripts/setup.sh",
-    "license": "cd licenser ; yarn apply"
+    "license": "node_modules/.bin/source-licenser licensing/config.yml licensing/LICENSE.src ./dest",
+    "licensesrc": "node_modules/.bin/source-licenser licensing/config.yml licensing/LICENSE.src ./src-dest"
   },
   "author": "Pryv S.A.",
   "license": "UNLICENSED",
@@ -14,6 +15,7 @@
     "lodash": "^4.17.15",
     "mkdirp": "^1.0.4",
     "ncp": "^2.0.0",
-    "rsync": "^0.6.1"
+    "rsync": "^0.6.1",
+    "source-licenser": "^1.0.2"
   }
 }
