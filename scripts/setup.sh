@@ -8,13 +8,9 @@ rootFolder=$scriptsFolder/..
 cd $rootFolder
 
 # Fetch git dependencies
- git submodule update --init --recursive && git submodule foreach git pull origin master
+git submodule update --init --recursive && git submodule foreach git pull origin master
 
 # Install node dependencies
-yarn
-
-# Install node dependencies for licenser
-cd $rootFolder/licenser
 yarn
 
 cd $rootFolder
