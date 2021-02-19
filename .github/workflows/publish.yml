@@ -28,7 +28,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     # Needed to push to gh-branch
-    - name: Login to github
+    - name: Sign in with Open Pryv.io Deploy key
       uses: webfactory/ssh-agent@v0.4.1
       with:
         ssh-private-key: ${{ secrets.DEPLOY_KEY_OPEN_PRYV_IO }}
