@@ -27,16 +27,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    # Needed to push to gh-branch
-    - name: Sign in with Open Pryv.io Deploy key
-      uses: webfactory/ssh-agent@v0.4.1
-      with:
-        ssh-private-key: ${{ secrets.DEPLOY_KEY_OPEN_PRYV_IO }}
-
     - name: Download Open Pryv.io repository in dest/
       uses: actions/checkout@v2
       with:
         repository: pryv/open-pryv.io
+        token: ${{ secrets.SECRET_FOR_COMMITING }}
         path: dest
         clean: false
 
