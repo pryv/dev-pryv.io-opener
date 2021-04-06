@@ -117,8 +117,5 @@ jobs:
         git fetch
         git branch
         git checkout gh-pages
-        git pull origin gh-pages --rebase --allow-unrelated-histories
         git merge master
-        git status
-        git diff
         git push
