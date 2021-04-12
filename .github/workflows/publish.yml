@@ -57,6 +57,10 @@ jobs:
       working-directory: dest/docker
       run: bash build-tarball.sh
 
+    - name: Upgrade rec-la
+      working-directory: dest
+      run: yarn upgrade rec-la
+
     - name: Set tag
       id: set_tag
       run: |
