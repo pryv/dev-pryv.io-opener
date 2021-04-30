@@ -46,6 +46,10 @@ jobs:
     #- name: Run tests
     #  run: echo 'I pretend that I run the tests'
 
+    - name: Fetch dependencies
+      working-directory: dest
+      run: yarn install --ignore-optionals
+
     - name: Download public_html assets and rec.la certificates
       working-directory: dest
       run: |
