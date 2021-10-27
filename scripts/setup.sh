@@ -30,6 +30,9 @@ Setting up 'dest' folder for publishing to release repository
   git clone git@github.com:pryv/open-pryv.io.git dest
 fi
 
+echo "Cleaning inside of 'dest' folder, populate it using 'yarn build'"
+rm -rf dest/*
+
 echo "
 Setup is complete, you can proceed with building and publishing.
 "
