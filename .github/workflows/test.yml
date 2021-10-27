@@ -39,6 +39,13 @@ jobs:
         path: dest
         clean: false
 
+    # there is one private package (lib-reporting) used as npm package, so we need 
+    # to authenticate
+    - name: Login to github
+      uses: webfactory/ssh-agent@v0.4.1
+      with:
+        ssh-private-key: ${{ secrets.TECH_PRYV_SSH_KEY }}
+
     - name: Setup opener
       run: |
         yarn setup
