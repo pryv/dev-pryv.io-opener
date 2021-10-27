@@ -72,4 +72,4 @@ jobs:
     - name: Run tests on Open Pryv.io
       working-directory: dest
       run: |
-        yarn test
+        IS_CI=true  yarn test
