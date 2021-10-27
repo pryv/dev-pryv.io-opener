@@ -16,7 +16,7 @@ const tasks = [{
         'app.js', 'config.js', 'dns', '.gitignore', '.npmignore', 'package.json', // root	
         'dataservers.js',  // business	
         'cross-domain.js', // middelware	
-        'server.js', // server
+        'source/server.js', // server
         'public/reserved-words.json', // public	
         'routes/index.js', 'routes/records.js', 'routes/users.js', 'routes/admin.js', // routes (users.js & admin.js will be added after)	
         'database.js', 'storage/invitations.js', 'storage/reserved-userid.js', 'storage/users.js', // storage	
