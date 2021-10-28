@@ -111,7 +111,7 @@ jobs:
         username: ${{ secrets.REGISTRY_PRYV_USERNAME_DOCKERHUB }}
         password: ${{ secrets.REGISTRY_PRYV_PASSWORD_DOCKERHUB }}
 
-    - name: Build core image
+    - name: Build open pryv.io image
       working-directory: dest
       run: TAG=latest docker-compose -f docker/local/docker-compose.no-ssl-build.yml build open-pryv.io
 
