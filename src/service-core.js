@@ -61,12 +61,12 @@ function loadTasks() {
           "url": "git://github.com/pryv/service-open-pryv.git"
         },
         "scripts": {
-          "api": "NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.json",
+          "api": "NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.yml",
           "mail": "yarn --cwd ./service-mail start",
           "setup": "yarn install --ignore-optionals ; bash ./scripts/setup-dev-env.bash",
           "proxy": "./node_modules/rec-la/bin/proxy.js localhost:3000",
           "pryv": "yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn api",
-          "local": "yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn proxy & NODE_ENV=production ./dist/components/api-server/bin/server --config ./configs/rec-la.json",
+          "local": "yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn proxy & NODE_ENV=production ./dist/components/api-server/bin/server --config ./configs/rec-la.yml",
         },
         "dependencies": {
           "pryv": "^2.0.2",
