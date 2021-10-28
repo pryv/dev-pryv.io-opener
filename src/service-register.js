@@ -30,7 +30,11 @@ const tasks = [{
   {	
     target: './source/routes/admin.js',	
     sed: [' START - CLEAN FOR OPENSOURCE/,/ END - CLEAN FOR OPENSOURCE']	
-  },	
+  },
+  {
+    target: './package.json',
+    sed: ['reporting']
+  }
 ];	
 
 

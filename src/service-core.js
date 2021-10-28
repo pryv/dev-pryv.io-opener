@@ -80,7 +80,11 @@ function loadTasks() {
   {
     target: './.flowconfig',
     sed: ['jaeger', 'tprpc', 'metadata', 'hfs-server', 'flow-coverage']
-  }
+  },
+  {
+    target: './components/api-server/package.json',
+    sed: ['reporting']
+  },
   ];
 };
 
