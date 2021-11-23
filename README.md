@@ -29,7 +29,7 @@ License settings and script are located in [`licenser/`](licenser/).
 2. `dest/dist/components/register` or other component you need to test
   - `pushd {your path}/app-node-opener/ ; yarn build ; popd ; ../../node_modules/.bin/mocha  'test/**/*.test.js'`
 3. to start api-server cd to `dest` and use `cd ../ ; yarn build; cd dest; sleep 2 ; yarn api`  
-  or: `cd ../ ; yarn build; cd dest; sleep 2 ; dist/components/api-server/bin/server --config ./config.json`
+  or: `cd ../ ; yarn build; cd dest; sleep 2 ; dist/components/api-server/bin/server --config ./config.yml`
 
 ## Opener
 

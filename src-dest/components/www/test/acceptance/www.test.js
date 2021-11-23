@@ -1,5 +1,5 @@
 
-require('test-helpers/src/boiler-init');
+require('test-helpers/src/api-server-tests-config');
 const { context } = require('api-server/test/test-helpers');
 const wwwPath = require('api-server/src/routes/Paths').WWW;
 

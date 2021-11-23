@@ -30,7 +30,7 @@ function loadTasks() {
   return [{
     target: './components',
     excludes: [
-      'hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks', 'metadata', // components
+      'hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks', 'metadata', 'audit', // components
       'business/src/series', 'business/src/series.js', 'series/repository.test.js', // series
       'api-server/config/test.json', // replaced by src-dest
       'register' // protects components/register from being deleted because we rsync --delete
@@ -61,12 +61,12 @@ function loadTasks() {
           "url": "git://github.com/pryv/service-open-pryv.git"
         },
         "scripts": {
-          "api": "NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.json",
+          "api": "NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.yml",
           "mail": "yarn --cwd ./service-mail start",
           "setup": "yarn install --ignore-optionals ; bash ./scripts/setup-dev-env.bash",
           "proxy": "./node_modules/rec-la/bin/proxy.js localhost:3000",
           "pryv": "yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn api",
-          "local": "yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn proxy & NODE_ENV=production ./dist/components/api-server/bin/server --config ./configs/rec-la.json",
+          "local": "yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn proxy & NODE_ENV=production ./dist/components/api-server/bin/server --config ./configs/rec-la.yml",
         },
         "dependencies": {
           "pryv": "^2.0.2",
@@ -75,12 +75,16 @@ function loadTasks() {
         "pre-commit": ""
       }
     },
-    sed: ['hfs', 'metadata', 'webhooks', 'gnat', 'influx', 'jsdoc', 'test-root', 'cover', 'flow-coverage', 'tag-tests', 'test-results', 'tprpc', 'jaeger', 'pryvuser-cli', 'metadata', 'nats', 'reporting']
+    sed: ['hfs', 'metadata', 'webhooks', 'gnat', 'influx', 'jsdoc', 'test-root', 'cover', 'flow-coverage', 'tag-tests', 'test-results', 'tprpc', 'pryvuser-cli', 'metadata', 'nats', 'reporting']
   },
   {
     target: './.flowconfig',
     sed: ['jaeger', 'tprpc', 'metadata', 'hfs-server', 'flow-coverage']
-  }
+  },
+  {
+    target: './components/api-server/package.json',
+    sed: ['reporting']
+  },
   ];
 };
 

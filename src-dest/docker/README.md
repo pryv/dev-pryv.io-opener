@@ -11,7 +11,7 @@ This archive contains the necessary files to download and run Open Pryv.io.
 
 ## Local dev with SSL
 
-1. Edit the following value in the [Config](https://github.com/pryv/open-pryv.io#config) file `local/dockerized-config.json`:
+1. Edit the following value in the [Config](https://github.com/pryv/open-pryv.io#config) file `local/dockerized-config.yml`:
    - auth:adminAccessKey: secret for admin functions, change it from its default value otherwise Open Pryv.io will crash on boot.
 
 2. Run:
@@ -22,9 +22,11 @@ docker-compose -f local/docker-compose.with-ssl.yml up
 
 It will run Open Pryv.io on https://my-computer.rec.la:4443, using [rec-la](https://github.com/pryv/rec-la).
 
+If the rec-la certificates have expired, you can download valid ones at [www.rec.la](https://www.rec.la/) and place them in `rec.la-certificates/`
+
 ## Server with built-in SSL
 
-1. Edit the following values in the [Config](https://github.com/pryv/open-pryv.io#config) file `production-with-ssl/dockerized-config.json` and docker-compose file: `production-with-ssl/docker-compose.yml`:
+1. Edit the following values in the [Config](https://github.com/pryv/open-pryv.io#config) file `production-with-ssl/dockerized-config.yml` and docker-compose file: `production-with-ssl/docker-compose.yml`:
 
    - ${HOSTNAME}: the hostname part of the public URL
    - auth:adminAccessKey: secret for admin functions, change it from its default value otherwise Open Pryv.io will crash on boot.
@@ -39,7 +41,7 @@ It will run Open Pryv.io on https://${HOSTNAME}.
 
 ## Server with external SSL
 
-1. Edit the following value in the [Config](https://github.com/pryv/open-pryv.io#config) file `production-no-ssl/dockerized-config.json`:
+1. Edit the following value in the [Config](https://github.com/pryv/open-pryv.io#config) file `production-no-ssl/dockerized-config.yml`:
    - ${HOSTNAME}: the hostname part of the public URL
    - auth:adminAccessKey: secret for admin functions, change it from its default value otherwise Open Pryv.io will crash on boot.
 

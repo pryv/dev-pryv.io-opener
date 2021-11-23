@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.13]
+        node-version: [16.4.1]
 
     steps:
     - name: Checkout repository with submodules
@@ -38,6 +38,13 @@ jobs:
         repository: pryv/open-pryv.io
         path: dest
         clean: false
+
+    # there is one private package (lib-reporting) used as npm package, so we need 
+    # to authenticate
+    - name: Login to github
+      uses: webfactory/ssh-agent@v0.4.1
+      with:
+        ssh-private-key: ${{ secrets.TECH_PRYV_SSH_KEY }}
 
     - name: Setup opener
       run: |
@@ -65,4 +72,4 @@ jobs:
     - name: Run tests on Open Pryv.io
       working-directory: dest
       run: |
-        yarn test
+        IS_CI=true  yarn test
