@@ -1,6 +1,6 @@
 {
-  "name": "app-node-opener",
-  "version": "0.0.1",
+  "name": "dev-pryv.io-opener",
+  "version": "0.1.0",
   "description": "Opener",
   "main": "index.js",
   "scripts": {

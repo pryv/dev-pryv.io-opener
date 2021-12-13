@@ -2,7 +2,6 @@
 
 Script that releases the open source version of Pryv.io.
 
-Folow dev on: [Trello Card](https://trello.com/c/6OyTu3Qi/861-pryv-opener)
 
 ## Usage
 
@@ -13,25 +12,30 @@ Folow dev on: [Trello Card](https://trello.com/c/6OyTu3Qi/861-pryv-opener)
 
 ### Update git dependencies
 
-1. `cd service-core`
+For one or more of `service-core`, `service-register`, `service-mail`:
+
+1. `cd {dependency}`
 2. `git checkout master`
 3. `git pull`
 4. `cd ..`
 5. git add, commit and push
 
+
 ## License
 
 License settings and script are located in [`licenser/`](licenser/).
+
 
 ## Helpers for developpment
 
 1. In `dest/` run `yarn setup`, `yarn release`, `yarn watch`
 2. `dest/dist/components/register` or other component you need to test
-  - `pushd {your path}/app-node-opener/ ; yarn build ; popd ; ../../node_modules/.bin/mocha  'test/**/*.test.js'`
-3. to start api-server cd to `dest` and use `cd ../ ; yarn build; cd dest; sleep 2 ; yarn api`  
+  - `pushd {your path}/dev-pryv.io-opener/ ; yarn build ; popd ; ../../node_modules/.bin/mocha  'test/**/*.test.js'`
+3. to start api-server cd to `dest` and use `cd ../ ; yarn build; cd dest; sleep 2 ; yarn api`
   or: `cd ../ ; yarn build; cd dest; sleep 2 ; dist/components/api-server/bin/server --config ./config.yml`
 
-## Opener
+
+## Design
 
 ### service-core
 
