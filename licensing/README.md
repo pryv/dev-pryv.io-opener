@@ -1,4 +1,4 @@
-- Licensing is made using  https://github.com/pryv/app-node-licenser
+- Licensing via https://github.com/pryv/source-licenser
 
 
 # License
