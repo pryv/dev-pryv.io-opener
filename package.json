@@ -1,16 +1,10 @@
 {
   "name": "dev-pryv.io-opener",
   "version": "0.1.0",
-  "description": "Opener",
-  "main": "index.js",
-  "scripts": {
-    "build": "node src/index.js && yarn license",
-    "setup": "./scripts/setup.sh",
-    "license": "node_modules/.bin/source-licenser licensing/config.yml licensing/LICENSE.src ./dest",
-    "licensesrc": "node_modules/.bin/source-licenser licensing/config.yml licensing/LICENSE.src ./src-dest"
-  },
-  "author": "Pryv S.A.",
+  "private": true,
+  "description": "Builds Open-Pryv.io, extracting code from Pryv.io base services",
   "license": "UNLICENSED",
+  "author": "Pryv S.A.",
   "dependencies": {
     "lodash": "^4.17.15",
     "mkdirp": "^1.0.4",
