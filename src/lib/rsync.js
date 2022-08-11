@@ -2,24 +2,24 @@ const Rsync = require('rsync');
 const path = require('path');
 const mkdirp = require('mkdirp');
 
-module.exports = async function rsync(task, srcDir, destDir) {
+module.exports = async function rsync (task, srcDir, destDir) {
   const src = path.resolve(srcDir, task.target);
   let dest = path.resolve(destDir);
-  if (! task.rsyncUseDestDir) {
+  if (!task.rsyncUseDestDir) {
     dest = path.dirname(path.resolve(destDir, task.target));
   }
   console.log(src + ' >>>> ' + dest);
   mkdirp(dest);
   const r = new Rsync()
     .set('a')
-    //.progress()
+    // .progress()
     .source(src)
     .destination(dest);
 
   if (!task.noDelete) r.delete();
   if (task.excludes) r.exclude(task.excludes);
   if (task.patterns) r.patterns(task.patterns);
-    
+
   await new Promise((resolve, reject) => {
     r.execute(function (error, code, cmd) {
       if (error) return reject(error);
@@ -30,4 +30,4 @@ module.exports = async function rsync(task, srcDir, destDir) {
       process.stderr.write(data);
     });
   });
-}
+};

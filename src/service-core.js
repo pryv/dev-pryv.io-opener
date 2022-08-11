@@ -1,6 +1,5 @@
 const path = require('path');
 const fs = require('fs');
-const mkdirp = require('mkdirp');
 
 const srcDir = path.resolve(__dirname, '../service-core/');
 const destDir = path.resolve(__dirname, '../dest/');
@@ -11,22 +10,21 @@ const json = require('./lib/json')(destDir);
 
 const OPEN_TAG = '-open';
 
-function execShellCommand(cmd) {
+function execShellCommand (cmd) {
   const exec = require('child_process').exec;
   return new Promise((resolve, reject) => {
     exec(cmd, (error, stdout, stderr) => {
       if (error) {
         console.warn(error);
       }
-      resolve(stdout ? stdout : stderr);
+      resolve(stdout || stderr);
     });
   });
 }
 
 let version = null;
 
-
-function loadTasks() {
+function loadTasks () {
   return [{
     target: './components',
     excludes: [
@@ -53,26 +51,26 @@ function loadTasks() {
     target: './package.json',
     json: {
       merge: {
-        "name": "open-pryv.io",
-        "version": version,
-        "private": true,
-        "license": "BSD-3-clause",
-        "repository": {
-          "url": "git://github.com/pryv/service-open-pryv.git"
+        name: 'open-pryv.io',
+        version: version,
+        private: true,
+        license: 'BSD-3-clause',
+        repository: {
+          url: 'git://github.com/pryv/service-open-pryv.git'
         },
-        "scripts": {
-          "api": "NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.yml",
-          "mail": "yarn --cwd ./service-mail start",
-          "setup": "yarn install --ignore-optionals ; bash ./scripts/setup-dev-env.bash",
-          "proxy": "./node_modules/rec-la/bin/proxy.js localhost:3000",
-          "pryv": "yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn api",
-          "local": "yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn proxy & NODE_ENV=production ./dist/components/api-server/bin/server --config ./configs/rec-la.yml",
+        scripts: {
+          api: 'NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.yml',
+          mail: 'yarn --cwd ./service-mail start',
+          setup: 'yarn install --ignore-optionals ; bash ./scripts/setup-dev-env.bash',
+          proxy: './node_modules/rec-la/bin/proxy.js localhost:3000',
+          pryv: 'yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn api',
+          local: 'yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn proxy & NODE_ENV=production ./dist/components/api-server/bin/server --config ./configs/rec-la.yml'
         },
-        "dependencies": {
-          "pryv": "^2.0.2",
-          "rec-la": "latest"
+        dependencies: {
+          pryv: '^2.0.2',
+          'rec-la': 'latest'
         },
-        "pre-commit": ""
+        'pre-commit': ''
       }
     },
     sed: ['hfs', 'metadata', 'webhooks', 'gnat', 'influx', 'jsdoc', 'test-root', 'cover', 'flow-coverage', 'tag-tests', 'test-results', 'tprpc', 'pryvuser-cli', 'metadata', 'nats', 'reporting']
@@ -84,27 +82,22 @@ function loadTasks() {
   {
     target: './components/api-server/package.json',
     sed: ['reporting']
-  },
+  }
   ];
-};
-
-
-
+}
 
 module.exports = async () => {
-
   version = await execShellCommand('git --git-dir=' + srcDir + '/.git describe');
   // remove the intermediate commit index
   if (version.indexOf('-') >= 0) {
     version = version.substr(0, version.lastIndexOf('-'));
   }
-  version = version.split("\n")[0];
+  version = version.split('\n')[0];
   version = version + OPEN_TAG;
-  console.log('VERSION ', version)
+  console.log('VERSION ', version);
   fs.writeFileSync(path.resolve(__dirname, '../src-dest/.api-version'), version);
 
-
-  tasks = loadTasks();
+  const tasks = loadTasks();
 
   // --- initial copy
   for (let i = 0; i < tasks.length; i++) {
@@ -113,8 +106,7 @@ module.exports = async () => {
       json(tasks[i]);
     }
     if (tasks[i].sed) {
-      sed(tasks[i])
+      sed(tasks[i]);
     }
   }
-
 };

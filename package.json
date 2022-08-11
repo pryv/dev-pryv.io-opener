@@ -11,5 +11,15 @@
     "ncp": "^2.0.0",
     "rsync": "^0.6.1",
     "source-licenser": "^1.0.2"
+  },
+  "devDependencies": {
+    "semistandard": "^16.0.1"
+  },
+  "semistandard": {
+    "ignore": [
+      "/dest",
+      "/service-*",
+      "src-dest"
+    ]
   }
 }
