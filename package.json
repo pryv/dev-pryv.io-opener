@@ -19,7 +19,7 @@
     "ignore": [
       "/dest",
       "/service-*",
-      "src-dest"
+      "src-overrides"
     ]
   }
 }

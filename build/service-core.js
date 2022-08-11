@@ -30,7 +30,7 @@ function loadTasks () {
     excludes: [
       'hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks', 'metadata', 'audit', // components
       'business/src/series', 'business/src/series.js', 'series/repository.test.js', // series
-      'api-server/config/test.json', // replaced by src-dest
+      'api-server/config/test.json', // replaced by src-overrides
       'register' // protects components/register from being deleted because we rsync --delete
     ],
     patterns: ['-node_modules/', '-*influx*', '-*series*', '-webhook*', '-*nats*']
@@ -95,7 +95,7 @@ module.exports = async () => {
   version = version.split('\n')[0];
   version = version + OPEN_TAG;
   console.log('VERSION ', version);
-  fs.writeFileSync(path.resolve(__dirname, '../src-dest/.api-version'), version);
+  fs.writeFileSync(path.resolve(__dirname, '../src-overrides/.api-version'), version);
 
   const tasks = loadTasks();
 

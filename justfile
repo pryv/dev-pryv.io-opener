@@ -9,7 +9,7 @@ _help:
 # Setup
 # –––––––––––––----------------------------------------------------------------
 
-# Set up the dev environment to make it ready for building
+# Set up or update the dev environment for building
 setup: update-repos install prepare-dest
 
 # Update source git repos (submodules)
@@ -45,7 +45,7 @@ prepare-dest:
     echo ""
     rm -rf dest/*
     echo ""
-    echo "✓ 'dest/' folder is ready for building!"
+    echo "✓ 'dest/' folder is ready for building."
     echo ""
 
 # –––––––––––––----------------------------------------------------------------
@@ -54,12 +54,8 @@ prepare-dest:
 
 # Build to `dest/` and apply licensing info
 build *params:
-    node src/index.js
-    source-licenser --config-file .licenser.yml ./dest
-
-# Apply licensing info to `src-dest/`
-license-src:
-    source-licenser --config-file .licenser.yml ./src-dest
+    node build/index.js
+    # TODO: source-licenser --config-file .licenser.yml ./dest
 
 # –––––––––––––----------------------------------------------------------------
 # Misc. utils
@@ -68,3 +64,7 @@ license-src:
 # Run code linting
 lint *params:
     semistandard {{params}}
+
+# Apply licensing info to `build/`
+license-build:
+    # TODO: source-licenser --config-file .licenser.yml ./build
