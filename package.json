@@ -19,7 +19,11 @@
     "ignore": [
       "/dest",
       "/service-*",
-      "src-overrides"
+      "src-overrides/components/api-server/src/methods/webhooks.js",
+      "src-overrides/components/business/src/index.js",
+      "src-overrides/components/register/source/business/dataservers.js",
+      "src-overrides/components/register/source/storage/database.js",
+      "src-overrides/components/register/source/storage/users.js"
     ]
   }
 }

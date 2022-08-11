@@ -5,10 +5,10 @@ const reservedWords = [
   'register',
   'service',
   'system'
-]
+];
 
 exports.useridIsReserved = function (userid, callback) {
-  if (! userid) {
+  if (!userid) {
     return null;
   }
   userid = userid.toLowerCase();

@@ -4,10 +4,10 @@
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
  */
-function setAuditAccessId(accessId) {
-  return function(context, params, result, next) {
+function setAuditAccessId (accessId) {
+  return function (context, params, result, next) {
     next();
-  }
+  };
 }
 
 const AuditAccessIds = {
@@ -16,13 +16,12 @@ const AuditAccessIds = {
   PASSWORD_RESET_TOKEN: 'password-reset-token',
   ADMIN_TOKEN: 'admin',
   PUBLIC: 'public',
-  INVALID: 'invalid',
-}
+  INVALID: 'invalid'
+};
 
 Object.freeze(AuditAccessIds);
 
-
 module.exports = {
   setAuditAccessId: setAuditAccessId,
-  AuditAccessIds: AuditAccessIds,
-}
+  AuditAccessIds: AuditAccessIds
+};
