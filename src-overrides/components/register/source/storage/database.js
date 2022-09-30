@@ -150,13 +150,13 @@ exports.getUIDFromMail = getUIDFromMail;
 function getAllUsers(callback: GenericCallback<string>) {
   const context = {};
   async.series([
-    function (done) { 
-      getRawEventCollection(function(err, eventCollection) {  
+    function (done) {
+      getRawEventCollection(function(err, eventCollection) {
         context.eventCollection = eventCollection;
         done(err);
       });
     },
-    function (done) { 
+    function (done) {
       const cursor = context.eventCollection.aggregate(query_get_all(), { cursor: { batchSize: 1 }}); 
   
       context.users = [];
