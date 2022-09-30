@@ -29,19 +29,14 @@ License settings and script are located in [`licenser/`](licenser/).
 ## Helpers for developpment
 
 ### Build
- In `dest/` run `yarn setup`, `yarn release`, `yarn watch`
+ In `dest/` run `just setup-dev-env`, `just install`, `just compile-dev`
 
 ### Test
 tests have to runned component by component 
-`cd dest/dist/components/{component}` 
-  - `NODE_ENV=TEST ../../node_modules/.bin/mocha  'test/**/*.test.js'`
+`cd dest/` 
+  - `just test {component}'`
 
-combined with `yarn watch` and regular `yarn build` you can code in a source repospitory and test your changes
-
-### Run
-to start api-server cd to `dest` and use `cd ../ ; yarn build; cd dest; sleep 2 ; yarn api`
-  or: `cd ../ ; yarn build; cd dest; sleep 2 ; dist/components/api-server/bin/server --config ./config.yml`
-
+combined with `just compile-watch` in `dest` and `yarn build` each time you do modifcation you can code in a source repository and test your changes
 
 ## Design
 
