@@ -157,7 +157,7 @@ function getAllUsers(callback: GenericCallback<string>) {
       });
     },
     function (done) { 
-      const cursor = context.eventCollection.aggregate(QUERY_GET_ALL, { cursor: { batchSize: 1 }}); 
+      const cursor = context.eventCollection.aggregate(query_get_all(), { cursor: { batchSize: 1 }}); 
   
       context.users = [];
       cursor.each(function(err, item) {
@@ -235,21 +235,25 @@ function cleanAccessState() {
 
 cleanAccessState(); // launch cleaner
 
-
-const QUERY_GET_ALL = [
-  {
-    '$match': {
-      streamIds: { '$in': [ 'email', 'language', 'referer' ].map(SystemStreamsSerializer.addCorrectPrefixToAccountStreamId) }
-    }
-  },
-  {
-    '$group': {
-      _id: { userId: '$userId' },
-      smallestCreatedAt: { '$min': '$created' },
-      events: {
-        '$push': { content: '$content', streamIds: '$streamIds', type: '$type' }
+let QUERY_GET_ALL = null;
+function query_get_all() {
+  if (QUERY_GET_ALL !== null) return QUERY_GET_ALL;
+  QUERY_GET_ALL = [
+    {
+      '$match': {
+        streamIds: { '$in': [ 'email', 'language', 'referer' ].map(SystemStreamsSerializer.addCorrectPrefixToAccountStreamId) }
       }
-    }
-  },
-  {'$sort': { smallestCreatedAt: 1 }}
-];
+    },
+    {
+      '$group': {
+        _id: { userId: '$userId' },
+        smallestCreatedAt: { '$min': '$created' },
+        events: {
+          '$push': { content: '$content', streamIds: '$streamIds', type: '$type' }
+        }
+      }
+    },
+    {'$sort': { smallestCreatedAt: 1 }}
+  ];
+  return QUERY_GET_ALL;
+}

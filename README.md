@@ -5,9 +5,9 @@ Script that releases the open source version of Pryv.io.
 
 ## Usage
 
-1. Fetch git dependencies: `yarn setup`
-2. Fetch node dependencies: `yarn`
-3. Generate open-source release: `yarn build` this step also licenses code with: `yarn license`
+1. Fetch git dependencies: `just setup`
+2. Fetch node dependencies: `just install`
+3. Generate open-source release: `just build` 
 4. Verify the release in `./dest`
 
 ### Update git dependencies
