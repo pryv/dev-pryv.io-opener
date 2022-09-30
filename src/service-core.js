@@ -61,6 +61,8 @@ function loadTasks() {
           "url": "git://github.com/pryv/service-open-pryv.git"
         },
         "scripts": {
+          "release": "scripts/prepare_dist && node_modules/.bin/babel ./components --verbose --out-dir=dist/components --copy-files",
+          "watch": "node_modules/.bin/babel --verbose --watch=./components --out-dir=dist/components --copy-files --source-maps both",
           "api": "NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.yml",
           "mail": "yarn --cwd ./service-mail start",
           "setup": "yarn install --ignore-optionals ; bash ./scripts/setup-dev-env.bash",

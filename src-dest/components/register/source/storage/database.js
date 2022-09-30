@@ -239,7 +239,7 @@ cleanAccessState(); // launch cleaner
 const QUERY_GET_ALL = [
   {
     '$match': {
-      streamIds: { '$in': [ 'email', 'username', 'language', 'referer' ].map(SystemStreamsSerializer.addCorrectPrefixToAccountStreamId) }
+      streamIds: { '$in': [ 'email', 'language', 'referer' ].map(SystemStreamsSerializer.addCorrectPrefixToAccountStreamId) }
     }
   },
   {
