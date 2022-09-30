@@ -68,44 +68,43 @@ Once it is running, you can continue with the [tutorials](#start).
 
 *Prerequisites*:
 
-- Node v12.13.1 [Node.js home page](https://nodejs.org/)
-- Yarn v1 `npm install -g yarn`
+- Node v16.4.1 [Node.js home page](https://nodejs.org/)
+- [just](https://github.com/casey/just#installation)
 
 The installation script has been tested on Linux Ubuntu 18.04 LTS and MacOSX.
 
-- `yarn setup`: (see `scripts/` for details)
-  - Fetch dependencies
-  - Install mongodb
-  - Install service mail
-  - Install assets & app-web-auth3
-  - Generate random alpha-numeric adminKey
-- `yarn release` create distribution for release
+1. `just setup-dev-env` to setup local file structure and install MongoDB
+2. `just install [--no-optional]` to install node modules
+3. Compile with one of the following option
+  - `just compile-release` by default
+  - `just compile-dev` to include source maps
+  - `just compile-watch` to recompile all files after each saved change. Look out for compilation errors that might prevent the distribution from being updated.
 
 #### Native setup with external SSL
 
 [setup the environment](#native)
 
-- `yarn pryv` - mail and database logs will be kept in `var-pryv/logs/local-*.log`
+- `npm run pryv` - mail and database logs will be kept in `var-pryv/logs/local-*.log`
 
 Each service independently - logs will be displayed on the console
 
-- `yarn database` start mongodb
-- `yarn api` start the API server on port 3000 (default)
-- `yarn mail` start the mail service
+- `npm run database` start mongodb
+- `npm run api` start the API server on port 3000 (default)
+- `npm run mail` start the mail service
 
 #### Local native setup
 
 [setup the environment](#native)
 
-- `yarn local` is the equivalent of running `yarn pryv` + `yarn proxy` using `configs/rec-la.yml`. This setup is useful to test Open Pryv.io locally.
+- `npm run local` is the equivalent of running `npm run pryv` + `npm run proxy` using `configs/rec-la.yml`. This setup is useful to test Open Pryv.io locally.
 
-- `yarn proxy` based on [rec-la](https://github.com/pryv/rec-la), it will expose the server running on http://localhost:3000 with an SSL certificate on https://my-computer.rec.la:4443 in this case you need to edit `configs/rec-la.yml`.
+- `npm run proxy` based on [rec-la](https://github.com/pryv/rec-la), it will expose the server running on http://localhost:3000 with an SSL certificate on https://my-computer.rec.la:4443 in this case you need to edit `configs/rec-la.yml`.
 
 #### Native Server setup with built-in SSL
 
 [setup the environment](#native)
 
-1. Run `yarn pryv` to start the API
+1. Run `npm run pryv` to start the API
 2. Configure NGINX and certificate
 
 You can find a NGINX configuration that you can include in your `sites-enabled/` in [configs/site.conf](configs/site.conf).

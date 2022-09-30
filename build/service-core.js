@@ -48,6 +48,12 @@ function loadTasks () {
     target: './babel.config.json'
   },
   {
+    target: './justfile'
+  },
+  {
+    target: './package-lock.json'
+  },
+  {
     target: './package.json',
     json: {
       merge: {
@@ -59,10 +65,9 @@ function loadTasks () {
           url: 'git://github.com/pryv/service-open-pryv.git'
         },
         scripts: {
-          release: 'scripts/prepare_dist && node_modules/.bin/babel ./components --verbose --out-dir=dist/components --copy-files',
-          watch: 'node_modules/.bin/babel --verbose --watch=./components --out-dir=dist/components --copy-files --source-maps both',
           api: 'NODE_ENV=production ./dist/components/api-server/bin/server --config ./config.yml',
           mail: 'yarn --cwd ./service-mail start',
+          database: 'scripts/start-mongo',
           setup: 'yarn install --ignore-optionals ; bash ./scripts/setup-dev-env',
           proxy: './node_modules/rec-la/bin/proxy.js localhost:3000',
           pryv: 'yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn api',
