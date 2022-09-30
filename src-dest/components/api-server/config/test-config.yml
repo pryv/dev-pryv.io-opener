@@ -1,0 +1,69 @@
+---
+openSource:
+  isActive: true
+dnsLess:
+  isActive: true
+  publicUrl: http://localhost:3000
+auth:
+  adminAccessKey: some_key_yo
+  trustedApps: pryv-test@http://test.pryv.local, pryv-test-no-cors@*, *@https://*.rec.la*
+logs:
+  console:
+    active: false
+    level: info
+    timestamp: false
+services:
+  email:
+    enabled: false
+  register:
+    url: http://localhost:5123
+tcpMessaging:
+  enabled: true
+service:
+  name: Test
+  support: https://pryv.com/openpryv/unconfigured.html
+  terms: https://pryv.com/openpryv/unconfigured.html
+  home: https://pryv.com/openpryv/unconfigured.html
+  eventTypes: https://api.pryv.com/event-types/flat.json
+  assets:
+    definitions: https://http://localhost:3000/www/assets/index.json
+custom:
+  systemStreams:
+    account:
+    - id: insurancenumber
+      isIndexed: true
+      isShown: true
+      type: string/pryv
+      isRequiredInValidation: true
+      regexValidation: "^[0-9]*$"
+      regexError:
+        message: Cool error
+        code: cool-error
+      isEditable: true
+    - id: phoneNumber
+      isEditable: true
+      isShown: true
+      type: string/pryv
+    - id: email
+      isIndexed: true
+      isUnique: true
+      isShown: true
+      isEditable: true
+      type: email/string
+      name: Email
+      isRequiredInValidation: true
+  dataStores:
+    - id: dummy
+      name: Dummy Store
+      path: ../../mall/test-helpers/dummyDataStore # should be fully qualified path
+      config: null
+    - id: faulty
+      name: Faulty Store
+      path: ../../mall/test-helpers/faultyDataStore # should be fully qualified path
+      config: null
+backwardCompatibility:
+  systemStreams:
+    prefix:
+      isActive: false
+trace:
+  enable: false
