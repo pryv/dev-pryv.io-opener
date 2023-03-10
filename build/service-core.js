@@ -45,9 +45,6 @@ function loadTasks () {
     excludes: ['acceptance/high-frequency.test.js']
   },
   {
-    target: './babel.config.json'
-  },
-  {
     target: './justfile'
   },
   {
@@ -81,10 +78,6 @@ function loadTasks () {
       }
     },
     sed: ['hfs', 'metadata', 'webhooks', 'gnat', 'influx', 'jsdoc', 'test-root', 'cover', 'flow-coverage', 'tag-tests', 'test-results', 'tprpc', 'pryvuser-cli', 'metadata', 'nats', 'reporting']
-  },
-  {
-    target: './.flowconfig',
-    sed: ['jaeger', 'tprpc', 'metadata', 'hfs-server', 'flow-coverage']
   },
   {
     target: './components/api-server/package.json',

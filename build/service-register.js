@@ -11,7 +11,7 @@ const rsync = require('./lib/rsync');
 const sed = require('./lib/sed')(destDir);
 
 const tasks = [{
-  target: './source',
+  target: './src',
   excludes: [
     'app.js', 'config.js', 'dns', '.gitignore', '.npmignore', 'package.json', // root
     'dataservers.js', // business
@@ -24,11 +24,11 @@ const tasks = [{
   patterns: ['-*dns*', '-node_modules/']
 },
 {
-  target: './source/routes/users.js',
+  target: './src/routes/users.js',
   sed: [' START - CLEAN FOR OPENSOURCE/,/ END - CLEAN FOR OPENSOURCE']
 },
 {
-  target: './source/routes/admin.js',
+  target: './src/routes/admin.js',
   sed: [' START - CLEAN FOR OPENSOURCE/,/ END - CLEAN FOR OPENSOURCE']
 },
 {
