@@ -18,10 +18,12 @@ describe('www', function () {
   });
 
   it('[WWA1] GET / should receive an html page ', async function () {
-    const res = await server.request()
-      .get(wwwPath + '/');
+    const res = await server.request().get(wwwPath + '/');
     assert.equal(res.status, 200);
     const firstLine = res.text.split('\n')[0];
-    assert(firstLine.startsWith('<!DOCTYPE html>'), 'Should start with <!DOCTYPE html>');
+    assert(
+      firstLine.startsWith('<!DOCTYPE html>'),
+      'Should start with <!DOCTYPE html>'
+    );
   });
 });

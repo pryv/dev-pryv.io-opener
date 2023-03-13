@@ -1,5 +1,3 @@
-// @flow
+module.exports = function () {};
 
-export type WebhooksSettingsHolder = object;
-
-module.exports = function () {}
+/** @typedef {object} WebhooksSettingsHolder */

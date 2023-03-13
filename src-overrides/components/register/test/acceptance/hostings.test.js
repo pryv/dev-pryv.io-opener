@@ -19,7 +19,8 @@ describe('service', function () {
   });
 
   it('[REA1] GET /service/info should receive service info data ', async function () {
-    const res = await server.request()
+    const res = await server
+      .request()
       .get(regPath + '/service/info')
       .set('Accept', 'application/json');
     assert.equal(res.status, 200);
@@ -28,7 +29,8 @@ describe('service', function () {
   });
 
   it('[REA2] GET /apps should receive empty array ', async function () {
-    const res = await server.request()
+    const res = await server
+      .request()
       .get(regPath + '/apps')
       .set('Accept', 'application/json');
     assert.equal(res.status, 200);
@@ -36,7 +38,8 @@ describe('service', function () {
   });
 
   it('[REA3] GET /apps/:appid should receive an dummy message ', async function () {
-    const res = await server.request()
+    const res = await server
+      .request()
       .get(regPath + '/apps/toto')
       .set('Accept', 'application/json');
     assert.equal(res.status, 200);
@@ -44,7 +47,8 @@ describe('service', function () {
   });
 
   it('[REA4] GET /hostings should receive an hosting compatible message ', async function () {
-    const res = await server.request()
+    const res = await server
+      .request()
       .get(regPath + '/hostings')
       .set('Accept', 'application/json');
     assert.equal(res.status, 200);

@@ -1,5 +1,3 @@
-// @flow
-
 const async = require('async');
 const semver = require('semver');
 const logger = require('winston');
@@ -7,27 +5,27 @@ const lodash = require('lodash');
 
 const messages = require('../utils/messages');
 
-type GenericCallback<T> = (err?: ?Error, res: ?T) => mixed;
-type Callback = GenericCallback<mixed>;
+type GenericCallback<T> = (err?: Error | null, res?: T | null) => unknown;
+type Callback = GenericCallback<unknown>;
 
 const SystemStreamsSerializer = require('business/src/system-streams/serializer');
 
 import type { UserInformation } from './users';
 
 export type AccessState = {
-  status: 'NEED_SIGNIN' | 'REFUSED' | 'ERROR' | 'ACCEPTED',
+  status: "NEED_SIGNIN" | "REFUSED" | "ERROR" | "ACCEPTED"
   // HTTP Status Code to send when polling.
-  code: number,
+  code: number
   // Poll Key
-  key?: string,
-  requestingAppId?: string,
-  requestedPermissions?: PermissionSet,
-  url?: string,
-  poll?: string,
-  returnURL?: ?string,
-  oauthState?: OAuthState,
-  poll_rate_ms?: number,
-}
+  key?: string
+  requestingAppId?: string
+  requestedPermissions?: PermissionSet
+  url?: string
+  poll?: string
+  returnURL?: string | null
+  oauthState?: OAuthState
+  poll_rate_ms?: number
+};
 type OAuthState = string | null;
 import type { PermissionSet } from '../utils/check-and-constraints';
 
@@ -141,7 +139,7 @@ function getUIDFromMail(mail: string, callback: GenericCallback<string>) {
     callback(err, context.username);
   })
  
-};
+}
 exports.getUIDFromMail = getUIDFromMail;
 
 /**
@@ -189,7 +187,7 @@ function getAllUsers(callback: GenericCallback<string>) {
     callback(err, context.users);
   });
 
-};
+}
 exports.getAllUsers = getAllUsers;
 
 const dbAccessState = {};

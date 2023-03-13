@@ -23,11 +23,12 @@ describe('access', function () {
   it('[RE5T] POST /access', async () => {
     const res = await requestAccess();
     assert.equal(res.status, 'NEED_SIGNIN');
-    await new Promise(resolve => setTimeout(resolve, 10000));
+    await new Promise((resolve) => setTimeout(resolve, 10000));
   });
 
   it('[RE6T] POST /access/invitationtoken/check', async () => {
-    const res = await server.request()
+    const res = await server
+      .request()
       .post(regPath + '/access/invitationtoken/check')
       .send({ invitationToken: cuid() });
     assert.equal(res.status, 200);
@@ -41,7 +42,8 @@ describe('access', function () {
     });
 
     it('[RE8T] GET /access/:key', async () => {
-      const res = await server.request()
+      const res = await server
+        .request()
         .get(regPath + '/access/' + key)
         .set('Accept', 'application/json');
 
@@ -56,7 +58,8 @@ describe('access', function () {
         username: 'dummy',
         token: cuid()
       };
-      const res = await server.request()
+      const res = await server
+        .request()
         .post(regPath + '/access/' + key)
         .send(accessACCEPTED)
         .set('Accept', 'application/json');
@@ -66,7 +69,7 @@ describe('access', function () {
   });
 });
 
-async function requestAccess () {
+async function requestAccess() {
   const accessRequestData = {
     requestingAppId: 'test-app-id',
     requestedPermissions: [
@@ -78,7 +81,8 @@ async function requestAccess () {
     ],
     languageCode: 'fr'
   };
-  const res = await server.request()
+  const res = await server
+    .request()
     .post(regPath + '/access/')
     .send(accessRequestData)
     .set('Accept', 'application/json');

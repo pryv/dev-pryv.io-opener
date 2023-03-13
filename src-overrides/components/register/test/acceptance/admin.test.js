@@ -2,7 +2,10 @@
 
 require('test-helpers/src/api-server-tests-config');
 const { databaseFixture } = require('test-helpers');
-const { produceMongoConnection, context } = require('api-server/test/test-helpers');
+const {
+  produceMongoConnection,
+  context
+} = require('api-server/test/test-helpers');
 const regPath = require('api-server/src/routes/Paths').Register;
 
 const config = require('api-server/config/test.json');
@@ -46,7 +49,8 @@ describe('register /admin', function () {
   });
 
   it('[6TZE] /admin/users ', async function () {
-    const res = await server.request()
+    const res = await server
+      .request()
       .get(regPath + '/admin/users')
       .set('Authorization', adminKey)
       .set('Accept', 'application/json');

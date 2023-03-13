@@ -1,11 +1,4 @@
-
-const reservedWords = [
-  'access',
-  'reg',
-  'register',
-  'service',
-  'system'
-];
+const reservedWords = ['access', 'reg', 'register', 'service', 'system'];
 
 exports.useridIsReserved = function (userid, callback) {
   if (!userid) {

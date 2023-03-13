@@ -2,7 +2,10 @@
 
 require('test-helpers/src/api-server-tests-config');
 const { databaseFixture } = require('test-helpers');
-const { produceMongoConnection, context } = require('api-server/test/test-helpers');
+const {
+  produceMongoConnection,
+  context
+} = require('api-server/test/test-helpers');
 const regPath = require('api-server/src/routes/Paths').Register;
 
 const cuid = require('cuid');
@@ -52,21 +55,28 @@ describe('register /users', function () {
         language: 'fr',
         insurancenumber: '198263986123'
       };
-      const res = await server.request()
+      const res = await server
+        .request()
         .post(regPath + '/user')
         .send(userData);
       assert.equal(res.status, 201);
       assert.equal(res.body.username, userData.username);
       const apiEndpoint = res.body.apiEndpoint;
       const url = new URL(apiEndpoint);
-      const apiEndpointNoToken = apiEndpoint.replace(url.username, '').replace('@', '');
-      assert.equal(apiEndpointNoToken, 'http://localhost:3000/' + res.body.username + '/');
+      const apiEndpointNoToken = apiEndpoint
+        .replace(url.username, '')
+        .replace('@', '');
+      assert.equal(
+        apiEndpointNoToken,
+        'http://localhost:3000/' + res.body.username + '/'
+      );
     });
   });
 
   describe('username', function () {
     it('[REU7] POST /username/check', async function () {
-      const res = await server.request()
+      const res = await server
+        .request()
         .post(regPath + '/username/check')
         .send({ username: username })
         .set('Accept', 'application/json');
@@ -74,7 +84,8 @@ describe('register /users', function () {
     });
 
     it('[REU9] GET/:username/check_username ', async function () {
-      const res = await server.request()
+      const res = await server
+        .request()
         .get(regPath + '/' + username + '/check_username')
         .set('Accept', 'application/json');
       assert.equal(res.status, 409);
@@ -85,7 +96,8 @@ describe('register /users', function () {
     });
 
     it('[REU6] GET/:username/check_username', async function () {
-      const res = await server.request()
+      const res = await server
+        .request()
         .get(regPath + '/' + cuid().substr(5) + '/check_username')
         .set('Accept', 'application/json');
       assert.equal(res.status, 200);

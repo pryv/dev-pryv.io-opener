@@ -1,5 +1,3 @@
-
-class InfluxConnection {
-}
+class InfluxConnection {}
 
 module.exports = InfluxConnection;
