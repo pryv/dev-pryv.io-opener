@@ -48,6 +48,9 @@ function loadTasks () {
     target: './justfile'
   },
   {
+    target: './.mocharc.js'
+  },
+  {
     target: './package-lock.json'
   },
   {
