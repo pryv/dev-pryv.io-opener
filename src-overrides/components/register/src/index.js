@@ -34,6 +34,7 @@ module.exports = async (expressApp, application) => {
   config.loadSettings(application.config);
   database.setReference('storage', application.storageLayer);
   database.setReference('systemAPI', application.systemAPI);
+  await database.init();
 
   const app = new ExpressMock(expressApp);
   // public API routes

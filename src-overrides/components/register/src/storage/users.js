@@ -56,8 +56,13 @@ exports.getUsersOnServer = function (serverName, callback) {
  * @param {GenericCallback<Array<UserInformation>>} callback  : function(error, result), result being a list of information for all users
  * @returns {void}
  */
-function getAllUsersInfos(callback) {
-  db.getAllUsers(callback);
+async function getAllUsersInfos(callback) {
+  try {
+    const allUsers = await db.getAllUsers();
+    return callback(null, allUsers);
+  } catch (err) {
+    return callback(err, null);
+  }
 }
 exports.getAllUsersInfos = getAllUsersInfos;
 

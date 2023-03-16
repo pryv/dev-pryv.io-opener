@@ -1,11 +1,17 @@
 const async = require('async');
-const semver = require('semver');
-const logger = require('winston');
-const lodash = require('lodash');
-const messages = require('../utils/messages');
 const SystemStreamsSerializer = require('business/src/system-streams/serializer');
-const fakeRedis = {};
 const references = {};
+
+const { getUsersRepository } = require('business/src/users/repository');
+const { getPlatform } = require('platform');
+let platform = null;
+let usersRepository = null;
+
+exports.init = async function init() {
+  platform = await getPlatform();
+  usersRepository = await getUsersRepository();
+}
+ 
 /**
  * Load external references
  * @returns {void}
@@ -53,42 +59,15 @@ exports.emailExists = emailExists;
  * @param uid: the user id to verify
  * @param callback: function(error,result), result being 'true' if it exists, 'false' otherwise
  */
-exports.uidExists = function (uid, callback) {
-  uid = uid.toLowerCase();
-  const context = {};
-  async.series(
-    [
-      function (done) {
-        getRawEventCollection(function (err, eventCollection) {
-          context.eventCollection = eventCollection;
-          done(err);
-        });
-      },
-      function (done) {
-        if (!context.userId) return done();
-        context.eventCollection.findOne(
-          {
-            content: uid,
-            streamIds: {
-              $in: [
-                SystemStreamsSerializer.addCorrectPrefixToAccountStreamId(
-                  'username'
-                )
-              ]
-            },
-            type: 'identifier/string'
-          },
-          function (err, res) {
-            context.username = res?.content;
-            done(err);
-          }
-        );
-      }
-    ],
-    function (err) {
-      callback(err, context.username !== null);
-    }
-  );
+exports.uidExists = async function (uid, callback) {
+  $$(uid);
+  try {
+    const username = uid.toLowerCase();
+    const exists = usersRepository.usernameExists(username);
+    return callback(null, exists);
+  } catch (err) {
+    return callback(err);
+  }
 };
 /**
  * Get the server linked with provided user id
@@ -104,141 +83,40 @@ exports.getServer = function (uid, callback) {
  * @param {GenericCallback<string>} callback  : function(error,result), result being the requested user id
  * @returns {void}
  */
-function getUIDFromMail(mail, callback) {
-  mail = mail.toLowerCase();
-  const context = {};
-  async.series(
-    [
-      function (done) {
-        getRawEventCollection(function (err, eventCollection) {
-          context.eventCollection = eventCollection;
-          done(err);
-        });
-      },
-      function (done) {
-        context.eventCollection.findOne(
-          {
-            content: mail,
-            streamIds: {
-              $in: [
-                SystemStreamsSerializer.addCorrectPrefixToAccountStreamId(
-                  'email'
-                )
-              ]
-            },
-            type: 'email/string'
-          },
-          function (err, res) {
-            context.userId = res?.userId;
-            done(err);
-          }
-        );
-      },
-      function (done) {
-        if (!context.userId) return done();
-        context.eventCollection.findOne(
-          {
-            userId: context.userId,
-            streamIds: {
-              $in: [
-                SystemStreamsSerializer.addCorrectPrefixToAccountStreamId(
-                  'username'
-                )
-              ]
-            },
-            type: 'identifier/string'
-          },
-          function (err, res) {
-            context.username = res?.content;
-            done(err);
-          }
-        );
-      }
-    ],
-    function (err) {
-      callback(err, context.username);
-    }
-  );
+async function getUIDFromMail(mail, callback) {
+  try {
+    const cleanmail = mail.toLowerCase();
+    const username = await platform.getLocalUsersUniqueField('email', mail);
+    return callback(null, username);
+  } catch (err) {
+    return callback(err, null);
+  }
 }
 exports.getUIDFromMail = getUIDFromMail;
 /**
  * Get all users
- * @param {GenericCallback<string>} callback
- * @returns {void}
+ * @returns {Users[]}
  */
-function getAllUsers(callback) {
-  const context = {};
-  async.series(
-    [
-      function (done) {
-        getRawEventCollection(function (err, eventCollection) {
-          context.eventCollection = eventCollection;
-          done(err);
-        });
-      },
-      function (done) {
-        const cursor = context.eventCollection.aggregate(query_get_all(), {
-          cursor: { batchSize: 1 }
-        });
-        context.users = [];
-        cursor.each(function (err, item) {
-          if (err) return done(err);
-          if (item === null) return done();
-          const user = {
-            id: item._id?.userId,
-            registeredTimestamp: item.smallestCreatedAt * 1000
-          };
-          if (item.events) {
-            for (let event of item.events) {
-              if (
-                event.type === 'email/string' &&
-                event.streamIds.includes(
-                  SystemStreamsSerializer.addCorrectPrefixToAccountStreamId(
-                    'email'
-                  )
-                )
-              ) {
-                user.email = event.content;
-              } else if (
-                event.type === 'language/iso-639-1' &&
-                event.streamIds.includes(
-                  SystemStreamsSerializer.addCorrectPrefixToAccountStreamId(
-                    'language'
-                  )
-                )
-              ) {
-                user.language = event.content;
-              } else if (
-                event.type === 'identifier/string' &&
-                event.streamIds.includes(
-                  SystemStreamsSerializer.addCorrectPrefixToAccountStreamId(
-                    'username'
-                  )
-                )
-              ) {
-                user.username = event.content;
-              } else if (
-                event.type === 'identifier/string' &&
-                event.streamIds.includes(
-                  SystemStreamsSerializer.addCorrectPrefixToAccountStreamId(
-                    'referer'
-                  )
-                )
-              ) {
-                user.referer = event.content;
-              } else {
-                console.log('Unkown field... ', event);
-              }
-            }
-          }
-          context.users.push(user);
-        });
+async function getAllUsers() {
+  // we are missing here 'server' and 'referer'
+  const usersNamesAndIds = await usersRepository.getAllUsersNamesAndId();
+  const result = [];
+  for(const userNameAndId of usersNamesAndIds) {
+    const user = await usersRepository.getUserBuiltOnSystemStreamsById(userNameAndId.id);
+    if (user == null) {
+      console.log('XXXXX Null user', userNameAndId);
+    } else {
+      const userAccountInfos = user.getFullAccount();
+      let registeredTimestamp = Number.MAX_SAFE_INTEGER;
+      // deduct creation data from smallest ceatedAt date in event
+      for (const event of user.events) {
+        if (event.created < registeredTimestamp) registeredTimestamp = event.created;
       }
-    ],
-    function (err) {
-      callback(err, context.users);
+      const userInfos = Object.assign({ id: userNameAndId.id, username: userNameAndId.username , registeredTimestamp }, userAccountInfos);
+      result.push(userInfos);
     }
-  );
+  }
+  return result;
 }
 exports.getAllUsers = getAllUsers;
 const dbAccessState = {};
@@ -280,31 +158,6 @@ function cleanAccessState() {
 cleanAccessState(); // launch cleaner
 let QUERY_GET_ALL = null;
 /** @returns {any} */
-function query_get_all() {
-  if (QUERY_GET_ALL !== null) return QUERY_GET_ALL;
-  QUERY_GET_ALL = [
-    {
-      $match: {
-        streamIds: {
-          $in: ['email', 'language', 'referer'].map(
-            SystemStreamsSerializer.addCorrectPrefixToAccountStreamId
-          )
-        }
-      }
-    },
-    {
-      $group: {
-        _id: { userId: '$userId' },
-        smallestCreatedAt: { $min: '$created' },
-        events: {
-          $push: { content: '$content', streamIds: '$streamIds', type: '$type' }
-        }
-      }
-    },
-    { $sort: { smallestCreatedAt: 1 } }
-  ];
-  return QUERY_GET_ALL;
-}
 
 /** @typedef {(err?: Error | null, res?: T | null) => unknown} GenericCallback */
 /** @typedef {GenericCallback<unknown>} Callback */
