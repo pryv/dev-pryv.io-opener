@@ -66,7 +66,7 @@ function loadTasks () {
         },
         scripts: {
           api: 'LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./config.yml',
-          mail: 'yarn --cwd ./service-mail start',
+          mail: 'cd service-mail ; ./bin/server',
           database: 'scripts/start-mongo',
           proxy: './node_modules/rec-la/bin/proxy.js localhost:3000',
           proxied: './node_modules/rec-la/bin/proxy.js localhost:3000 & LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./configs/rec-la.yml',

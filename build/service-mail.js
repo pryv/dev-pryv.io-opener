@@ -13,7 +13,7 @@ const sed = require('./lib/sed')(destDir);
 const tasks = [{
   target: './',
   excludes: [
-    'app.js', 'build', 'config', 'test', '.gitignore', 'Jenkinsfile', 'CHANGELOG.md', // root
+    'app.js', 'build', 'config/development-config.yml', 'test', '.gitignore', 'Jenkinsfile', 'CHANGELOG.md', // root
     'templates/welcome-email', // set by src-overrides
     'package.json', './README.md' // sed will manage them
   ],
