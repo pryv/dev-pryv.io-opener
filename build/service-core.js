@@ -70,8 +70,8 @@ function loadTasks () {
           database: 'scripts/start-mongo',
           proxy: './node_modules/rec-la/bin/proxy.js localhost:3000',
           proxied: './node_modules/rec-la/bin/proxy.js localhost:3000 & LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./configs/rec-la.yml',
-          pryv: 'yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn api',
-          local: 'yarn database >> ./var-pryv/logs/mongodb.log & yarn mail >> ./var-pryv/logs/mail.log & yarn proxy & NODE_ENV=production ./dist/components/api-server/bin/server --config ./configs/rec-la.yml'
+          pryv: 'npm run database >> ./var-pryv/logs/mongodb.log & npm run mail >> ./var-pryv/logs/mail.log & npm run api',
+          local: 'npm run database >> ./var-pryv/logs/mongodb.log & npm run mail >> ./var-pryv/logs/mail.log & npm run proxy & NODE_ENV=production ./dist/components/api-server/bin/server --config ./configs/rec-la.yml'
         },
         dependencies: {
           pryv: '^2.0.2',

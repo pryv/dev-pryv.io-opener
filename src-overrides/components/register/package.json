@@ -6,7 +6,7 @@
   "author": "Pryv SA",
   "main": "src/index.js",
   "scripts": {
-   "test": "yarn run _test --logs:console:active=false",
+   "test": "npm run _test --logs:console:active=false",
    "_test": "NODE_ENV=test PRYV_CONFIG=../api-server/config/test.json  ../../node_modules/.bin/mocha --reporter=dot 'test/**/*.test.js' --exit"
   },
   "dependencies": {
