@@ -68,17 +68,13 @@ Once it is running, you can continue with the [tutorials](#start).
 
 *Prerequisites*:
 
-- Node v16.4.1 [Node.js home page](https://nodejs.org/)
+- Node v18.14.2 [Node.js home page](https://nodejs.org/)
 - [just](https://github.com/casey/just#installation)
 
 The installation script has been tested on Linux Ubuntu 18.04 LTS and MacOSX.
 
 1. `just setup-dev-env` to setup local file structure and install MongoDB
 2. `just install [--no-optional]` to install node modules
-3. Compile with one of the following option
-  - `just compile-release` by default
-  - `just compile-dev` to include source maps
-  - `just compile-watch` to recompile all files after each saved change. Look out for compilation errors that might prevent the distribution from being updated.
 
 #### Native setup with external SSL
 
@@ -98,7 +94,7 @@ Each service independently - logs will be displayed on the console
 
 - `npm run local` is the equivalent of running `npm run pryv` + `npm run proxy` using `configs/rec-la.yml`. This setup is useful to test Open Pryv.io locally.
 
-- `npm run proxy` based on [rec-la](https://github.com/pryv/rec-la), it will expose the server running on http://localhost:3000 with an SSL certificate on https://my-computer.rec.la:4443 in this case you need to edit `configs/rec-la.yml`.
+- `npm run proxy` (with database) and `npm run proxied` (without database) based on [rec-la](https://github.com/pryv/rec-la), it will expose the server running on http://localhost:3000 with an SSL certificate on https://my-computer.rec.la:4443 in this case you need to edit `configs/rec-la.yml`.
 
 #### Native Server setup with built-in SSL
 

@@ -2,10 +2,7 @@
  * Extension of database.js dedicated to user management
  */
 const db = require('./database');
-const async = require('async');
 const lodash = require('lodash');
-const logger = require('winston');
-const messages = require('../utils/messages');
 const domain = '.' + require('../config').get('dns:domain');
 const info = require('../business/service-info');
 const Pryv = require('pryv');

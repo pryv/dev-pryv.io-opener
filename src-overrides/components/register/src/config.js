@@ -1,4 +1,5 @@
 const wwwPath = require('../../api-server/src/routes/Paths').WWW;
+const { getConfig } = require('@pryv/boiler');
 
 const config = {
   'auth:authorizedKeys': {},
@@ -11,7 +12,8 @@ module.exports = {
   get: function (key) {
     return config[key];
   },
-  loadSettings: function (settings) {
+  loadSettings: async function () {
+    const settings = await getConfig();
     config.service = settings.get('service');
     let publicUrl = settings.get('dnsLess:publicUrl');
     if (publicUrl.slice(-1) === '/') publicUrl = publicUrl.slice(0, -1);

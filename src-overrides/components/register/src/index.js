@@ -1,8 +1,5 @@
-const logger = require('winston');
 const database = require('./storage/database');
 const config = require('./config');
-
-logger.default.transports.console.level = 'info';
 
 const headPath = require('api-server/src/routes/Paths').Register;
 
@@ -30,10 +27,8 @@ class ExpressMock {
   }
 }
 
-module.exports = async (expressApp, application) => {
-  config.loadSettings(application.config);
-  database.setReference('storage', application.storageLayer);
-  database.setReference('systemAPI', application.systemAPI);
+module.exports = async (expressApp) => {
+  await config.loadSettings();
   await database.init();
 
   const app = new ExpressMock(expressApp);

@@ -12,7 +12,7 @@ const assert = chai.assert;
 let server;
 
 describe('access', function () {
-  this.timeout(1000000);
+  this.timeout(10000);
   before(async () => {
     server = await context.spawn();
   });
@@ -23,10 +23,10 @@ describe('access', function () {
   it('[RE5T] POST /access', async () => {
     const res = await requestAccess();
     assert.equal(res.status, 'NEED_SIGNIN');
-    await new Promise((resolve) => setTimeout(resolve, 10000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
   });
 
-  it('[RE6T] POST /access/invitationtoken/check', async () => {
+  it('[RE6T] POST /access/invitationtoken/check', async () => {
     const res = await server
       .request()
       .post(regPath + '/access/invitationtoken/check')

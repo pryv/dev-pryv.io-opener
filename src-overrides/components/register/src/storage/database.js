@@ -1,7 +1,3 @@
-const async = require('async');
-const SystemStreamsSerializer = require('business/src/system-streams/serializer');
-const references = {};
-
 const { getUsersRepository } = require('business/src/users/repository');
 const { getPlatform } = require('platform');
 let platform = null;
@@ -11,27 +7,7 @@ exports.init = async function init() {
   platform = await getPlatform();
   usersRepository = await getUsersRepository();
 }
- 
-/**
- * Load external references
- * @returns {void}
- */
-function setReference(key, value) {
-  references[key] = value;
-}
-exports.setReference = setReference;
-/** @returns {void} */
-function getRawEventCollection(callback) {
-  references.storage.connection.getCollectionSafe(
-    { name: 'events' },
-    function errorCallback(err) {
-      callback(err, null);
-    },
-    function sucessCallback(col) {
-      callback(null, col);
-    }
-  );
-}
+
 /** @returns {any} */
 function systemCall(...args) {
   return references.systemAPI.call(...args);
@@ -60,7 +36,6 @@ exports.emailExists = emailExists;
  * @param callback: function(error,result), result being 'true' if it exists, 'false' otherwise
  */
 exports.uidExists = async function (uid, callback) {
-  $$(uid);
   try {
     const username = uid.toLowerCase();
     const exists = usersRepository.usernameExists(username);

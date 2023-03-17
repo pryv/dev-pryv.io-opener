@@ -48,7 +48,7 @@ describe('register /admin', function () {
     });
   });
 
-  it('[6TZE] /admin/users ', async function () {
+  it('[6TZE] /admin/users ', async function () {
     const res = await server
       .request()
       .get(regPath + '/admin/users')

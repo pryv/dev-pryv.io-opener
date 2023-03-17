@@ -21,7 +21,7 @@ const tasks = [{
 },
 {
   target: './package.json',
-  sed: ['test', 'chai', 'mocha', 'supertest', 'node-foreman', 'eslint']
+  sed: ['chai', 'mocha', 'node-foreman', 'eslint']
 },
 {
   target: './README.md',
