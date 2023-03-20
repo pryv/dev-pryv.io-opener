@@ -1,0 +1,59 @@
+name: Open Pryv.io CI
+
+on:
+  pull_request:
+    branches:
+      - '*'
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.16.0]
+
+    steps:
+    - name: Install `just`
+      uses: extractions/setup-just@v1
+
+    - name: Checkout repository with submodules
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+        token: ${{ secrets.SECRET_FOR_COMMITING }}
+        fetch-depth: 0
+        clean: false
+
+    - name: Install Node.js with version ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    # there is one private package (lib-reporting) used as npm package, so we need
+    # to authenticate
+    - name: Login to github
+      uses: webfactory/ssh-agent@v0.4.1
+      with:
+        ssh-private-key: ${{ secrets.TECH_PRYV_SSH_KEY }}
+
+    - name: Setup opener
+      run: just setup
+
+    - name: Build
+      run: just build
+
+    - name: Setup Open Pryv.io
+      working-directory: dest
+      run: |
+        ./scripts/setup-dev-env
+        sudo apt-get install graphicsmagick
+        ./scripts/start-mongo
+
+    - name: Run tests on Open Pryv.io
+      working-directory: dest
+      run: |
+        IS_CI=true just test all

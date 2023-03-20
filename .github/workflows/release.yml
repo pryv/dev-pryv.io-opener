@@ -1,6 +1,6 @@
-name: Publish Open Pryv.io
+name: Open Pryv.io publish release
 
-on: 
+on:
   push:
     tags:
       - '*'
@@ -9,11 +9,15 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
-        node-version: [16.4.1]
+        node-version: [16.16.0]
 
     steps:
+    - name: Install `just`
+      uses: extractions/setup-just@v1
+
     - name: Checkout repository with submodules
       uses: actions/checkout@v2
       with:
@@ -35,7 +39,7 @@ jobs:
         path: dest
         clean: false
 
-    # there is one private package (lib-reporting) used as npm package, so we need 
+    # there is one private package (lib-reporting) used as npm package, so we need
     # to authenticate
     - name: Login to github
       uses: webfactory/ssh-agent@v0.4.1
@@ -43,16 +47,14 @@ jobs:
         ssh-private-key: ${{ secrets.TECH_PRYV_SSH_KEY }}
 
     - name: Setup opener
-      run: |
-        yarn setup
-        yarn install
+      run: just setup
 
-    - name: Generate Open Pryv.io
-      run: yarn build
+    - name: Build
+      run: just build
 
-    - name: Fetch dependencies
+    - name: Fetch Open Pryv.io dependencies
       working-directory: dest
-      run: yarn install --ignore-optionals
+      run: just install-stable
 
     - name: Download public_html assets and rec.la certificates
       working-directory: dest
@@ -61,25 +63,25 @@ jobs:
         bash ./scripts/setup-assets.bash
         bash ./scripts/setup-app-web-auth3.bash
 
-    - name: Create docker tarball without ssl
+    - name: Create docker tarball without SSL
       working-directory: dest/docker
       run: bash build-tarball.sh
 
-    - name: Upgrade rec-la
+    - name: Upgrade rec.la
       working-directory: dest
-      run: yarn upgrade rec-la
+      run: npm install rec.la@latest
 
-    - name: Set tag
+    - name: Set git tag
       id: set_tag
       run: |
           SOURCE_TAG=$(cat dest/.api-version)
           echo $SOURCE_TAG
           echo ::set-output name=SOURCE_TAG::$SOURCE_TAG
-          
-    - name: Check the prepared commit to Open Pryv
-      run: cd dest && yarn remove pre-commit -W && git status && git diff && echo '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
 
-    - name: Commit and push to open Pryv and release docker tarball
+    - name: Check the prepared commit to Open Pryv
+      run: cd dest && git status && git diff && echo '${{ steps.set_tag.outputs.SOURCE_TAG }} version'
+
+    - name: Commit and push to Open Pryv.io repo and release docker tarball
       uses: EndBug/add-and-commit@v4
       with:
         # The name of the user that will be displayed as the author of the commit
@@ -87,7 +89,7 @@ jobs:
         author_name: Pryvio
         # The email of the user that will be displayed as the author of the commit
         # Default: author of the commit that triggered the run
-        author_email: ilia@pryv.com
+        author_email: tech@pryv.com
         # The local path to the directory where your repository is located. You should use actions/checkout first to set it up
         # Default: '.'
         cwd: './dest'
@@ -111,7 +113,7 @@ jobs:
         username: ${{ secrets.REGISTRY_PRYV_USERNAME_DOCKERHUB }}
         password: ${{ secrets.REGISTRY_PRYV_PASSWORD_DOCKERHUB }}
 
-    - name: Build open pryv.io image
+    - name: Build Open Pryv.io image
       working-directory: dest
       run: TAG=latest docker-compose -f docker/local/docker-compose.no-ssl-build.yml build open-pryv.io
 

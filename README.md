@@ -7,7 +7,7 @@ Script that releases the open source version of Pryv.io.
 
 1. Fetch git dependencies: `just setup`
 2. Fetch node dependencies: `just install`
-3. Generate open-source release: `just build` 
+3. Generate open-source release: `just build`
 4. Verify the release in `./dest`
 
 ### Update git dependencies
@@ -32,11 +32,10 @@ License settings and script are located in [`licenser/`](licenser/).
  In `dest/` run `just setup-dev-env`, `just install`, `just compile-dev`
 
 ### Test
-tests have to runned component by component 
-`cd dest/` 
+tests have to runned component by component
+`cd dest/`
   - `just test {component}'`
 
-combined with `just compile-watch` in `dest` and `yarn build` each time you do modifcation you can code in a source repository and test your changes
 
 ## Design
 
