@@ -51,6 +51,7 @@ jobs:
       run: |
         ./scripts/setup-dev-env
         sudo apt-get install graphicsmagick
+        just install-stable
         ./scripts/start-mongo
 
     - name: Run tests on Open Pryv.io
