@@ -198,7 +198,7 @@ To customize your own, clone the [Data Types repository](https://github.com/pryv
 
 ### MongoDB data folder
 
-By default the MongoDB data are stored in `var-pryv/mongodb-data`. If you want to modify the folder where the MongoDB data files are stored, you can modify in `scripts/setup-mongodb.bash` the variable `MONGO_DATA_FOLDER`.
+By default the MongoDB data are stored in `var-pryv/mongodb-data`. If you want to modify the folder where the MongoDB data files are stored, you can modify in `scripts/setup-mongodb` the variable `MONGO_DATA_FOLDER`.
 
 
 ### Visual assets and icons
@@ -209,7 +209,7 @@ Your platforms visuals can be customized in `public_html/assets/`, please refer 
 
 Pryv.io can send e-mails at registration and password reset request.
 
-The emails can be sent either by local sendmail (default) or SMTP.  
+The emails can be sent either by local sendmail (default) or SMTP.
 
 This service, its documentation and mail templates can be found in [`service-mail/`](service-mail/).
 
@@ -223,11 +223,11 @@ To make a backup of your data:
 
 ### Backup: native
 
-Run `./scripts/backup-database-native.sh ${BACKUP_FOLDER}` to generate a dump of the current database contents
-Run `./scripts/backup-attachments-native.sh ${BACKUP_FOLDER}` to copy the current attachment files.
+Run `./scripts/backup-database-native ${BACKUP_FOLDER}` to generate a dump of the current database contents
+Run `./scripts/backup-attachments-native ${BACKUP_FOLDER}` to copy the current attachment files.
 
-To restore the database, run `./scripts/restore-database-native.sh ${BACKUP_FOLDER}` to restore data from the provided backup folder.
-To restore attachments, run `./scripts/restore-attachments-native.sh ${BACKUP_FOLDER}` to restore data from the provided backup folder.
+To restore the database, run `./scripts/restore-database-native ${BACKUP_FOLDER}` to restore data from the provided backup folder.
+To restore attachments, run `./scripts/restore-attachments-native ${BACKUP_FOLDER}` to restore data from the provided backup folder.
 Depending on your setup, you may need additional access rights.
 
 ### Backup: dockerized
@@ -244,29 +244,29 @@ Copyright (c) 2020 Pryv S.A. https://pryv.com
 
 This file is part of Open-Pryv.io and released under BSD-Clause-3 License
 
-Redistribution and use in source and binary forms, with or without 
+Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 
-1. Redistributions of source code must retain the above copyright notice, 
+1. Redistributions of source code must retain the above copyright notice,
    this list of conditions and the following disclaimer.
 
-2. Redistributions in binary form must reproduce the above copyright notice, 
-   this list of conditions and the following disclaimer in the documentation 
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
    and/or other materials provided with the distribution.
 
-3. Neither the name of the copyright holder nor the names of its contributors 
-   may be used to endorse or promote products derived from this software 
+3. Neither the name of the copyright holder nor the names of its contributors
+   may be used to endorse or promote products derived from this software
    without specific prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE 
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER 
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, 
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 SPDX-License-Identifier: BSD-3-Clause
