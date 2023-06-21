@@ -59,7 +59,7 @@ jobs:
     - name: Download public_html assets and rec.la certificates
       working-directory: dest
       run: |
-        bash ./scripts/download-recla-certificates
+        bash ./scripts/update-recla-certificates
         bash ./scripts/setup-assets
         bash ./scripts/setup-app-web-auth3
 
