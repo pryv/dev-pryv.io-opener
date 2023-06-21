@@ -30,7 +30,6 @@ function loadTasks () {
     excludes: [
       'hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks', 'metadata', 'audit', // components
       'business/src/series', 'business/src/series.js', 'series/repository.test.js', // series
-      'api-server/config/test.json', // replaced by overrides
       'register' // protects components/register from being deleted because we rsync --delete
     ],
     patterns: ['-node_modules/', '-*influx*', '-*series*', '-webhook*', '-*nats*']

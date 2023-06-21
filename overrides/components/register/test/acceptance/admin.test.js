@@ -8,8 +8,7 @@ const {
 } = require('api-server/test/test-helpers');
 const regPath = require('api-server/src/routes/Paths').Register;
 
-const config = require('api-server/config/test.json');
-const adminKey = config.auth.adminAccessKey;
+const { getConfig } = require('@pryv/boiler');
 
 const cuid = require('cuid');
 
@@ -17,11 +16,13 @@ const chai = require('chai');
 const assert = chai.assert;
 
 describe('register /admin', function () {
-  let server, email;
+  let server, email, adminKey;
   this.timeout(10000);
 
   let mongoFixtures;
   before(async function () {
+    const config = await getConfig();
+    adminKey = config.get('auth:adminAccessKey');
     mongoFixtures = databaseFixture(await produceMongoConnection());
   });
   after(() => {

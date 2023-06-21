@@ -29,7 +29,7 @@ License settings and script are located in [`licenser/`](licenser/).
 ## Helpers for developpment
 
 ### Build
- In `dest/` run `just setup-dev-env`, `just install`, `just compile-dev`
+ In `dest/` run `just setup`, `just install`, `just build`
 
 ### Test
 tests have to runned component by component

@@ -55,7 +55,7 @@ prepare-dest:
 # Build to `dest/` and apply licensing info
 build *params:
     node build/index.js
-    # TODO: source-licenser --config-file .licenser.yml ./dest
+    just license-build
 
 # –––––––––––––----------------------------------------------------------------
 # Misc. utils
@@ -67,4 +67,4 @@ lint *params:
 
 # Apply licensing info to `build/`
 license-build:
-    # TODO: source-licenser --config-file .licenser.yml ./build
+   source-licenser --config-file licensing/config.yml ./dest

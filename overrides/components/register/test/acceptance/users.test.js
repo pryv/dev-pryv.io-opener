@@ -68,7 +68,7 @@ describe('register /users', function () {
         .replace('@', '');
       assert.equal(
         apiEndpointNoToken,
-        'http://localhost:3000/' + res.body.username + '/'
+        'http://127.0.0.1:3000/' + res.body.username + '/'
       );
     });
   });

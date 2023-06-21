@@ -25,7 +25,7 @@ describe('service', function () {
       .set('Accept', 'application/json');
     assert.equal(res.status, 200);
     assert.equal(res.body.name, 'Pryv Lab');
-    assert.equal(res.body.api, 'http://localhost:3000/{username}/');
+    assert.equal(res.body.api, 'http://127.0.0.1:3000/{username}/');
   });
 
   it('[REA2] GET /apps should receive empty array ', async function () {
@@ -65,7 +65,7 @@ describe('service', function () {
                   name: 'Pryv.io',
                   description: 'Self hosted',
                   available: true,
-                  availableCore: 'http://localhost:3000'
+                  availableCore: 'http://127.0.0.1:3000'
                 }
               }
             }

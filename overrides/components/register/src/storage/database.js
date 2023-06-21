@@ -74,10 +74,10 @@ exports.getUIDFromMail = getUIDFromMail;
  */
 async function getAllUsers() {
   // we are missing here 'server' and 'referer'
-  const usersNamesAndIds = await usersRepository.getAllUsersNamesAndId();
+  const usersNamesAndIds = await usersRepository.getAllUsersIdAndName();
   const result = [];
   for(const userNameAndId of usersNamesAndIds) {
-    const user = await usersRepository.getUserBuiltOnSystemStreamsById(userNameAndId.id);
+    const user = await usersRepository.getUserById(userNameAndId.id);
     if (user == null) {
       console.log('XXXXX Null user', userNameAndId);
     } else {
