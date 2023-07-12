@@ -6,13 +6,12 @@
   "license": "UNLICENSED",
   "author": "Pryv S.A.",
   "dependencies": {
-    "lodash": "^4.17.15",
     "mkdirp": "^1.0.4",
     "ncp": "^2.0.0",
     "rsync": "^0.6.1"
   },
   "devDependencies": {
-    "semistandard": "^16.0.1",
+    "semistandard": "^17.0.0",
     "source-licenser": "^2.0.5"
   },
   "semistandard": {
