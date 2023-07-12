@@ -4,7 +4,7 @@
  * Unauthorized copying of this file, via any medium is strictly prohibited
  * Proprietary and confidential
  */
-function setAuditAccessId(accessId) {
+function setAuditAccessId (accessId) {
   return function (context, params, result, next) {
     next();
   };
@@ -22,6 +22,6 @@ const AuditAccessIds = {
 Object.freeze(AuditAccessIds);
 
 module.exports = {
-  setAuditAccessId: setAuditAccessId,
-  AuditAccessIds: AuditAccessIds
+  setAuditAccessId,
+  AuditAccessIds
 };

@@ -57,7 +57,7 @@ function loadTasks () {
     json: {
       merge: {
         name: 'open-pryv.io',
-        version: version,
+        version,
         private: true,
         license: 'BSD-3-clause',
         repository: {
