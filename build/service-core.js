@@ -74,7 +74,7 @@ function loadTasks () {
         },
         dependencies: {
           pryv: '^2.0.2',
-          'rec-la': 'latest'
+          'rec.la': 'latest'
         },
         'pre-commit': ''
       }
