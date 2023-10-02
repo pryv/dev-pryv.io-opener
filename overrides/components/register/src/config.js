@@ -16,7 +16,7 @@ module.exports = {
     const settings = await getConfig();
     config.service = settings.get('service');
     let publicUrl = settings.get('dnsLess:publicUrl');
-    if (publicUrl.slice(-1) === '/') publicUrl = publicUrl.slice(0, -1);
+    if (publicUrl.slice(-1) !== '/') publicUrl += '/';
     config.publicUrl = publicUrl;
     config['access:trustedAuthUrls'] = [publicUrl];
     config['access:defaultAuthUrl'] = [

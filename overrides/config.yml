@@ -1,5 +1,5 @@
 dnsLess:
-  publicUrl: http://localhost:3000
+  publicUrl: http://localhost:3000/
 http:
   port: 3000
   ip: 127.0.0.1
@@ -19,3 +19,15 @@ services:
     enabled:
       welcome: true
       resetPassword: true
+custom:
+  systemStreams:
+    account:
+      -
+        isIndexed: true
+        isUnique: true
+        isShown: true
+        isEditable: true
+        type: email/string
+        name: Email
+        id: email
+        isRequiredInValidation: true
