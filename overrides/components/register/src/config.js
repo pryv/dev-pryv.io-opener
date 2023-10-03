@@ -15,12 +15,15 @@ module.exports = {
   loadSettings: async function () {
     const settings = await getConfig();
     config.service = settings.get('service');
-    let publicUrl = settings.get('dnsLess:publicUrl');
-    if (publicUrl.slice(-1) !== '/') publicUrl += '/';
-    config.publicUrl = publicUrl;
-    config['access:trustedAuthUrls'] = [publicUrl];
+    let settingPublicUrl = settings.get('dnsLess:publicUrl');
+    if (settingPublicUrl.slice(-1) !== '/') {
+      settingPublicUrl += '/';
+    }
+    const pathPublicUrl = settingPublicUrl.slice(0, -1);
+    config.publicUrl = settingPublicUrl;
+    config['access:trustedAuthUrls'] = [settingPublicUrl];
     config['access:defaultAuthUrl'] = [
-      publicUrl + wwwPath + '/access/access.html'
+      pathPublicUrl + wwwPath + '/access/access.html'
     ];
 
     // load admin keys
