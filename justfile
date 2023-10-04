@@ -52,10 +52,12 @@ prepare-dest:
 # Build
 # –––––––––––––----------------------------------------------------------------
 
-# Build to `dest/` and apply licensing info
+# Build to `dest/`, apply licensing info and rebuild package-lock
 build *params:
     node build/index.js
+    rm dest/package-lock.json
     just license-build
+    cd dest/; npm install --package-lock-only
 
 # –––––––––––––----------------------------------------------------------------
 # Misc. utils
