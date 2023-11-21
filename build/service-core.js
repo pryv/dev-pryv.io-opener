@@ -64,6 +64,7 @@ function loadTasks () {
           url: 'git://github.com/pryv/service-open-pryv.git'
         },
         scripts: {
+          'setup-dev-env': 'scripts/setup-dev-env',
           api: 'LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./config.yml',
           mail: 'cd service-mail ; ./bin/server',
           database: 'scripts/start-mongo',
