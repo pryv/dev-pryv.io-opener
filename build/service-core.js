@@ -67,7 +67,7 @@ function loadTasks () {
           'setup-dev-env': 'scripts/setup-dev-env',
           api: 'LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./config.yml',
           mail: 'cd service-mail ; ./bin/server',
-          database: 'scripts/start-mongo',
+          database: 'DEVELOPMENT=true scripts/start-mongo',
           proxy: './node_modules/rec.la/bin/proxy.js localhost:3000',
           proxied: './node_modules/rec.la/bin/proxy.js localhost:3000 & LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./configs/rec-la.yml',
           pryv: 'npm run database >> ./var-pryv/logs/mongodb.log & npm run mail >> ./var-pryv/logs/mail.log & npm run api',
