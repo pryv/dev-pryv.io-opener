@@ -75,7 +75,7 @@ The installation script has been tested on Linux Ubuntu 18.04 LTS and MacOSX.
 1. `npm run setup-dev-env` to setup local file structure and install MongoDB
 2. `npm install [--no-optional]` to install node modules
 
-#### Native setup with external SSL
+#### Native setup with no SSL
 
 [setup the environment](#native)
 
@@ -87,13 +87,14 @@ Each service independently - logs will be displayed on the console
 - `npm run api` start the API server on port 3000 (default)
 - `npm run mail` start the mail service
 
-#### Local native setup
+#### Local native setup with rec.la loopback SSL
+
+[rec.la](https://rec.la) certificates facilitate local developpment by enabling https on localhost. 
 
 [setup the environment](#native)
 - `npm run database` to start mongodb 
 - (optional) `npm run mail` start the mail service
 - `npm run apirecla` to start api server using `configs/rec-la.yml`
-- `npm run proxy` to start [rec.la](https://github.com/pryv/rec.la) proxy
 
 You can now access you API from you own computer with SSL on 
 - `https://my-computer.rec.la:4443`
@@ -103,26 +104,13 @@ You can check by opening [https://my-computer.rec.la:4443/reg/service/info](http
 And create new users or access token from the [Pryv Access Token Generation Page](https://api.pryv.com/app-web-access/?pryvServiceInfoUrl=https://l.rec.la:4443/reg/service/info)
 
 
-#### Native Server setup with built-in SSL
+#### Native setup with custom SSL
 
 [setup the environment](#native)
 
-1. Run `npm run pryv` to start the API
-2. Configure NGINX and certificate
-
-You can find a NGINX configuration that you can include in your `sites-enabled/` in [configs/site.conf](configs/site.conf).
-
-You must change `${HOSTNAME}` to match the hostname of the public URL.
-
-##### SSL certificate
-
-Using [certbot](https://certbot.eff.org/), you can generate a SSL certificate for your platform using `sudo certbot --nginx -d ${HOSTNAME}`.
-
-To set an automatic renewal, run `crontab -e` and append the following line:
-
-```cron
-0 12 * * * /usr/bin/certbot renew --quiet
-```
+1. Edit `http:ssl` part in `config.yml` file to point to your certificates an key files.
+2. Update `dnsLess:publicUrl` in `config.yml` to match 
+3. Run `npm run pryv` to start the API
 
 ### Config
 
@@ -135,7 +123,7 @@ http:
   port: 3000
   ip: 127.0.0.1
 auth:
-  adminAccessKey: iuahwd0ba87hw0bd7a8hwd
+  adminAccessKey: REPLACE_ME 
   trustedApps: "*@https://pryv.github.io*, *@https://*.rec.la*"
 eventFiles:
   attachmentsDirPath: var-pryv/attachment-files
@@ -162,8 +150,6 @@ services:
   - **trustedApps** list of web apps that can be trusted-app functionalities
      API for trusted apps: [API reference](https://api.pryv.com/reference/)
     see: [SETUP Guide - customize authentication](https://api.pryv.com/customer-resources/pryv.io-setup/#customize-authentication-registration-and-reset-password-apps)
-- **eventFiles**
-  - **attachmentsDirPath** Directory where event attachment files will be stored on the file system.
 - **service** [API documentation on Service Information](https://api.pryv.com/reference/#service-info)
 - **services:email** see [Options & Customization](#custom-email) below
 

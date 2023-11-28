@@ -1,10 +1,12 @@
 dnsLess:
   publicUrl: "https://my-computer.rec.la:4443/"
 http:
-  port: 3000
+  port: 4443
   ip: 127.0.0.1
+  ssl:
+    rec.la: true
 auth:
-  adminAccessKey: REPLACE_ME
+  adminAccessKey: RECLA-ADMIN-KEY-UNSECURE
   trustedApps: "*@https://pryv.github.io, *@https://*.rec.la*"
 eventFiles:
   attachmentsDirPath: var-pryv/attachment-files
