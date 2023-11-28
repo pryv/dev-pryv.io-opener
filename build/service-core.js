@@ -68,7 +68,6 @@ function loadTasks () {
           api: 'LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./config.yml',
           mail: 'cd service-mail ; ./bin/server',
           database: 'DEVELOPMENT=true scripts/start-mongo',
-          proxy: './node_modules/rec.la/bin/proxy.js localhost:3000',
           pryv: 'npm run database >> ./var-pryv/logs/mongodb.log & npm run mail >> ./var-pryv/logs/mail.log & npm run api',
           apirecla: 'LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./configs/rec-la.yml',
           },
