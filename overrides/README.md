@@ -94,7 +94,7 @@ Each service independently - logs will be displayed on the console
 [setup the environment](#native)
 - `npm run database` to start mongodb 
 - (optional) `npm run mail` start the mail service
-- `npm run apirecla` to start api server using `configs/rec-la.yml`
+- `npm run apirecla` to start api server using `configs/api-recla.yml`
 
 You can now access you API from you own computer with SSL on 
 - `https://my-computer.rec.la:4443`
@@ -108,13 +108,13 @@ And create new users or access token from the [Pryv Access Token Generation Page
 
 [setup the environment](#native)
 
-1. Edit `http:ssl` part in `./configs/default.yml` file to point to your certificates an key files.
-2. Update `dnsLess:publicUrl` in `./configs/default.yml` to match 
+1. Edit `http:ssl` part in `./configs/api.yml` file to point to your certificates an key files.
+2. Update `dnsLess:publicUrl` in `./configs/api.yml` to match 
 3. Run `npm run pryv` to start the API
 
 ### Config
 
-For the native installation, edit `./configs/default.yml`
+For the native installation, edit `./configs/api.yml`
 
 ```yaml
 dnsLess:

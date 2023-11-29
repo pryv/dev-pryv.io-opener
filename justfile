@@ -59,6 +59,11 @@ build *params:
     just license-build
     cd dest/; npm install --package-lock-only
 
+# Build to `dest/`, without removing package-lock (use with care)
+build-dirty *params:
+    node build/index.js
+    just license-build
+
 # –––––––––––––----------------------------------------------------------------
 # Misc. utils
 # –––––––––––––----------------------------------------------------------------

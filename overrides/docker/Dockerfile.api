@@ -2,9 +2,6 @@ FROM node:18
 
 WORKDIR /app
 
-RUN mkdir ./configs
-RUN mkdir ./var-pryv
-
 # Copy necessary files
 COPY ./components/ /app/components
 COPY ./docker/override-config.yml /app/components/api-server/config/override-config.yml

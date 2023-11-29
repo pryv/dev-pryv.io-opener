@@ -1,10 +1,7 @@
 version: "3.8"
 services:
-  open-pryv.io:
-    build: 
-      context: ../
-      dockerfile: ./docker/Dockerfile.api
-    image: pryvio/open-pryv.io:${PRYV_TAG}
+  open-pryv-api:
+    image: pryvio/open-pryv.io-api:${PRYV_TAG}
     container_name: "open-pryv-api"
     restart: "always"
     ports:
@@ -12,23 +9,21 @@ services:
     volumes:
       - ${PRYV_BASE}/configs:/app/configs
       - ${PRYV_BASE}/public_html:/app/public_html
-      - ${PRYV_BASE}/var-pryv:/app/var-pryv
+      - ${PRYV_BASE}/var-pryv/api:/app/var-pryv
     depends_on:
       - open-pryv-mongo
     networks:
       - app-network
 
   open-pryv-mail:
-    build: 
-      context: ../
-      dockerfile: ./docker/Dockerfile.mail
     image: pryvio/open-pryv.io-mail:${PRYV_TAG}
     container_name: "open-pryv-mail"
     restart: "always"
     depends_on:
-      - open-pryv.io
+      - open-pryv-api
     volumes:
-      - ${PRYV_BASE}/var-pryv/logs/:/app/var-pryv/maillogs
+      - ${PRYV_BASE}/configs:/app/configs
+      - ${PRYV_BASE}/mail-logs/:/app/var-pryv/mail-logs
     networks:
       - app-network
 
@@ -37,8 +32,8 @@ services:
     container_name: "open-pryv-mongo"
     restart: "always"
     volumes:
-      - ${PRYV_BASE}/var-pryv/db:/data/db
-      - ${PRYV_BASE}/var-pryv/db-backup:/data/backup/
+      - ${PRYV_BASE}/var-pryv/mongo/backup/:/data/backup/
+      - ${PRYV_BASE}/var-pryv/mongo/db/:/data/db/
     networks:
       - app-network
 

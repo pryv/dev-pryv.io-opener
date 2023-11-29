@@ -1,8 +1,8 @@
 dnsLess:
   publicUrl: http://localhost:3000/ # the "Public" URL to reach the service, you need to change this if you use a third party SSL service such as NGNIX.
 http:
-  port: 3000 # The local port to listen
-  ip: 127.0.0.1 # The IP adress to use. Keep it 127.0.0.1 unless you explicitely want to expose the service in `http` to another network.
+  port: 3000 # (ignored with docker) The local port to listen
+  ip: 127.0.0.1 # (ignored with docker) The IP adress to use. Keep it 127.0.0.1 unless you explicitely want to expose the service in `http` to another network.
   ssl:
     keyFile: false # to enable HTTPS give the full path to your SSL key file in pem format
     certFile: false # to enable HTTPS give the full path to your SSL certificate file in pem format

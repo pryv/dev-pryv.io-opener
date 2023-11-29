@@ -3,16 +3,22 @@
 SCRIPT_FOLDER=$(cd $(dirname "$0"); pwd)
 cd $SCRIPT_FOLDER
 
-cp -rf ../public_html/ ./public_html
+. ./src/env_config
 
-tar czfv dockerized-open-pryv.io.tgz \
-  ./local/dockerized-config.yml \
-  ./local/dockerized-service-mail-config.hjson \
-  ./local/docker-compose.yml \
-  ./production-no-ssl \
-  ./production-with-ssl \
-  ./README.md \
-  ./public_html \
-  ./scripts/
+TEMPDEST=./dockerized-open-pryv
+rm -rf $TEMPDEST
+mkdir -p $TEMPDEST
+cp -r ./src/* $TEMPDEST/
 
-rm -r ./public_html
+cp -r ../configs $TEMPDEST
+cp -r ../public_html $TEMPDEST
+mkdir -p $TEMPDEST/var-pryv
+mkdir -p $TEMPDEST/mail-logs
+mkdir -p $TEMPDEST/var-pryv/mongo/backup
+mkdir -p $TEMPDEST/var-pryv/mongo/db
+
+DEST=dockerized-open-pryv-${PRYV_TAG}.tgz
+
+tar -cvzf $DEST $TEMPDEST
+rm -rf $TEMPDEST
+echo "Docker base packed in ${DEST}"

@@ -65,11 +65,11 @@ function loadTasks () {
         },
         scripts: {
           'setup-dev-env': 'scripts/setup-dev-env',
-          api: 'LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./configs/default.yml',
+          api: 'LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./configs/api.yml',
           mail: 'cd service-mail ; ./bin/server',
           database: 'DEVELOPMENT=true scripts/start-mongo',
           pryv: 'npm run database >> ./var-pryv/logs/mongodb.log & npm run mail >> ./var-pryv/logs/mail.log & npm run api',
-          apirecla: 'LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./configs/rec-la.yml',
+          apirecla: 'LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./configs/api-recla.yml',
           },
         dependencies: {
           pryv: '^2.0.2',
