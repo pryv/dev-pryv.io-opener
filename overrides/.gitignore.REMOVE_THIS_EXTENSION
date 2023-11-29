@@ -2,7 +2,6 @@ var-pryv/
 public_html/
 app-web-auth3/
 node_modules/
-rec.la-certificates/
 
 # not commiting this into OS version
 

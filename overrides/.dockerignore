@@ -10,8 +10,6 @@ dist
 # skip build related files except for dockerized-config
 docker/production-with-ssl
 docker/production-no-ssl
-rec.la-certificates
-docker/local/dhparam.pem
 docker/local/docker-compose.no-ssl.yml
 docker/local/docker-compose.with-ssl.yml
 docker/local/Dockerfile

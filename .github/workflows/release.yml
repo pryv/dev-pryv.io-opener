@@ -56,10 +56,9 @@ jobs:
       working-directory: dest
       run: just install-stable
 
-    - name: Download public_html assets and rec.la certificates
+    - name: Download public_html assets
       working-directory: dest
       run: |
-        bash ./scripts/update-recla-certificates
         bash ./scripts/setup-assets
         bash ./scripts/setup-app-web-auth3
 

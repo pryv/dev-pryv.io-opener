@@ -11,7 +11,7 @@ for i in `seq 1 $n`; do
     char=${set:$RANDOM % ${#set}:1}
     rand+=$char
 done
-sed -i ".bak" "s/${DEFAULT_VALUE}/${rand}/g" "./config.yml"
+sed -i ".bak" "s/${DEFAULT_VALUE}/${rand}/g" "./configs/default.yml"
 sed -i ".bak" "s/${DEFAULT_VALUE}/${rand}/g" "./configs/rec-la.yml"
 sed -i ".bak" "s/${DEFAULT_VALUE}/${rand}/g" "./docker/local/dockerized-config.yml"
 sed -i ".bak" "s/${DEFAULT_VALUE}/${rand}/g" "./docker/local/dockerized-config-no-ssl.yml"

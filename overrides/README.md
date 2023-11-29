@@ -108,13 +108,13 @@ And create new users or access token from the [Pryv Access Token Generation Page
 
 [setup the environment](#native)
 
-1. Edit `http:ssl` part in `config.yml` file to point to your certificates an key files.
-2. Update `dnsLess:publicUrl` in `config.yml` to match 
+1. Edit `http:ssl` part in `./configs/default.yml` file to point to your certificates an key files.
+2. Update `dnsLess:publicUrl` in `./configs/default.yml` to match 
 3. Run `npm run pryv` to start the API
 
 ### Config
 
-For the native installation, edit `config.yml`, otherwise `docker/local/dockerized-config.yml`:
+For the native installation, edit `./configs/default.yml`
 
 ```yaml
 dnsLess:

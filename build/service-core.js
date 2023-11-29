@@ -65,7 +65,7 @@ function loadTasks () {
         },
         scripts: {
           'setup-dev-env': 'scripts/setup-dev-env',
-          api: 'LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./config.yml',
+          api: 'LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./configs/default.yml',
           mail: 'cd service-mail ; ./bin/server',
           database: 'DEVELOPMENT=true scripts/start-mongo',
           pryv: 'npm run database >> ./var-pryv/logs/mongodb.log & npm run mail >> ./var-pryv/logs/mail.log & npm run api',
