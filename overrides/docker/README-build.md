@@ -16,7 +16,7 @@ Prepare the various assets, run the following commands from the `docker/` direct
 
 ## with external SSL
 
-Run `TAG=latest docker-compose -f local/docker-compose.no-ssl-build.yml up --build`
+Run `docker compose --env-file ./local/env_config -f local/docker-compose.yml up --build`
 
 - [Config](https://github.com/pryv/open-pryv.io#config) file `local/dockerized-config-no-ssl.yml`
 - launch API on `http://localhost:3000`
@@ -25,9 +25,6 @@ After images are built, you can run the command above just without "--build" par
 
 ## with built-in SSL
 
-Fetch the [rec-la](https://github.com/pryv/rec-la) SSL certificates:
-
-- Run `bash ../scripts/update-recla-certificates`
 
 Run `TAG=latest docker-compose -f local/docker-compose.with-ssl-build.yml up --build`
 

@@ -51,8 +51,6 @@ echo "Hostname is $HOSTNAME"
 # ================= Config parsing ends           =====================
 # =====================================================================
 
-# download or update rec.la domain certificates
-bash ../scripts/update-recla-certificates
 
 # =====================================================================
 # ================= Start docker compose          =====================
