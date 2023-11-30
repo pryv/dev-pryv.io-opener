@@ -50,7 +50,6 @@ Choose your Set-up
   - Native installation
 - Launch Pryv.io on a server exposed to the Internet with built-in SSL, this requires to have a hostname pointing to the public IP of your server.
   - Download docker images (quick start)
-  - Launch image with Open Pryv.io installed on Exoscale hosting provider: [link to guide](https://api.pryv.com/image-exoscale-open-pryv.io/) (quick start including hosting)
   - Native installation
 - Launch Pryv.io on a server with an external SSL termination. You know what you are doing.
   - Download docker images
@@ -58,7 +57,7 @@ Choose your Set-up
 
 ### Docker
 
-The dockerized versions and their instructions are available at this link: [Download link](https://api.pryv.com/open-pryv.io/docker/dockerized-open-pryv.io.tgz).
+The dockerized versions and their instructions are available at this link: [Download link](https://api.pryv.com/open-pryv.io/docker/dockerized-open-pryv-1.9.0.io.tgz).
 
 If you wish to build the images yourself, refer to the following README: [docker/README-build.md](docker/README-build.md).
 
@@ -73,13 +72,11 @@ Once it is running, you can continue with the [tutorials](#start).
 The installation script has been tested on Linux Ubuntu 18.04 LTS and MacOSX.
 
 1. `npm run setup-dev-env` to setup local file structure and install MongoDB
-2. `npm install [--no-optional]` to install node modules
+2. `npm install` to install node modules
 
 #### Native setup with no SSL
 
 [setup the environment](#native)
-
-- `npm run pryv` - mail and database logs will be kept in `var-pryv/logs/local-*.log`
 
 Each service independently - logs will be displayed on the console
 
@@ -233,7 +230,7 @@ Contributions are welcome. Get in touch with the Pryv team or submit a PR with y
 
 ## License
 
-Copyright (c) 2020 Pryv S.A. https://pryv.com
+Copyright (c) 2019-2023 Pryv S.A. https://pryv.com
 
 This file is part of Open-Pryv.io and released under BSD-Clause-3 License
 

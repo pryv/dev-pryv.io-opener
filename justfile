@@ -74,4 +74,4 @@ lint *params:
 
 # Apply licensing info to `build/`
 license-build:
-   source-licenser --config-file licensing/config.yml ./dest
+   source-licenser --config-file dest/.licenser.yml ./dest

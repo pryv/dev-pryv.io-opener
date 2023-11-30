@@ -20,6 +20,18 @@ For one or more of `service-core`, `service-register`, `service-mail`:
 4. `cd ..`
 5. git add, commit and push
 
+## Publishing 
+
+As per 1.9.0 integrated release has been removed. Github script `release-orig.yml` has been kept for reference.
+
+Publish docker containers: 
+- build the containers from `dest/docker`
+- build the tarball with the confing with `build_tarball.sh`
+- publish the containers `docker push "pryvio/open-pryv.io-api:{TAG}` & `docker push "pryvio/open-pryv.io-mail:{TAG}`
+- Commit the content of `dest`
+- Publish on github: push `dest` content 
+
+
 
 ## License
 

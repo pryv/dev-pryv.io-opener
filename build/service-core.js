@@ -36,7 +36,8 @@ function loadTasks () {
   },
   {
     target: './scripts',
-    excludes: ['compile-proxy-config.js', 'components-checkdeps.js', 'components-version.js'],
+    excludes: ['compile-proxy-config.js', 'components-checkdeps.js', 'components-version.js', 
+    'setup-ci', 'setup-infux', 'setup-nats-server', 'setup-private-libs', 'tag-tests'],
     patterns: ['-test*']
   },
   {

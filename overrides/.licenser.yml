@@ -31,9 +31,7 @@ files:
 ignore:
 - .git
 - .vscode
-- build/test/pryv
 - coverage
-- nats-server
 - node_modules
 - test-results
 - var-pryv
