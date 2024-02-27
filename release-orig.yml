@@ -68,9 +68,9 @@ jobs:
       working-directory: dest/docker
       run: bash build-tarball.sh
 
-    - name: Upgrade rec.la
+    - name: Upgrade backloop.dev
       working-directory: dest
-      run: npm install rec.la@latest
+      run: npm install backloop.dev@latest
 
     - name: Set git tag
       id: set_tag

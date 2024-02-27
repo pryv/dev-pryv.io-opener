@@ -70,11 +70,11 @@ function loadTasks () {
           mail: 'cd service-mail ; ./bin/server',
           database: 'DEVELOPMENT=true scripts/start-mongo',
           pryv: 'npm run database >> ./var-pryv/logs/mongodb.log & npm run mail >> ./var-pryv/logs/mail.log & npm run api',
-          apirecla: 'LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./configs/api-recla.yml',
+          apibackloop: 'LOGS=info NODE_ENV=production ./components/api-server/bin/server --config ./configs/api-backloop.yml',
           },
         dependencies: {
           pryv: '^2.0.2',
-          'rec.la': 'latest'
+          'backloop.dev': 'latest'
         },
         'pre-commit': ''
       }
