@@ -48,6 +48,9 @@ function loadTasks () {
     target: './justfile'
   },
   {
+    target: './ferretDB'
+  },
+  {
     target: './.mocharc.js'
   },
   {
