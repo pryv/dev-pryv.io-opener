@@ -51,6 +51,9 @@ function loadTasks () {
     target: './ferretDB'
   },
   {
+    target: './README-DBs.md'
+  },
+  {
     target: './.mocharc.js'
   },
   {
