@@ -1,7 +1,7 @@
 # Pryv.io Opener
 
-Script that releases the open source version of Pryv.io.
-
+Script that releases the open-pryv.io a strip down version of service-core, service-mail and service-register.
+As of february 2025 All Pryv.io software has been open-sourced. 
 
 ## Usage
 
@@ -35,45 +35,4 @@ Publish docker containers:
 
 ## License
 
-License settings and script are located in [`licenser/`](licenser/).
-
-
-## Helpers for developpment
-
-### Build
- In `dest/` run `just setup`, `just install`, `just build`
-
-### Test
-tests have to runned component by component
-`cd dest/`
-  - `just test {component}'`
-
-
-## Design
-
-### service-core
-
-Changes made on **service-core** legacy code base to make it openable
-
-#### Integration of register as a component (used if DNSLESS = true)
-
-- Added `/reg` route in `routes/Path.js`
-- Module is loaded directly from `server.js` with `expressApp` and `applications` parameters
-
-### service-regiser
-
-Changes made on **service-core** legacy code base to make it openable
-
-This task had a very small impact on the code of register as the **node-app-opener** was able to strip out the necessary code.
-
-Note the **striping comments** in `routes/admin.js` and `routes/user.js` that are used to remove parts of the code during build process of the open version.
-
-Example:
-
-The code between `// START - CLEAN ...` and `// END - CLEAN ...` will be removed
-
-```javascript
-// START - CLEAN FOR OPENSOURCE
-const invitationToken = require('../storage/invitations');
-// END - CLEAN FOR OPENSOURCE
-```
+[BSD-3-Clause](LICENSE)

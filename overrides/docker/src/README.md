@@ -49,3 +49,8 @@ On a fresh install (never started)
 2. Start the service with `./start.sh`
 3. Restore mongodb data with `docker exec -t open-pryv-mongo mongorestore /data/backup/`
 
+
+
+## License
+
+[BSD-3-Clause](LICENSE)

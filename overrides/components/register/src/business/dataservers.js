@@ -1,3 +1,9 @@
+/**
+ * @license
+ * Copyright (C) Pryv https://pryv.com
+ * This file is part of Pryv.io and released under BSD-Clause-3 License
+ * Refer to LICENSE file
+ */
 const home = require('../config').get('service').home;
 const publicUrl = require('../config').get('publicUrl');
 /** @returns {{ regions: { region1: { name: string; zones: { zone1: { name: string; hostings: { hosting1: { url: any; name: string; description: string; available: boolean; availableCore: any; }; }; }; }; }; }; }} */

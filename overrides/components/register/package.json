@@ -1,17 +1,18 @@
 {
   "name": "register",
-  "description": "Pryv Register component",
   "version": "0.1.9",
   "private": true,
-  "author": "Pryv SA",
+  "description": "Pryv Register component",
+  "homepage": "https://pryv.com",
+  "license": "BSD-3-Clause",
+  "author": "Pryv <info@pryv.com> (https://pryv.com)",
   "main": "src/index.js",
   "scripts": {
-   "test": "npm run _test --logs:console:active=false",
-   "_test": "NODE_ENV=test  ../../node_modules/.bin/mocha --reporter=dot 'test/**/*.test.js' --exit"
+    "_test": "NODE_ENV=test  ../../node_modules/.bin/mocha --reporter=dot 'test/**/*.test.js' --exit",
+    "test": "npm run _test --logs:console:active=false"
   },
   "dependencies": {
     "winston": "^2.3.0"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
