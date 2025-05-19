@@ -34,7 +34,7 @@ function loadTasks () {
   return [{
     target: './components',
     excludes: [
-      'hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks', 'metadata', 'audit', // components
+      'hfs-server', 'pryvuser-cli', 'tprpc', 'webhooks', 'metadata', // components
       'business/src/series', 'business/src/series.js', 'series/repository.test.js', // series
       'register' // protects components/register from being deleted because we rsync --delete
     ],
